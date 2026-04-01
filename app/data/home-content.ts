@@ -8,7 +8,7 @@ export const heroContent: HeroContent = {
 export const aboutFacts: AboutFact[] = [
   ["Age", "23yo"],
   ["Location", "Bombay <-> Bengaluru, India"],
-  ["Email", "hi@ohshin.me"],  
+  ["Email", "hi@ohshin.me"],
   ["Phone", "+91 98260 00000"],
 ];
 

@@ -7,8 +7,8 @@ interface WorkExperienceColumnProps {
 export default function WorkExperienceColumn({ items }: WorkExperienceColumnProps) {
   return (
     <aside className="border-b border-white/80 lg:border-r lg:border-b-0">
-      <div className="flex border-b border-white/80 px-8 py-8 lg:h-42 lg:items-center">
-        <h2 className="font-['Doto'] text-[2.7rem] font-semibold uppercase tracking-[-0.08em] sm:text-[3.4rem]">
+      <div className="flex border-b border-white/80 px-8 py-8 lg:h-nav-row lg:items-center">
+        <h2 className="font-doto text-[2.7rem] font-semibold uppercase tracking-section sm:text-[3.4rem]">
           work experience
         </h2>
       </div>
@@ -18,7 +18,7 @@ export default function WorkExperienceColumn({ items }: WorkExperienceColumnProp
           {items.map((item) => (
             <article
               key={item.role}
-              className="border border-white/80 bg-[#df1303] px-6 py-6 font-['IBM_Plex_Mono'] text-sm leading-6 text-white/88 transition-colors duration-500 ease-out hover:bg-black"
+              className="border border-white/80 bg-accent px-6 py-6 font-mono text-sm leading-6 text-white/88 transition-colors duration-500 ease-out hover:bg-black"
             >
               <p className="text-[0.72rem] uppercase tracking-[0.2em] text-white/70">
                 {item.period}

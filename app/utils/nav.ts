@@ -2,6 +2,10 @@ import type { HomeSectionId } from "../types";
 
 export const HOME_SECTIONS: HomeSectionId[] = ["about", "projects"];
 
+export function isHomeSectionId(value: string): value is HomeSectionId {
+  return value === "about" || value === "projects";
+}
+
 export function getSectionAbsoluteTop(sectionId: HomeSectionId) {
   const element = document.getElementById(sectionId);
 

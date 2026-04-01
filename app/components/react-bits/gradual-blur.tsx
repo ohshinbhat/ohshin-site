@@ -4,6 +4,7 @@ type BlurPosition = "top" | "bottom" | "left" | "right";
 type BlurCurve = "linear" | "bezier";
 
 interface GradualBlurProps {
+  target?: "parent";
   position?: BlurPosition;
   height?: string;
   width?: string;
@@ -34,6 +35,7 @@ function getProgress(index: number, count: number, curve: BlurCurve): number {
 }
 
 export default function GradualBlur({
+  target = "parent",
   position = "bottom",
   height = "100%",
   width = "100%",
@@ -43,6 +45,7 @@ export default function GradualBlur({
   curve = "bezier",
   className = "",
 }: GradualBlurProps) {
+  void target;
   const direction = getDirection(position);
   const isVertical = position === "top" || position === "bottom";
   const layers = Array.from({ length: divCount }, (_, index) => {
@@ -69,19 +72,21 @@ export default function GradualBlur({
     };
   });
 
+  const containerStyle: CSSProperties = {
+    left: 0,
+    [position]: 0,
+    right: isVertical ? 0 : undefined,
+    top: isVertical ? undefined : 0,
+    bottom: isVertical ? undefined : 0,
+    height: isVertical ? height : "100%",
+    width: isVertical ? width : height,
+  };
+
   return (
     <div
       aria-hidden="true"
       className={`pointer-events-none absolute ${className}`.trim()}
-      style={{
-        [position]: 0,
-        left: 0,
-        right: isVertical ? 0 : undefined,
-        top: isVertical ? undefined : 0,
-        bottom: isVertical ? undefined : 0,
-        height: isVertical ? height : "100%",
-        width: isVertical ? width : height,
-      }}
+      style={containerStyle}
     >
       {layers.map((layer) => (
         <div key={layer.id} style={layer.style} />

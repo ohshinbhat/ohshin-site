@@ -1,10 +1,10 @@
 import { useLocation, useNavigate } from "@remix-run/react";
 import { useEffect, useLayoutEffect, type MouseEvent } from "react";
-import type { HomeSectionId, NavItem } from "../types";
+import type { NavItem } from "../types";
 import DockNav from "./react-bits/dock-nav";
 import GradualBlur from "./react-bits/gradual-blur";
 import { useActiveHomeSection } from "../hooks/use-active-home-section";
-import { HOME_SECTIONS, scrollWindowToSection } from "../utils/nav";
+import { isHomeSectionId, scrollWindowToSection } from "../utils/nav";
 
 interface SiteNavProps {
   currentPage?: "home" | "blogs";
@@ -72,15 +72,15 @@ export default function SiteNav({ currentPage = "home" }: SiteNavProps) {
     }
 
     window.history.replaceState(null, "", `#${item.key}`);
-    scrollWindowToSection(item.key as HomeSectionId);
+    scrollWindowToSection(item.key);
   };
 
   useEffect(() => {
     if (location.pathname !== "/") return;
     if (!location.hash) return;
 
-    const sectionId = location.hash.slice(1) as HomeSectionId;
-    if (!HOME_SECTIONS.includes(sectionId)) return;
+    const sectionId = location.hash.slice(1);
+    if (!isHomeSectionId(sectionId)) return;
 
     // Delay to ensure layout is ready before measuring positions
     window.requestAnimationFrame(() => {
@@ -90,7 +90,7 @@ export default function SiteNav({ currentPage = "home" }: SiteNavProps) {
 
   return (
     <header
-      className={`${isHomePage ? "fixed inset-x-0 top-0" : "sticky top-0"} z-30 w-full overflow-hidden bg-[rgba(20,24,31,0.28)] shadow-[0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-xl supports-[backdrop-filter]:bg-[rgba(20,24,31,0.18)]`}
+      className={`${isHomePage ? "fixed inset-x-0 top-0" : "sticky top-0"} z-30 w-full overflow-hidden bg-[rgba(20,24,31,0.28)] shadow-nav-glass backdrop-blur-xl supports-[backdrop-filter]:bg-glass`}
       data-site-nav
     >
       <GradualBlur
@@ -105,7 +105,7 @@ export default function SiteNav({ currentPage = "home" }: SiteNavProps) {
       />
       <nav
         aria-label="Primary"
-        className="relative mx-auto flex w-full max-w-[1400px] items-center justify-center gap-2 px-4 py-3 sm:gap-4 md:gap-8"
+        className="relative mx-auto flex w-full max-w-site items-center justify-center gap-2 px-4 py-3 sm:gap-4 md:gap-8"
       >
         <span
           aria-hidden="true"

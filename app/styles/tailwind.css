@@ -1,9 +1,5 @@
+@config "../../tailwind.config.ts";
 @import "tailwindcss";
-
-@theme {
-  --color-ink: #05070a;
-  --color-fog: #f3f5f7;
-}
 
 html {
   scroll-behavior: smooth;
@@ -12,7 +8,7 @@ html {
 body {
   min-width: 320px;
   margin: 0;
-  background: #05070a;
-  color: var(--color-fog);
+  background: theme(colors.ink);
+  color: theme(colors.fog);
   font-family: "IBM Plex Mono", monospace;
 }

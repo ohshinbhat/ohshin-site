@@ -2,6 +2,8 @@ import { projectCards, workExperiences } from "../data/projects-content";
 import type { ContributionCalendar, ProjectCardData } from "../types";
 import ContributionGraph from "./projects/contribution-graph";
 import ProjectCard from "./projects/project-card";
+import ProjectsHeader from "./projects/projects-header";
+import TechRow from "./projects/tech-row";
 import WorkExperienceColumn from "./projects/work-experience-column";
 
 function getTechTags(projectList: ProjectCardData[]): string[] {
@@ -21,23 +23,15 @@ export default function ProjectsSection({
   return (
     <section
       id="projects"
-      className="min-h-[calc(100dvh-var(--site-nav-height,61px))] border-t border-white/80 bg-[#df1303] text-white"
+      className="min-h-screen-nav border-t border-white/80 bg-accent text-white"
     >
-      <div className="grid min-h-[calc(100dvh-var(--site-nav-height,61px))] grid-cols-1 lg:grid-cols-[1.03fr_2.02fr]">
+      <div className="grid min-h-screen-nav grid-cols-1 lg:grid-cols-[1.03fr_2.02fr]">
         <WorkExperienceColumn items={workExperiences} />
 
-        <div className="grid min-h-[calc(100dvh-var(--site-nav-height,61px))] grid-cols-1 lg:grid-cols-[1.4fr_1fr] lg:grid-rows-[auto_auto_1fr] lg:min-h-0">
+        <div className="grid min-h-screen-nav grid-cols-1 lg:grid-cols-[1.4fr_1fr] lg:grid-rows-[auto_auto_1fr] lg:min-h-0">
           <ContributionGraph weeks={weeks} />
-
-          <div className="flex border-b border-white/80 px-8 py-8 lg:h-42 lg:items-center">
-            <h2 className="text-right font-['Doto'] text-[3.6rem] font-semibold uppercase leading-none tracking-[-0.08em] sm:text-[5.2rem]">
-              projects
-            </h2>
-          </div>
-
-          <div className="w-full border-b border-white/80 px-8 py-4 font-['Doto'] text-[1.5rem] uppercase tracking-[-0.06em] lg:col-span-2">
-            tech
-          </div>
+          <ProjectsHeader />
+          <TechRow tech={tech} />
           <div className="h-full min-h-0 lg:col-span-2 lg:row-start-3 lg:overflow-y-auto">
             <div className="grid grid-cols-1 gap-px bg-white/80 md:grid-cols-2 xl:grid-cols-3">
               {projectCards.map((project) => (

@@ -52,7 +52,7 @@ function DockNavItem({ item, isActive, mouseX, onClick }: DockNavItemProps) {
       href={item.href}
       onClick={onClick}
       style={{ scale, y, opacity }}
-      className={`relative z-10 rounded-full px-5 py-2.5 font-['Doto'] text-[14px] font-medium tracking-[0.12em] transition-[background-color,box-shadow,color] duration-300 ${
+      className={`relative z-10 rounded-full px-5 py-2.5 font-doto text-[14px] font-medium tracking-[0.12em] transition-[background-color,box-shadow,color] duration-300 ${
         isActive
           ? "bg-white/10 text-white ring-1 ring-white/20 shadow-[0_0_24px_rgba(255,255,255,0.06)]"
           : "text-white/70"

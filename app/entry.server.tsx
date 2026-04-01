@@ -1,5 +1,5 @@
 import { RemixServer } from "@remix-run/react";
-import type { EntryContext } from "@remix-run/node";
+import { createReadableStreamFromReadable, type EntryContext } from "@remix-run/node";
 import ReactDOMServer from "react-dom/server";
 import { PassThrough } from "node:stream";
 
@@ -21,8 +21,9 @@ export default async function handleRequest(
         onShellReady() {
           shellRendered = true;
           responseHeaders.set("Content-Type", "text/html");
+          const stream = createReadableStreamFromReadable(body);
           resolve(
-            new Response(body, {
+            new Response(stream, {
               headers: responseHeaders,
               status: responseStatusCode,
             }),

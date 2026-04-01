@@ -1,11 +1,10 @@
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
-  type LinksFunction,
-  type MetaFunction,
 } from "@remix-run/react";
 import type { PropsWithChildren } from "react";
 import appStylesHref from "./styles/tailwind.css?url";

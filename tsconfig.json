@@ -18,12 +18,13 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "strict": true,
+    "skipLibCheck": true,
     "noEmit": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
       "~/*": ["./app/*"]
     },
-    "types": ["vite/client"]
+    "types": ["vite/client", "react", "react-dom"]
   }
 }

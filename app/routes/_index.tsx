@@ -4,7 +4,6 @@ import AboutSection from "../components/home/about-section";
 import HeroSection from "../components/home/hero-section";
 import ProjectsSection from "../components/projects-section";
 import SiteNav from "../components/site-nav";
-import type { BookInfo, ContributionCalendar } from "../types";
 import {
   aboutFacts,
   aboutParagraphs,
@@ -14,11 +13,6 @@ import {
 } from "../data/home-content";
 import { getContributionCalendar } from "../lib/github.server";
 import { getBooksByTitles } from "../lib/google-books.server";
-
-interface IndexLoaderData {
-  contributionCalendar: ContributionCalendar;
-  books: BookInfo[];
-}
 
 export const meta: MetaFunction = () => [
   { title: "Ohshin | Engineer, Designer, Shipper" },
@@ -60,10 +54,10 @@ export async function loader() {
 }
 
 export default function Index() {
-  const { contributionCalendar, books } = useLoaderData<typeof loader>() as IndexLoaderData;
+  const { contributionCalendar, books } = useLoaderData<typeof loader>();
 
   return (
-    <main className="bg-[#05070a] text-[#f3f5f7]">
+    <main className="bg-ink text-fog">
       <HeroSection title={heroContent.title} subtitle={heroContent.subtitle} />
       <SiteNav currentPage="home" />
       <AboutSection
