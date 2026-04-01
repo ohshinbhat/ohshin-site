@@ -1,0 +1,32 @@
+import type { ContributionWeek } from "../../types";
+
+interface ContributionGraphProps {
+  weeks: ContributionWeek[];
+}
+
+export default function ContributionGraph({ weeks }: ContributionGraphProps) {
+  const hasGraph = weeks.length > 0;
+
+  return (
+    <div className="border-b border-white/80 px-3 py-3 lg:flex lg:h-42 lg:items-center lg:border-r lg:overflow-hidden">
+      {hasGraph ? (
+        <div className="grid grid-cols-14 gap-1 sm:grid-cols-21 xl:grid-cols-28">
+          {weeks.flatMap((week, weekIndex) =>
+            week.contributionDays.map((day) => (
+              <span
+                key={`${day.date}-${weekIndex}`}
+                className="aspect-square w-full border border-white/20"
+                style={{ backgroundColor: day.color }}
+                title={`${day.date}: ${day.contributionCount} contributions`}
+              />
+            )),
+          )}
+        </div>
+      ) : (
+        <div className="px-4 py-6 font-['IBM_Plex_Mono'] text-sm text-white/82">
+          contribution graph unavailable. add `GITHUB_TOKEN` to enable live data.
+        </div>
+      )}
+    </div>
+  );
+}
