@@ -1,8 +1,7 @@
-import type { AboutFact, BookInfo, SpotifyPlaylist } from "../../types";
+import type { AboutFact, ReactNode, SpotifyPlaylist } from "../../types";
 import AboutCopy from "../about/about-copy";
 import AboutFacts from "../about/about-facts";
 import AboutPortrait from "../about/about-portrait";
-import BooksShelf from "../about/books-shelf";
 import SpotifyShelf from "../about/spotify-shelf";
 import SectionHeading from "../ui/section-heading";
 
@@ -10,7 +9,7 @@ interface AboutSectionProps {
   facts: AboutFact[];
   paragraphs: string[];
   playlists: SpotifyPlaylist[];
-  books: BookInfo[];
+  booksContent: ReactNode;
 }
 
 const interactiveBlockClassName =
@@ -20,7 +19,7 @@ export default function AboutSection({
   facts,
   paragraphs,
   playlists,
-  books,
+  booksContent,
 }: AboutSectionProps) {
   return (
     <section id="about" className="min-h-screen-nav bg-panel font-mono">
@@ -58,7 +57,7 @@ export default function AboutSection({
             <div
               className={`space-y-6 lg:px-7 lg:py-6 ${interactiveBlockClassName}`}
             >
-              <BooksShelf books={books} />
+              {booksContent}
             </div>
           </div>
         </div>

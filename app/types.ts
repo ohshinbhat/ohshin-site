@@ -1,5 +1,9 @@
+import type { ReactNode } from "react";
+
 export type HomeSectionId = "about" | "projects";
 export type NavigationKey = HomeSectionId | "blogs";
+
+export type { ReactNode };
 
 export interface SiteHeroContent {
   title: string;

@@ -1,15 +1,28 @@
 import type { ContributionWeek } from "../../types";
 
 interface ContributionGraphProps {
-  weeks: ContributionWeek[];
+  weeks?: ContributionWeek[];
+  loading?: boolean;
 }
 
-export default function ContributionGraph({ weeks }: ContributionGraphProps) {
+export default function ContributionGraph({
+  weeks = [],
+  loading = false,
+}: ContributionGraphProps) {
   const hasGraph = weeks.length > 0;
 
   return (
     <div className="border-b border-white/80 px-3 py-3 lg:flex lg:h-nav-row lg:items-center lg:border-r lg:overflow-hidden">
-      {hasGraph ? (
+      {loading ? (
+        <div className="grid w-full grid-cols-14 gap-1 sm:grid-cols-21 xl:grid-cols-28">
+          {Array.from({ length: 140 }, (_, index) => (
+            <span
+              key={index}
+              className="aspect-square w-full animate-pulse border border-white/15 bg-white/8"
+            />
+          ))}
+        </div>
+      ) : hasGraph ? (
         <div className="grid grid-cols-14 gap-1 sm:grid-cols-21 xl:grid-cols-28">
           {weeks.flatMap((week, weekIndex) =>
             week.contributionDays.map((day) => (

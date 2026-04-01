@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "@remix-run/react";
-import { useEffect, useLayoutEffect, type MouseEvent } from "react";
+import { useEffect, type MouseEvent } from "react";
 import type { SiteNavigationItem } from "../types";
 import DockNav from "./react-bits/dock-nav";
 import GradualBlur from "./react-bits/gradual-blur";
@@ -29,7 +29,7 @@ export default function SiteNav({ currentPage = "home", items }: SiteNavProps) {
   const activeKey =
     location.pathname === "/blogs" ? "blogs" : activeHomeSection;
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const nav = document.querySelector("header[data-site-nav]");
 
     if (!nav) {
