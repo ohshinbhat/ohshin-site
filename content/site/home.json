@@ -1,0 +1,46 @@
+{
+  "hero": {
+    "title": "hi, im ohshin.",
+    "subtitle": "engineer. designer. shipper."
+  },
+  "about": {
+    "facts": [
+      { "label": "Age", "value": "23yo" },
+      { "label": "Location", "value": "Bombay <-> Bengaluru, India" },
+      { "label": "Email", "value": "hi@ohshin.me" },
+      { "label": "Phone", "value": "+91 98260 00000" }
+    ],
+    "paragraphs": [
+      "i’m from bengaluru.",
+      "i grew up on the internet.",
+      "i love cyberpunk. neon skylines. machines that feel alive. questions about consciousness and scale.",
+      "dune changed how i think about power and destiny.",
+      "the three-body problem rewired my sense of cosmic insignificance.",
+      "i’m probably the way i am because i watched tron when i was 12 and decided the future had to glow.",
+      "i studied electronics for six years at a nowhere college. oscilloscopes, solder burns, broken circuits. that’s where i learned pattern recognition. signal from noise. systems thinking.",
+      "i love solving problems.",
+      "i love building elegant things.",
+      "i love retro tech. old processors. chunky keyboards. green terminal screens.",
+      "i’m in pursuit of greatness.not the loud kind.the disciplined, inevitable kind.",
+      "every day is training."
+    ]
+  },
+  "spotifyPlaylists": [
+    {
+      "title": "Playlist 01",
+      "embedUrl": "https://open.spotify.com/embed/playlist/7fsx9hjtBJtFj9Xzr8D2ri?utm_source=generator"
+    },
+    {
+      "title": "Playlist 02",
+      "embedUrl": "https://open.spotify.com/embed/playlist/42FfI12H2l5rStbFV5zDpI?utm_source=generator"
+    }
+  ],
+  "bookTitles": [
+    "Dune",
+    "The Three-Body Problem",
+    "The Martian",
+    "1984",
+    "Project Hail Mary",
+    "Neuromancer"
+  ]
+}

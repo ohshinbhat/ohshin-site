@@ -25,6 +25,6 @@
     "paths": {
       "~/*": ["./app/*"]
     },
-    "types": ["vite/client", "react", "react-dom"]
+    "types": ["node", "vite/client", "react", "react-dom"]
   }
 }

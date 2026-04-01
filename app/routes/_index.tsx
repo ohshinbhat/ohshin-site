@@ -1,16 +1,10 @@
 import { json, type MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { getHomePageContent } from "../content/loaders.server";
 import AboutSection from "../components/home/about-section";
 import HeroSection from "../components/home/hero-section";
 import ProjectsSection from "../components/projects-section";
 import SiteNav from "../components/site-nav";
-import {
-  aboutFacts,
-  aboutParagraphs,
-  bookTitles,
-  heroContent,
-  spotifyPlaylists,
-} from "../data/home-content";
 import { getContributionCalendar } from "../lib/github.server";
 import { getBooksByTitles } from "../lib/google-books.server";
 
@@ -20,6 +14,7 @@ export const meta: MetaFunction = () => [
 
 export async function loader() {
   const username = process.env.GITHUB_USERNAME || "ohshinbhat";
+  const homePageContent = await getHomePageContent();
 
   try {
     const [contributionCalendar, books] = await Promise.all([
@@ -27,11 +22,11 @@ export async function loader() {
         username,
         token: process.env.GITHUB_TOKEN,
       }),
-      getBooksByTitles(bookTitles),
+      getBooksByTitles(homePageContent.home.bookTitles),
     ]);
 
     return json(
-      { contributionCalendar, books },
+      { ...homePageContent, contributionCalendar, books },
       {
         headers: {
           "Cache-Control": "private, max-age=900",
@@ -42,6 +37,7 @@ export async function loader() {
     const message = error instanceof Error ? error.message : "Unknown error";
 
     return json({
+      ...homePageContent,
       contributionCalendar: {
         weeks: [],
         username,
@@ -54,19 +50,30 @@ export async function loader() {
 }
 
 export default function Index() {
-  const { contributionCalendar, books } = useLoaderData<typeof loader>();
+  const {
+    home,
+    navigationItems,
+    contributionCalendar,
+    books,
+    projects,
+    workExperience,
+  } = useLoaderData<typeof loader>();
 
   return (
     <main className="bg-ink text-fog">
-      <HeroSection title={heroContent.title} subtitle={heroContent.subtitle} />
-      <SiteNav currentPage="home" />
+      <HeroSection title={home.hero.title} subtitle={home.hero.subtitle} />
+      <SiteNav currentPage="home" items={navigationItems} />
       <AboutSection
-        facts={aboutFacts}
-        paragraphs={aboutParagraphs}
-        playlists={spotifyPlaylists}
+        facts={home.about.facts}
+        paragraphs={home.about.paragraphs}
+        playlists={home.spotifyPlaylists}
         books={books ?? []}
       />
-      <ProjectsSection contributionCalendar={contributionCalendar} />
+      <ProjectsSection
+        contributionCalendar={contributionCalendar}
+        projects={projects}
+        workExperience={workExperience}
+      />
     </main>
   );
 }

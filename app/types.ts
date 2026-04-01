@@ -1,35 +1,104 @@
 export type HomeSectionId = "about" | "projects";
+export type NavigationKey = HomeSectionId | "blogs";
 
-export interface HeroContent {
+export interface SiteHeroContent {
   title: string;
   subtitle: string;
 }
 
-export type AboutFact = [label: string, value: string];
-
-export interface WorkExperience {
-  role: string;
-  company: string;
-  period: string;
-  copy: string;
-}
-
-export interface ProjectCardData {
-  title: string;
-  summary: string;
-  tech: string[];
-  githubUrl: string;
-  liveUrl: string;
-}
-
-export interface BlogItem {
-  id: number;
-  title: string;
+export interface AboutFact {
+  label: string;
+  value: string;
 }
 
 export interface SpotifyPlaylist {
   title: string;
   embedUrl: string;
+}
+
+export interface SiteHomeContent {
+  hero: SiteHeroContent;
+  about: {
+    facts: AboutFact[];
+    paragraphs: string[];
+  };
+  spotifyPlaylists: SpotifyPlaylist[];
+  bookTitles: string[];
+}
+
+export interface WorkExperienceLink {
+  label: string;
+  url: string;
+}
+
+export interface SiteWorkExperience {
+  id: string;
+  role: string;
+  company: string;
+  periodLabel: string;
+  startDate: string;
+  endDate?: string | null;
+  summary: string;
+  highlights: string[];
+  location?: string;
+  links: WorkExperienceLink[];
+  published: boolean;
+  sortOrder: number;
+}
+
+export interface SiteWorkExperienceSection {
+  sectionTitle: string;
+  items: SiteWorkExperience[];
+}
+
+export interface SiteProject {
+  id: string;
+  slug: string;
+  title: string;
+  summary: string;
+  description: string;
+  tech: string[];
+  githubUrl?: string | null;
+  liveUrl?: string | null;
+  image?: string | null;
+  featured: boolean;
+  published: boolean;
+  sortOrder: number;
+  year: number;
+  role: string;
+  status: string;
+}
+
+export interface SiteProjectsSection {
+  sectionTitle: string;
+  techTitle: string;
+  items: SiteProject[];
+}
+
+export interface BlogPostMeta {
+  title: string;
+  slug: string;
+  excerpt: string;
+  publishedAt: string;
+  tags: string[];
+  published: boolean;
+  readingTimeMinutes: number;
+}
+
+export interface BlogPost extends BlogPostMeta {
+  body: string;
+}
+
+export interface SiteNavigationItem {
+  key: NavigationKey;
+  label: string;
+  href: string;
+  visible: boolean;
+}
+
+export interface SiteSocialLink {
+  label: string;
+  url: string;
 }
 
 export interface BookInfo {
@@ -40,6 +109,7 @@ export interface BookInfo {
   description?: string;
   thumbnail?: string;
 }
+
 export interface ContributionDay {
   color: string;
   contributionCount: number;
@@ -55,10 +125,4 @@ export interface ContributionCalendar {
   username: string;
   live: boolean;
   error: string | null;
-}
-
-export interface NavItem {
-  key: HomeSectionId | "blogs";
-  label: string;
-  href: string;
 }

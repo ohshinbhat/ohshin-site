@@ -1,0 +1,59 @@
+{
+  "sectionTitle": "work experience",
+  "items": [
+    {
+      "id": "founding-engineer-full-time-role",
+      "role": "Founding Engineer",
+      "company": "Full-time role",
+      "periodLabel": "2024 - present",
+      "startDate": "2024-01-01",
+      "endDate": null,
+      "summary": "Owning product delivery across design systems, frontend architecture, and shipping velocity.",
+      "highlights": [
+        "Built and evolved core frontend systems",
+        "Shipped product features across the stack",
+        "Worked closely with design and product to compress iteration loops"
+      ],
+      "location": "India",
+      "links": [],
+      "published": true,
+      "sortOrder": 1
+    },
+    {
+      "id": "product-engineering-intern-internship-01",
+      "role": "Product Engineering Intern",
+      "company": "Internship 01",
+      "periodLabel": "2023",
+      "startDate": "2023-01-01",
+      "endDate": "2023-12-31",
+      "summary": "Built internal tools and shipped UI quality improvements for fast-moving product teams.",
+      "highlights": [
+        "Delivered internal tooling improvements",
+        "Raised UI quality and interaction polish",
+        "Worked in a fast-moving shipping environment"
+      ],
+      "location": "Remote",
+      "links": [],
+      "published": true,
+      "sortOrder": 2
+    },
+    {
+      "id": "design-technologist-intern-internship-02",
+      "role": "Design Technologist Intern",
+      "company": "Internship 02",
+      "periodLabel": "2022",
+      "startDate": "2022-01-01",
+      "endDate": "2022-12-31",
+      "summary": "Bridged prototyping, interaction design, and implementation for experimental interfaces.",
+      "highlights": [
+        "Built prototypes for new interaction concepts",
+        "Translated design experiments into production-feasible systems",
+        "Worked across design and frontend implementation"
+      ],
+      "location": "India",
+      "links": [],
+      "published": true,
+      "sortOrder": 3
+    }
+  ]
+}

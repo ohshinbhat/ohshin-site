@@ -1,0 +1,20 @@
+[
+  {
+    "key": "about",
+    "label": "about",
+    "href": "#about",
+    "visible": true
+  },
+  {
+    "key": "projects",
+    "label": "projects",
+    "href": "#projects",
+    "visible": true
+  },
+  {
+    "key": "blogs",
+    "label": "blogs",
+    "href": "/blogs",
+    "visible": true
+  }
+]

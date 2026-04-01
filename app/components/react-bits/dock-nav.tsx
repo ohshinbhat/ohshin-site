@@ -1,19 +1,22 @@
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useRef, type MouseEvent } from "react";
 import type { MotionValue, SpringOptions } from "motion/react";
-import type { NavItem } from "../../types";
+import type { SiteNavigationItem } from "../../types";
 
 interface DockNavItemProps {
-  item: NavItem;
+  item: SiteNavigationItem;
   isActive: boolean;
   mouseX: MotionValue<number>;
   onClick: (event: MouseEvent<HTMLAnchorElement>) => void;
 }
 
 interface DockNavProps {
-  items: NavItem[];
-  activeKey: NavItem["key"];
-  onItemClick: (event: MouseEvent<HTMLAnchorElement>, item: NavItem) => void;
+  items: SiteNavigationItem[];
+  activeKey: SiteNavigationItem["key"];
+  onItemClick: (
+    event: MouseEvent<HTMLAnchorElement>,
+    item: SiteNavigationItem,
+  ) => void;
 }
 
 const springConfig: SpringOptions = { mass: 0.12, stiffness: 220, damping: 18 };

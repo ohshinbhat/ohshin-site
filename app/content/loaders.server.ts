@@ -1,0 +1,51 @@
+import { getBlogPostBySlug, getBlogPostMetas } from "./blogs.server";
+import {
+  getHomeContent,
+  getNavigationItems,
+  getProjectsSection,
+  getSocialLinks,
+  getWorkExperienceSection,
+} from "./site-content.server";
+
+export async function getHomePageContent() {
+  const [home, navigationItems, socialLinks, projects, workExperience] =
+    await Promise.all([
+      getHomeContent(),
+      getNavigationItems(),
+      getSocialLinks(),
+      getProjectsSection(),
+      getWorkExperienceSection(),
+    ]);
+
+  return {
+    home,
+    navigationItems,
+    socialLinks,
+    projects,
+    workExperience,
+  };
+}
+
+export async function getBlogsPageContent() {
+  const [navigationItems, posts] = await Promise.all([
+    getNavigationItems(),
+    getBlogPostMetas(),
+  ]);
+
+  return {
+    navigationItems,
+    posts,
+  };
+}
+
+export async function getBlogPostPageContent(slug: string) {
+  const [navigationItems, post] = await Promise.all([
+    getNavigationItems(),
+    getBlogPostBySlug(slug),
+  ]);
+
+  return {
+    navigationItems,
+    post,
+  };
+}

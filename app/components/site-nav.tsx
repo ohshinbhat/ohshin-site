@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "@remix-run/react";
 import { useEffect, useLayoutEffect, type MouseEvent } from "react";
-import type { NavItem } from "../types";
+import type { SiteNavigationItem } from "../types";
 import DockNav from "./react-bits/dock-nav";
 import GradualBlur from "./react-bits/gradual-blur";
 import { useActiveHomeSection } from "../hooks/use-active-home-section";
@@ -8,32 +8,23 @@ import { isHomeSectionId, scrollWindowToSection } from "../utils/nav";
 
 interface SiteNavProps {
   currentPage?: "home" | "blogs";
+  items: SiteNavigationItem[];
 }
 
-export default function SiteNav({ currentPage = "home" }: SiteNavProps) {
+export default function SiteNav({ currentPage = "home", items }: SiteNavProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const activeHomeSection = useActiveHomeSection(currentPage === "home");
   const isBlogsPage = currentPage === "blogs";
   const isHomePage = currentPage === "home";
-
-  const items: NavItem[] = [
-    {
-      key: "about",
-      label: "about",
-      href: isBlogsPage ? "/#about" : "#about",
-    },
-    {
-      key: "projects",
-      label: "projects",
-      href: isBlogsPage ? "/#projects" : "#projects",
-    },
-    {
-      key: "blogs",
-      label: "blogs",
-      href: "/blogs",
-    },
-  ];
+  const resolvedItems = items.map((item) =>
+    item.key === "blogs"
+      ? item
+      : {
+          ...item,
+          href: isBlogsPage ? `/${item.href}` : item.href,
+        },
+  );
 
   const activeKey =
     location.pathname === "/blogs" ? "blogs" : activeHomeSection;
@@ -58,35 +49,47 @@ export default function SiteNav({ currentPage = "home" }: SiteNavProps) {
     };
   }, []);
 
-  const handleClick = (event: MouseEvent<HTMLAnchorElement>, item: NavItem) => {
-    event.preventDefault();
-
+  const handleClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    item: SiteNavigationItem,
+  ) => {
     if (item.key === "blogs") {
+      event.preventDefault();
       navigate("/blogs");
       return;
     }
 
     if (isBlogsPage) {
-      navigate(`/#${item.key}`);
+      event.preventDefault();
+      navigate("/", {
+        state: { targetSection: item.key },
+      });
       return;
     }
 
+    event.preventDefault();
     window.history.replaceState(null, "", `#${item.key}`);
     scrollWindowToSection(item.key);
   };
 
   useEffect(() => {
     if (location.pathname !== "/") return;
-    if (!location.hash) return;
-
-    const sectionId = location.hash.slice(1);
+    const stateSection =
+      typeof location.state === "object" &&
+      location.state !== null &&
+      "targetSection" in location.state &&
+      typeof location.state.targetSection === "string"
+        ? location.state.targetSection
+        : null;
+    const sectionId = stateSection ?? location.hash.slice(1);
     if (!isHomeSectionId(sectionId)) return;
 
     // Delay to ensure layout is ready before measuring positions
     window.requestAnimationFrame(() => {
+      window.history.replaceState(null, "", `#${sectionId}`);
       scrollWindowToSection(sectionId);
     });
-  }, [location.pathname, location.hash]);
+  }, [location.pathname, location.hash, location.state]);
 
   return (
     <header
@@ -112,7 +115,11 @@ export default function SiteNav({ currentPage = "home" }: SiteNavProps) {
           className="pointer-events-none absolute inset-0 "
         />
 
-        <DockNav items={items} activeKey={activeKey} onItemClick={handleClick} />
+        <DockNav
+          items={resolvedItems}
+          activeKey={activeKey}
+          onItemClick={handleClick}
+        />
       </nav>
     </header>
   );
