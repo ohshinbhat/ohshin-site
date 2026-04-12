@@ -26,8 +26,9 @@ export default function SiteNav({ currentPage = "home", items }: SiteNavProps) {
         },
   );
 
-  const activeKey =
-    location.pathname === "/blogs" ? "blogs" : activeHomeSection;
+  const activeKey = location.pathname.startsWith("/blogs")
+    ? "blogs"
+    : activeHomeSection;
 
   useEffect(() => {
     const nav = document.querySelector("header[data-site-nav]");
@@ -54,8 +55,6 @@ export default function SiteNav({ currentPage = "home", items }: SiteNavProps) {
     item: SiteNavigationItem,
   ) => {
     if (item.key === "blogs") {
-      event.preventDefault();
-      navigate("/blogs");
       return;
     }
 

@@ -19,7 +19,6 @@ Every blog post requires:
 - `slug`
 - `excerpt`
 - `publishedAt` in `YYYY-MM-DD`
-- `tags` as an array of strings
 - `published` as a boolean
 
 ## Project fields

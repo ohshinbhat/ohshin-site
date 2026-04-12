@@ -1,0 +1,28 @@
+---
+title: "Field Notes from a Portfolio Rebuild"
+slug: "temp-field-notes-from-a-portfolio-rebuild"
+excerpt: "Temporary notes about rebuilding a personal site as both a product surface and a content system."
+publishedAt: "2026-01-08"
+published: true
+---
+
+A portfolio rebuild starts as a visual problem and quickly becomes a maintenance problem.
+
+The first question is what it should look like. The better question is how it will keep changing without becoming expensive to touch.
+
+## The split
+
+The split that matters is simple:
+
+- content belongs in content files
+- rendering belongs in components
+- validation belongs near the loading boundary
+- experiments belong behind small interfaces
+
+Once that split exists, the site gets easier to change.
+
+## The useful constraint
+
+The site should feel authored, but the content should not be trapped in the authored surface.
+
+That is the balance: strong visual language, low update friction. If either side wins completely, the site becomes less useful.
