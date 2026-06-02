@@ -107,7 +107,7 @@ export default function SiteNav({ currentPage = "home", items }: SiteNavProps) {
       />
       <nav
         aria-label="Primary"
-        className="relative mx-auto flex w-full max-w-site items-center justify-center gap-2 px-4 py-3 sm:gap-4 md:gap-8"
+        className="relative mx-auto flex w-full max-w-site items-center justify-center gap-2 px-2 py-2.5 sm:gap-4 sm:px-4 sm:py-3 md:gap-8"
       >
         <span
           aria-hidden="true"

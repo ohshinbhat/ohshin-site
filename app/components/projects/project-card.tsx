@@ -6,9 +6,9 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <article className="flex min-h-[21rem] flex-col justify-between bg-accent transition-colors duration-500 ease-out hover:bg-black">
-      <div className="flex-1 px-8 py-8 font-mono text-sm leading-7 text-white/84">
-        <div className="flex items-center justify-between gap-3 text-[0.68rem] uppercase tracking-[0.18em] text-white/56">
+    <article className="flex min-h-[18rem] flex-col justify-between bg-accent transition-colors duration-500 ease-out hover:!bg-black sm:min-h-[21rem]">
+      <div className="flex-1 px-5 py-6 font-mono text-[0.86rem] leading-6 text-white/84 sm:px-8 sm:py-8 sm:text-sm sm:leading-7">
+        <div className="flex flex-wrap items-center justify-between gap-3 text-[0.68rem] uppercase tracking-[0.14em] text-white/56 sm:tracking-[0.18em]">
           <span>{project.year}</span>
           <span>{project.status}</span>
         </div>
@@ -24,7 +24,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           ))}
         </div>
 
-        <p className="mt-5 text-sm leading-7 text-white/82">{project.summary}</p>
+        <p className="mt-5 text-[0.86rem] leading-6 text-white/82 sm:text-sm sm:leading-7">{project.summary}</p>
         <p className="mt-4 text-[0.82rem] leading-6 text-white/60">{project.role}</p>
 
         <div className="mt-8 flex flex-wrap gap-3">
@@ -51,8 +51,8 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
       </div>
 
-      <div className="border-t border-white/80 px-8 py-4">
-        <p className="block font-mono text-center text-[0.9rem] uppercase tracking-[0.12em] text-white">
+      <div className="border-t border-white/80 px-5 py-4 sm:px-8">
+        <p className="block font-mono text-center text-[0.82rem] uppercase tracking-[0.1em] text-white sm:text-[0.9rem] sm:tracking-[0.12em]">
           {project.title}
         </p>
       </div>

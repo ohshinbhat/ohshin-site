@@ -31,7 +31,7 @@ const config: Config = {
         "nav-glass": "0 10px 30px rgba(0,0,0,0.18)",
       },
       tracking: {
-        section: "-0.08em",
+        section: "0em",
       },
     },
   },

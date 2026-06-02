@@ -12,9 +12,9 @@ export default function ContributionGraph({
   const hasGraph = weeks.length > 0;
 
   return (
-    <div className="border-b border-white/80 px-3 py-3 lg:flex lg:h-nav-row lg:items-center lg:border-r lg:overflow-hidden">
+    <div className="overflow-x-auto border-b border-white/80 px-3 py-3 lg:flex lg:h-nav-row lg:items-center lg:border-r lg:overflow-hidden">
       {loading ? (
-        <div className="grid w-full grid-cols-14 gap-1 sm:grid-cols-21 xl:grid-cols-28">
+        <div className="grid w-[34rem] grid-cols-14 gap-1 sm:w-[48rem] sm:grid-cols-21 xl:w-full xl:grid-cols-28">
           {Array.from({ length: 140 }, (_, index) => (
             <span
               key={index}
@@ -23,7 +23,7 @@ export default function ContributionGraph({
           ))}
         </div>
       ) : hasGraph ? (
-        <div className="grid grid-cols-14 gap-1 sm:grid-cols-21 xl:grid-cols-28">
+        <div className="grid w-[34rem] grid-cols-14 gap-1 sm:w-[48rem] sm:grid-cols-21 xl:w-full xl:grid-cols-28">
           {weeks.flatMap((week, weekIndex) =>
             week.contributionDays.map((day) => (
               <span

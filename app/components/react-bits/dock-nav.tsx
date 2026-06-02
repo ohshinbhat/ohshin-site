@@ -55,7 +55,7 @@ function DockNavItem({ item, isActive, mouseX, onClick }: DockNavItemProps) {
       href={item.href}
       onClick={onClick}
       style={{ scale, y, opacity }}
-      className={`relative z-10 rounded-full px-5 py-2.5 font-doto text-[14px] font-medium tracking-[0.12em] transition-[background-color,box-shadow,color] duration-300 ${
+      className={`relative z-10 rounded-full px-3 py-2 font-doto text-[12px] font-medium tracking-[0.08em] transition-[background-color,box-shadow,color] duration-300 sm:px-5 sm:py-2.5 sm:text-[14px] sm:tracking-[0.12em] ${
         isActive
           ? "bg-white/10 text-white ring-1 ring-white/20 shadow-[0_0_24px_rgba(255,255,255,0.06)]"
           : "text-white/70"
@@ -71,7 +71,7 @@ export default function DockNav({ items, activeKey, onItemClick }: DockNavProps)
 
   return (
     <div
-      className="relative flex items-center justify-center gap-2 sm:gap-4 md:gap-8"
+      className="relative flex w-full max-w-full items-center justify-center gap-1 overflow-x-auto px-1 sm:gap-4 sm:px-0 md:gap-8"
       onMouseMove={(event) => mouseX.set(event.clientX)}
       onMouseLeave={() => mouseX.set(Infinity)}
     >

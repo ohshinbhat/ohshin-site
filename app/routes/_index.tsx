@@ -5,7 +5,7 @@ import { getHomePageContent } from "../content/loaders.server";
 import BooksShelf from "../components/about/books-shelf";
 import AboutSection from "../components/home/about-section";
 import HeroSection from "../components/home/hero-section";
-import ProjectsSection from "../components/projects-section";
+import ProjectsSection from "../components/projects/projects-section";
 import ContributionGraph from "../components/projects/contribution-graph";
 import SiteNav from "../components/site-nav";
 import { getContributionCalendar } from "../lib/github.server";

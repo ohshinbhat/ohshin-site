@@ -11,18 +11,18 @@ export default function WorkExperienceColumn({
 }: WorkExperienceColumnProps) {
   return (
     <aside className="border-b border-white/80 lg:border-r lg:border-b-0">
-      <div className="flex border-b border-white/80 px-8 py-8 lg:h-nav-row lg:items-center">
-        <h2 className="font-doto text-[2.7rem] font-semibold uppercase tracking-section sm:text-[3.4rem]">
+      <div className="flex border-b border-white/80 px-5 py-7 sm:px-8 sm:py-8 lg:h-nav-row lg:items-center">
+        <h2 className="font-doto text-[2.35rem] font-black uppercase tracking-section sm:text-[3.4rem]">
           {title}
         </h2>
       </div>
 
-      <div className="px-8 py-8">
-        <div className="space-y-6">
+      <div className="px-5 py-6 transition-colors duration-500 ease-out hover:!bg-black sm:px-8 sm:py-8">
+        <div className="space-y-4 sm:space-y-6">
           {items.map((item) => (
             <article
               key={item.id}
-              className="border border-white/80 bg-accent px-6 py-6 font-mono text-sm leading-6 text-white/88 transition-colors duration-500 ease-out hover:bg-black"
+              className="border border-white/80 bg-accent px-5 py-5 font-mono text-[0.86rem] leading-6 text-white/88 transition-colors duration-500 ease-out hover:!bg-black sm:px-6 sm:py-6 sm:text-sm"
             >
               <p className="text-[0.72rem] uppercase tracking-[0.2em] text-white/70">
                 {item.periodLabel}

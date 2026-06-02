@@ -7,7 +7,7 @@ interface HeroSectionProps {
 
 export default function HeroSection({ title, subtitle }: HeroSectionProps) {
   return (
-    <section id="hero" className="relative isolate min-h-screen overflow-hidden">
+    <section id="hero" className="relative isolate min-h-[100svh] overflow-hidden">
       <div className="absolute inset-0">
         <img
           src="/background.webp"
@@ -16,13 +16,13 @@ export default function HeroSection({ title, subtitle }: HeroSectionProps) {
         />
       </div>
 
-      <div className="relative z-10 flex min-h-screen items-center justify-center px-6 py-16 text-center sm:py-20">
+      <div className="relative z-10 flex min-h-[100svh] items-center justify-center px-5 py-20 text-center sm:px-6 sm:py-20">
         <div className="relative w-full max-w-5xl">
           <div
             aria-hidden="true"
             className="absolute left-1/2 top-1/2 -z-10 h-72 w-[min(92vw,54rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-black/58 blur-[78px] sm:h-[22rem] md:h-[26rem]"
           />
-          <h1 className="font-doto text-[2.35rem] leading-[1.02] font-semibold tracking-[-0.06em] text-white drop-shadow-[0_0_16px_rgba(255,255,255,0.16)] sm:text-[3.5rem] md:text-[4.75rem] lg:text-[6rem]">
+          <h1 className="font-doto text-[2.25rem] leading-[1.04] font-semibold tracking-normal text-white drop-shadow-[0_0_16px_rgba(255,255,255,0.16)] sm:text-[3.5rem] md:text-[4.75rem] lg:text-[6rem]">
             <DecryptedText
               text={title}
               speed={96}
@@ -31,7 +31,7 @@ export default function HeroSection({ title, subtitle }: HeroSectionProps) {
               encryptedClassName="text-white/55"
             />
           </h1>
-          <p className="mt-6 font-doto text-[15px] font-medium tracking-[0.14em] text-white/90 sm:text-[18px] md:text-[24px]">
+          <p className="mt-5 font-doto text-[13px] font-medium tracking-[0.1em] text-white/90 sm:mt-6 sm:text-[18px] sm:tracking-[0.14em] md:text-[24px]">
             <DecryptedText
               text={subtitle}
               speed={74}

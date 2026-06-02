@@ -9,7 +9,7 @@ export default function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <h2
-      className={`font-doto text-[3.7rem] font-semibold uppercase leading-none tracking-section text-white sm:text-[5.5rem] ${className}`.trim()}
+      className={`font-doto text-[3rem] font-black uppercase leading-none tracking-section text-white sm:text-[4.5rem] md:text-[5.5rem] ${className}`.trim()}
     >
       {children}
     </h2>

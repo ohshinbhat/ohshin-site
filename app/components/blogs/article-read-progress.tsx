@@ -54,7 +54,7 @@ export default function ArticleReadProgress({ articleRef, resetKey }: ArticleRea
 
   return (
     <div
-      className="relative min-h-[2.75rem] overflow-hidden border-x border-white/70 bg-cobalt"
+      className="relative min-h-2 overflow-hidden border-t border-white/70 bg-cobalt sm:min-h-[2.75rem] sm:border-x sm:border-t-0"
       role="progressbar"
       aria-valuenow={ariaValue}
       aria-valuemin={0}

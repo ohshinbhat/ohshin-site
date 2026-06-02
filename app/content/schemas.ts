@@ -9,6 +9,7 @@ export const SortableDateSchema = z
 export const AboutFactSchema = z.object({
   label: z.string().min(1),
   value: z.string().min(1),
+  href: z.string().url().optional(),
 });
 
 export const SpotifyPlaylistSchema = z.object({
@@ -74,7 +75,6 @@ export const ProjectSchema = z.object({
 
 export const ProjectsSectionSchema = z.object({
   sectionTitle: z.string().min(1),
-  techTitle: z.string().min(1),
   items: z.array(ProjectSchema),
 });
 

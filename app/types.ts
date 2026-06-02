@@ -1,9 +1,5 @@
-import type { ReactNode } from "react";
-
 export type HomeSectionId = "about" | "projects";
 export type NavigationKey = HomeSectionId | "blogs";
-
-export type { ReactNode };
 
 export interface SiteHeroContent {
   title: string;
@@ -13,6 +9,7 @@ export interface SiteHeroContent {
 export interface AboutFact {
   label: string;
   value: string;
+  href?: string;
 }
 
 export interface SpotifyPlaylist {
@@ -75,7 +72,6 @@ export interface SiteProject {
 
 export interface SiteProjectsSection {
   sectionTitle: string;
-  techTitle: string;
   items: SiteProject[];
 }
 

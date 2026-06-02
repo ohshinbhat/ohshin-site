@@ -1,18 +1,8 @@
-import type {
-  ReactNode,
-  ContributionCalendar,
-  SiteProject,
-  SiteProjectsSection,
-  SiteWorkExperienceSection,
-} from "../types";
-import ProjectCard from "./projects/project-card";
-import ProjectsHeader from "./projects/projects-header";
-import TechRow from "./projects/tech-row";
-import WorkExperienceColumn from "./projects/work-experience-column";
-
-function getTechTags(projectList: SiteProject[]): string[] {
-  return [...new Set(projectList.flatMap((project) => project.tech))].slice(0, 8);
-}
+import type { ReactNode } from "react";
+import type { SiteProjectsSection, SiteWorkExperienceSection } from "../../types";
+import ProjectCard from "./project-card";
+import ProjectsHeader from "./projects-header";
+import WorkExperienceColumn from "./work-experience-column";
 
 interface ProjectsSectionProps {
   contributionGraphContent: ReactNode;
@@ -25,8 +15,6 @@ export default function ProjectsSection({
   projects,
   workExperience,
 }: ProjectsSectionProps) {
-  const tech = getTechTags(projects.items);
-
   return (
     <section
       id="projects"

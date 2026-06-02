@@ -7,13 +7,13 @@ interface SpotifyShelfProps {
 export default function SpotifyShelf({ playlists }: SpotifyShelfProps) {
   return (
     <div className="space-y-6">
-      <h3 className="font-doto text-[2.2rem] font-semibold uppercase leading-none tracking-section text-white lg:text-[2.1rem]">
+      <h3 className="font-doto text-[1.8rem] font-black uppercase leading-none tracking-section text-white sm:text-[2.2rem] lg:text-[2.1rem]">
         playlists
       </h3>
       <div className="mt-4 overflow-x-auto pb-2">
         <div className="flex w-max gap-4">
           {playlists.map((playlist) => (
-            <div key={playlist.embedUrl} className="w-64 flex-none space-y-2">
+            <div key={playlist.embedUrl} className="w-[min(18rem,calc(100vw-3rem))] flex-none space-y-2 sm:w-64">
               <p className="text-[0.72rem] uppercase tracking-[0.2em] text-white/70">
                 {playlist.title}
               </p>

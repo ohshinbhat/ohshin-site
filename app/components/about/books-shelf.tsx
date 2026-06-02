@@ -27,21 +27,29 @@ export default function BooksShelf({
 }: BooksShelfProps) {
   return (
     <div className="space-y-6">
-      <h3 className="font-doto text-[1.8rem] font-semibold uppercase leading-none tracking-section text-white lg:text-[1.7rem]">
+      <h3 className="font-doto text-[1.8rem] font-black uppercase leading-none tracking-section text-white lg:text-[1.7rem]">
         books
       </h3>
-      <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        {loading
-          ? Array.from({ length: 4 }, (_, index) => (
-              <div key={index} className="min-w-0">
-                <BookCardSkeleton />
-              </div>
-            ))
-          : books.map((book) => (
-              <div key={book.id} className="min-w-0">
-                <BookCard book={book} />
-              </div>
-            ))}
+      <div className="mt-4 overflow-x-auto pb-2">
+        <div className="flex w-max gap-4">
+          {loading
+            ? Array.from({ length: 4 }, (_, index) => (
+                <div
+                  key={index}
+                  className="w-[min(17rem,calc(100vw-3rem))] flex-none sm:w-64"
+                >
+                  <BookCardSkeleton />
+                </div>
+              ))
+            : books.map((book) => (
+                <div
+                  key={book.id}
+                  className="w-[min(17rem,calc(100vw-3rem))] flex-none sm:w-64"
+                >
+                  <BookCard book={book} />
+                </div>
+              ))}
+        </div>
       </div>
     </div>
   );
