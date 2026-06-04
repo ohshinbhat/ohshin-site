@@ -80,6 +80,7 @@ export interface BlogPostMeta {
   slug: string;
   excerpt: string;
   publishedAt: string;
+  tags: string[];
   published: boolean;
   readingTimeMinutes: number;
 }

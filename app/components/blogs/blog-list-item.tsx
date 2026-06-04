@@ -1,4 +1,6 @@
+import { Link } from "@remix-run/react";
 import type { BlogPostMeta } from "../../types";
+import { formatPostDate } from "../../utils/blog";
 import ArrowUpRight from "../ui/icons/arrow-up-right";
 
 interface BlogListItemProps {
@@ -9,25 +11,29 @@ export default function BlogListItem({ item }: BlogListItemProps) {
   const href = `/blogs/${item.slug}`;
 
   return (
-    <a
-      href={href}
-      className="grid grid-cols-1 border-b border-white/80 md:grid-cols-[0.35fr_1fr_auto]"
+    <Link
+      to={href}
+      className="grid grid-cols-1 gap-3 border-t border-white/20 px-3 py-4 transition-colors duration-200 hover:bg-white/[0.02] sm:px-4 sm:py-5 lg:grid-cols-[9rem_1fr_auto] lg:gap-5 lg:px-5"
     >
-      <div className="min-h-[5.5rem] border-b border-white/80 bg-muted sm:min-h-[8rem] md:min-h-[9rem] md:border-r md:border-b-0" />
+      <div className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-white/44">
+        <p>{formatPostDate(item.publishedAt)}</p>
+      </div>
 
-      <div className="px-5 py-6 font-mono sm:px-6 sm:py-8 md:px-6 lg:px-8">
-        <p className="text-[0.7rem] uppercase tracking-[0.18em] text-white/60">
-          {item.publishedAt} • {item.readingTimeMinutes} min read
+      <div className="min-w-0">
+        <p className="font-mono text-[0.62rem] uppercase tracking-[0.18em] text-white/40">
+          {item.readingTimeMinutes} min read
         </p>
-        <h2 className="mt-3 font-serif text-[1.3rem] leading-[1.35] text-white lg:text-[1.45rem]">
+        <h2 className="mt-1.5 font-serif text-[1.02rem] leading-[1.3] text-white sm:text-[1.12rem] lg:text-[1.2rem]">
           {item.title}
         </h2>
-        <p className="mt-3 text-[0.86rem] leading-6 text-white/74 sm:text-sm sm:leading-7">{item.excerpt}</p>
+        <p className="mt-2 max-w-[54ch] font-mono text-[0.76rem] leading-5 text-white/56 sm:text-[0.8rem] sm:leading-6">
+          {item.excerpt}
+        </p>
       </div>
 
-      <div className="flex items-center justify-end px-5 pb-5 sm:px-6 sm:pb-6 md:px-8 md:pb-0">
+      <div className="flex items-start justify-end pt-0.5 text-white/34">
         <ArrowUpRight />
       </div>
-    </a>
+    </Link>
   );
 }

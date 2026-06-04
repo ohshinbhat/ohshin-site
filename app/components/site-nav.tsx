@@ -87,14 +87,14 @@ export default function SiteNav({ currentPage = "home", items }: SiteNavProps) {
       className="pointer-events-none fixed inset-x-0 bottom-4 z-30 flex w-full justify-center px-3 sm:bottom-6"
       data-site-nav
     >
-      <div className="pointer-events-auto relative max-w-full rounded-full border border-white/12 bg-[rgba(8,10,14,0.74)] p-1.5 shadow-nav-glass backdrop-blur-2xl">
+      <div className="pointer-events-auto relative max-w-full rounded-full border border-white/14 bg-[rgba(10,12,17,0.42)] p-1.5 shadow-nav-glass backdrop-blur-2xl">
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0.04)_42%,rgba(255,255,255,0.015))]"
+          className="pointer-events-none absolute inset-0 rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,0.18),rgba(255,255,255,0.045)_42%,rgba(0,0,0,0.12))]"
         />
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-px rounded-full border border-black/35"
+          className="pointer-events-none absolute inset-px rounded-full border border-black/18"
         />
 
         <nav

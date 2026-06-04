@@ -23,7 +23,7 @@ function DockNavItem({ item, isActive, onClick }: DockNavItemProps) {
       href={item.href}
       onClick={onClick}
       whileTap={{ scale: 0.97 }}
-      className={`relative z-10 min-w-[5.8rem] rounded-full px-4 py-3 text-center font-doto text-[12px] font-medium tracking-[0.08em] sm:min-w-[7rem] sm:px-6 sm:text-[14px] sm:tracking-[0.12em] ${
+      className={`relative z-10 min-w-[5.8rem] rounded-full px-4 py-3 text-center font-doto text-[12px] font-black tracking-[0.08em] sm:min-w-[7rem] sm:px-6 sm:text-[14px] sm:tracking-[0.12em] ${
         isActive ? "text-white" : "text-white/70"
       }`}
     >

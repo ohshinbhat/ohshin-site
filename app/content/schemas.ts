@@ -95,5 +95,6 @@ export const BlogFrontmatterSchema = z.object({
   slug: z.string().min(1),
   excerpt: z.string().min(1),
   publishedAt: SortableDateSchema,
+  tags: z.array(z.string().min(1)).default([]),
   published: z.boolean(),
 });
