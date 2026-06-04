@@ -14,7 +14,7 @@ interface AboutSectionProps {
 }
 
 const interactiveBlockClassName =
-  "bg-transparent text-white transition-colors duration-500 ease-out hover:bg-accent hover:text-white";
+  "bg-transparent text-white";
 
 export default function AboutSection({
   facts,

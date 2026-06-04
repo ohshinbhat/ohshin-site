@@ -1,12 +1,10 @@
-import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
-import { useRef, type MouseEvent } from "react";
-import type { MotionValue, SpringOptions } from "motion/react";
+import { motion } from "motion/react";
+import type { MouseEvent } from "react";
 import type { SiteNavigationItem } from "../../types";
 
 interface DockNavItemProps {
   item: SiteNavigationItem;
   isActive: boolean;
-  mouseX: MotionValue<number>;
   onClick: (event: MouseEvent<HTMLAnchorElement>) => void;
 }
 
@@ -19,68 +17,42 @@ interface DockNavProps {
   ) => void;
 }
 
-const springConfig: SpringOptions = { mass: 0.12, stiffness: 220, damping: 18 };
-
-function DockNavItem({ item, isActive, mouseX, onClick }: DockNavItemProps) {
-  const itemRef = useRef<HTMLAnchorElement | null>(null);
-
-  const distance = useTransform(mouseX, (value) => {
-    const rect = itemRef.current?.getBoundingClientRect();
-
-    if (!rect || !Number.isFinite(value)) {
-      return Infinity;
-    }
-
-    return value - (rect.left + rect.width / 2);
-  });
-
-  const scale = useSpring(
-    useTransform(distance, [-180, -90, 0, 90, 180], [1, 1.05, 1.18, 1.05, 1]),
-    springConfig,
-  );
-
-  const y = useSpring(
-    useTransform(distance, [-180, -90, 0, 90, 180], [0, -2, -8, -2, 0]),
-    springConfig,
-  );
-
-  const opacity = useSpring(
-    useTransform(distance, [-180, -90, 0, 90, 180], [0.75, 0.88, 1, 0.88, 0.75]),
-    springConfig,
-  );
-
+function DockNavItem({ item, isActive, onClick }: DockNavItemProps) {
   return (
     <motion.a
-      ref={itemRef}
       href={item.href}
       onClick={onClick}
-      style={{ scale, y, opacity }}
-      className={`relative z-10 rounded-full px-3 py-2 font-doto text-[12px] font-medium tracking-[0.08em] transition-[background-color,box-shadow,color] duration-300 sm:px-5 sm:py-2.5 sm:text-[14px] sm:tracking-[0.12em] ${
-        isActive
-          ? "bg-white/10 text-white ring-1 ring-white/20 shadow-[0_0_24px_rgba(255,255,255,0.06)]"
-          : "text-white/70"
+      whileTap={{ scale: 0.97 }}
+      className={`relative z-10 min-w-[5.8rem] rounded-full px-4 py-3 text-center font-doto text-[12px] font-medium tracking-[0.08em] sm:min-w-[7rem] sm:px-6 sm:text-[14px] sm:tracking-[0.12em] ${
+        isActive ? "text-white" : "text-white/70"
       }`}
     >
-      {item.label}
+      {isActive ? (
+        <motion.span
+          layoutId="dock-active-pill"
+          className="absolute inset-0 -z-10 rounded-full border border-white/16 bg-white/12 shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_8px_24px_rgba(0,0,0,0.22)]"
+          transition={{ type: "spring", stiffness: 360, damping: 32, mass: 0.35 }}
+        />
+      ) : null}
+      <motion.span
+        className="relative z-10 block"
+        animate={{ y: isActive ? -1 : 0, opacity: isActive ? 1 : 0.78 }}
+        transition={{ duration: 0.18, ease: "easeOut" }}
+      >
+        {item.label}
+      </motion.span>
     </motion.a>
   );
 }
 
 export default function DockNav({ items, activeKey, onItemClick }: DockNavProps) {
-  const mouseX = useMotionValue(Infinity);
-
   return (
-    <div
-      className="relative flex w-full max-w-full items-center justify-center gap-1 overflow-x-auto px-1 sm:gap-4 sm:px-0 md:gap-8"
-      onMouseMove={(event) => mouseX.set(event.clientX)}
-      onMouseLeave={() => mouseX.set(Infinity)}
-    >
+    <div className="relative flex max-w-[calc(100vw-2.5rem)] items-center justify-center gap-1 overflow-x-auto">
       {items.map((item) => (
         <DockNavItem
           key={item.key}
           item={item}
           isActive={item.key === activeKey}
-          mouseX={mouseX}
           onClick={(event) => onItemClick(event, item)}
         />
       ))}

@@ -17,6 +17,7 @@ const config: Config = {
       fontFamily: {
         doto: ['"Doto"', "monospace"],
         mono: ['"IBM Plex Mono"', "monospace"],
+        serif: ['"Lora"', "Georgia", "serif"],
       },
       maxWidth: {
         site: "1400px",
@@ -28,7 +29,8 @@ const config: Config = {
         "nav-row": "10.5rem",
       },
       boxShadow: {
-        "nav-glass": "0 10px 30px rgba(0,0,0,0.18)",
+        "nav-glass":
+          "0 18px 60px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.22), inset 0 -1px 0 rgba(255,255,255,0.06)",
       },
       tracking: {
         section: "0em",

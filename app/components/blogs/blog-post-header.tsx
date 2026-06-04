@@ -13,9 +13,9 @@ export default function BlogPostHeader({
   post,
 }: BlogPostHeaderProps) {
   return (
-    <header className="sticky top-[var(--site-nav-height,61px)] z-20 bg-cobalt">
+    <header className="sticky top-0 z-20 bg-cobalt">
       <div className="px-5 py-5 text-center sm:px-8 sm:py-6 lg:px-10">
-        <h1 className="mx-auto max-w-[60rem] py-1 font-mono text-[0.86rem] font-semibold uppercase leading-[1.55] tracking-[0.08em] text-white sm:text-[1.1rem] sm:tracking-[0.12em] lg:text-[1.25rem]">
+        <h1 className="mx-auto max-w-[60rem] py-1 font-serif text-[1.6rem] font-semibold leading-[1.18] text-white sm:text-[2rem] lg:text-[2.45rem]">
           {post.title}
         </h1>
       </div>

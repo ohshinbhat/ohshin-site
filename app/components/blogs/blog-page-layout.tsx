@@ -17,7 +17,7 @@ export default function BlogPageLayout({
   withTopBorder = false,
 }: BlogPageLayoutProps) {
   return (
-    <main className="min-h-screen bg-cobalt text-white">
+    <main className="min-h-screen bg-cobalt pb-24 text-white">
       <SiteNav currentPage="blogs" items={navigationItems} />
 
       <section

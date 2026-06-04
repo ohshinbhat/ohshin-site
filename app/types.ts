@@ -1,5 +1,5 @@
-export type HomeSectionId = "about" | "projects";
-export type NavigationKey = HomeSectionId | "blogs";
+export type HomeSectionId = "about";
+export type NavigationKey = HomeSectionId | "projects" | "blogs";
 
 export interface SiteHeroContent {
   title: string;

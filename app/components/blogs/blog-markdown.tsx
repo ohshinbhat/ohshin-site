@@ -12,7 +12,7 @@ export default function BlogMarkdown({ body }: BlogMarkdownProps) {
         remarkPlugins={[remarkGfm]}
         components={{
           h2: ({ children }) => (
-            <h2 className="mt-10 font-mono text-[1.35rem] font-semibold uppercase tracking-[0.08em] text-white">
+            <h2 className="mt-10 font-serif text-[1.55rem] font-semibold leading-[1.22] text-white">
               {children}
             </h2>
           ),
@@ -30,7 +30,7 @@ export default function BlogMarkdown({ body }: BlogMarkdownProps) {
           a: ({ href, children }) => (
             <a
               href={href}
-              className="underline decoration-white/40 underline-offset-4 transition hover:text-white/80"
+              className="underline decoration-white/40 underline-offset-4"
               target={href?.startsWith("http") ? "_blank" : undefined}
               rel={href?.startsWith("http") ? "noreferrer" : undefined}
             >

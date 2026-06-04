@@ -8,19 +8,29 @@ import {
 } from "./site-content.server";
 
 export async function getHomePageContent() {
-  const [home, navigationItems, socialLinks, projects, workExperience] =
+  const [home, navigationItems, socialLinks] =
     await Promise.all([
       getHomeContent(),
       getNavigationItems(),
       getSocialLinks(),
-      getProjectsSection(),
-      getWorkExperienceSection(),
     ]);
 
   return {
     home,
     navigationItems,
     socialLinks,
+  };
+}
+
+export async function getWorkPageContent() {
+  const [navigationItems, projects, workExperience] = await Promise.all([
+    getNavigationItems(),
+    getProjectsSection(),
+    getWorkExperienceSection(),
+  ]);
+
+  return {
+    navigationItems,
     projects,
     workExperience,
   };

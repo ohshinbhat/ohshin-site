@@ -1,9 +1,9 @@
 import type { HomeSectionId } from "../types";
 
-export const HOME_SECTIONS: HomeSectionId[] = ["about", "projects"];
+export const HOME_SECTIONS: HomeSectionId[] = ["about"];
 
 export function isHomeSectionId(value: string): value is HomeSectionId {
-  return value === "about" || value === "projects";
+  return value === "about";
 }
 
 export function getSectionAbsoluteTop(sectionId: HomeSectionId) {
@@ -31,7 +31,7 @@ export function scrollWindowToSection(sectionId: HomeSectionId): void {
   }
 
   const rect = target.getBoundingClientRect();
-  const targetY = window.scrollY + rect.top - getNavHeight();
+  const targetY = window.scrollY + rect.top;
 
   window.scrollTo({
     top: Math.max(targetY, 0),

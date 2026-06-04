@@ -45,7 +45,7 @@ export default function AboutFacts({ facts }: AboutFactsProps) {
                 href={fact.href}
                 target="_blank"
                 rel="noreferrer"
-                className="underline decoration-white/45 underline-offset-4 transition-colors hover:decoration-white"
+                className="underline decoration-white/45 underline-offset-4"
               >
                 {value}
               </a>

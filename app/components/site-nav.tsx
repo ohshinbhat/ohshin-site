@@ -2,12 +2,11 @@ import { useLocation, useNavigate } from "@remix-run/react";
 import { useEffect, type MouseEvent } from "react";
 import type { SiteNavigationItem } from "../types";
 import DockNav from "./react-bits/dock-nav";
-import GradualBlur from "./react-bits/gradual-blur";
 import { useActiveHomeSection } from "../hooks/use-active-home-section";
 import { isHomeSectionId, scrollWindowToSection } from "../utils/nav";
 
 interface SiteNavProps {
-  currentPage?: "home" | "blogs";
+  currentPage?: "home" | "work" | "blogs";
   items: SiteNavigationItem[];
 }
 
@@ -15,20 +14,13 @@ export default function SiteNav({ currentPage = "home", items }: SiteNavProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const activeHomeSection = useActiveHomeSection(currentPage === "home");
-  const isBlogsPage = currentPage === "blogs";
-  const isHomePage = currentPage === "home";
-  const resolvedItems = items.map((item) =>
-    item.key === "blogs"
-      ? item
-      : {
-          ...item,
-          href: isBlogsPage ? `/${item.href}` : item.href,
-        },
-  );
+  const isHomePage = location.pathname === "/";
 
   const activeKey = location.pathname.startsWith("/blogs")
     ? "blogs"
-    : activeHomeSection;
+    : location.pathname.startsWith("/work")
+      ? "projects"
+      : activeHomeSection;
 
   useEffect(() => {
     const nav = document.querySelector("header[data-site-nav]");
@@ -54,11 +46,11 @@ export default function SiteNav({ currentPage = "home", items }: SiteNavProps) {
     event: MouseEvent<HTMLAnchorElement>,
     item: SiteNavigationItem,
   ) => {
-    if (item.key === "blogs") {
+    if (item.key === "blogs" || item.key === "projects") {
       return;
     }
 
-    if (isBlogsPage) {
+    if (!isHomePage) {
       event.preventDefault();
       navigate("/", {
         state: { targetSection: item.key },
@@ -92,34 +84,30 @@ export default function SiteNav({ currentPage = "home", items }: SiteNavProps) {
 
   return (
     <header
-      className={`${isHomePage ? "fixed inset-x-0 top-0" : "sticky top-0"} z-30 w-full overflow-hidden bg-[rgba(20,24,31,0.28)] shadow-nav-glass backdrop-blur-xl supports-[backdrop-filter]:bg-glass`}
+      className="pointer-events-none fixed inset-x-0 bottom-4 z-30 flex w-full justify-center px-3 sm:bottom-6"
       data-site-nav
     >
-      <GradualBlur
-        target="parent"
-        position="bottom"
-        height="100%"
-        strength={2}
-        divCount={6}
-        curve="bezier"
-        opacity={0.7}
-        className="pointer-events-none"
-      />
-      <nav
-        aria-label="Primary"
-        className="relative mx-auto flex w-full max-w-site items-center justify-center gap-2 px-2 py-2.5 sm:gap-4 sm:px-4 sm:py-3 md:gap-8"
-      >
+      <div className="pointer-events-auto relative max-w-full rounded-full border border-white/12 bg-[rgba(8,10,14,0.74)] p-1.5 shadow-nav-glass backdrop-blur-2xl">
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 "
+          className="pointer-events-none absolute inset-0 rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0.04)_42%,rgba(255,255,255,0.015))]"
+        />
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-px rounded-full border border-black/35"
         />
 
-        <DockNav
-          items={resolvedItems}
-          activeKey={activeKey}
-          onItemClick={handleClick}
-        />
-      </nav>
+        <nav
+          aria-label="Primary"
+          className="relative flex max-w-full items-center justify-center"
+        >
+          <DockNav
+            items={items}
+            activeKey={activeKey}
+            onItemClick={handleClick}
+          />
+        </nav>
+      </div>
     </header>
   );
 }

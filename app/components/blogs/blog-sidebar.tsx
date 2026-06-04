@@ -6,7 +6,7 @@ interface BlogSidebarProps {
 }
 
 const headingClassName =
-  "font-doto text-[3rem] font-black uppercase leading-none tracking-section text-white sm:text-[4.5rem] md:text-[5.6rem]";
+  "font-serif text-[2.8rem] font-semibold uppercase leading-none tracking-[0.04em] text-white sm:text-[4.15rem] md:text-[5.1rem]";
 
 export default function BlogSidebar({
   href,
