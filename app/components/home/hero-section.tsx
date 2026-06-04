@@ -5,7 +5,10 @@ interface HeroSectionProps {
   subtitle: string;
 }
 
-export default function HeroSection({ title, subtitle }: HeroSectionProps) {
+export default function HeroSection({
+  title,
+  subtitle,
+}: HeroSectionProps) {
   return (
     <section id="hero" className="relative isolate min-h-[100svh] overflow-hidden">
       <div className="absolute inset-0">
@@ -16,7 +19,7 @@ export default function HeroSection({ title, subtitle }: HeroSectionProps) {
         />
       </div>
 
-      <div className="relative z-10 flex min-h-[100svh] items-center justify-center px-5 py-20 text-center sm:px-6 sm:py-20">
+      <div className="relative z-10 flex min-h-[100svh] items-center justify-center px-5 py-20 text-center sm:px-6">
         <div className="relative w-full max-w-5xl">
           <div
             aria-hidden="true"

@@ -24,6 +24,7 @@ const config: Config = {
       },
       minHeight: {
         "screen-nav": "calc(100dvh - var(--site-nav-height, 61px))",
+        "nav-row": "10.5rem",
       },
       height: {
         "nav-row": "10.5rem",
@@ -34,6 +35,15 @@ const config: Config = {
       },
       tracking: {
         section: "0em",
+      },
+      keyframes: {
+        "signal-cell": {
+          "0%": { opacity: "0", transform: "translateY(6px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+      },
+      animation: {
+        "signal-cell": "signal-cell 420ms ease-out both",
       },
     },
   },

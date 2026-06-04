@@ -1,4 +1,5 @@
 import type { BookInfo } from "../../types";
+import { BlockHeader } from "../blocks/signal-board";
 import BookCard from "./book-card";
 
 interface BooksShelfProps {
@@ -27,29 +28,23 @@ export default function BooksShelf({
 }: BooksShelfProps) {
   return (
     <div className="space-y-6">
-      <h3 className="font-doto text-[1.8rem] font-black uppercase leading-none tracking-section text-white lg:text-[1.7rem]">
-        books
-      </h3>
-      <div className="mt-4 overflow-x-auto pb-2">
-        <div className="flex w-max gap-4">
-          {loading
-            ? Array.from({ length: 4 }, (_, index) => (
-                <div
-                  key={index}
-                  className="w-[min(17rem,calc(100vw-3rem))] flex-none sm:w-64"
-                >
-                  <BookCardSkeleton />
-                </div>
-              ))
-            : books.map((book) => (
-                <div
-                  key={book.id}
-                  className="w-[min(17rem,calc(100vw-3rem))] flex-none sm:w-64"
-                >
-                  <BookCard book={book} />
-                </div>
-              ))}
-        </div>
+      <BlockHeader
+        eyebrow="read stack"
+        title="books"
+        titleClassName="text-[1.8rem] sm:text-[2.15rem] lg:text-[2rem]"
+      />
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+        {loading
+          ? Array.from({ length: 6 }, (_, index) => (
+              <div key={index} className="min-w-0">
+                <BookCardSkeleton />
+              </div>
+            ))
+          : books.map((book) => (
+              <div key={book.id} className="min-w-0">
+                <BookCard book={book} />
+              </div>
+            ))}
       </div>
     </div>
   );

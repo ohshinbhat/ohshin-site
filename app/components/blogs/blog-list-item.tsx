@@ -1,5 +1,6 @@
 import { Link } from "@remix-run/react";
 import type { BlogPostMeta } from "../../types";
+import { BlockLabel } from "../blocks/signal-board";
 import { formatPostDate } from "../../utils/blog";
 import ArrowUpRight from "../ui/icons/arrow-up-right";
 
@@ -13,17 +14,20 @@ export default function BlogListItem({ item }: BlogListItemProps) {
   return (
     <Link
       to={href}
-      className="grid grid-cols-1 gap-3 border-t border-white/20 px-3 py-4 transition-colors duration-200 hover:bg-white/[0.02] sm:px-4 sm:py-5 lg:grid-cols-[9rem_1fr_auto] lg:gap-5 lg:px-5"
+      className="grid grid-cols-1 gap-3 border-b border-white/30 px-4 py-4 sm:px-5 sm:py-5 lg:grid-cols-[9rem_1fr_auto] lg:gap-5"
     >
-      <div className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-white/44">
-        <p>{formatPostDate(item.publishedAt)}</p>
+      <div>
+        <BlockLabel className="text-[0.58rem] text-white/40">date</BlockLabel>
+        <p className="mt-2 font-mono text-[0.66rem] uppercase tracking-[0.14em] text-white/58">
+          {formatPostDate(item.publishedAt)}
+        </p>
       </div>
 
       <div className="min-w-0">
-        <p className="font-mono text-[0.62rem] uppercase tracking-[0.18em] text-white/40">
+        <BlockLabel className="text-[0.58rem] text-white/40">
           {item.readingTimeMinutes} min read
-        </p>
-        <h2 className="mt-1.5 font-serif text-[1.02rem] leading-[1.3] text-white sm:text-[1.12rem] lg:text-[1.2rem]">
+        </BlockLabel>
+        <h2 className="mt-2 font-serif text-[1.02rem] leading-[1.3] text-white sm:text-[1.12rem] lg:text-[1.2rem]">
           {item.title}
         </h2>
         <p className="mt-2 max-w-[54ch] font-mono text-[0.76rem] leading-5 text-white/56 sm:text-[0.8rem] sm:leading-6">

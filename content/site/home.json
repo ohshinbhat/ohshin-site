@@ -33,12 +33,48 @@
       "embedUrl": "https://open.spotify.com/embed/playlist/42FfI12H2l5rStbFV5zDpI?utm_source=generator"
     }
   ],
-  "bookTitles": [
-    "Dune",
-    "The Three-Body Problem",
-    "The Martian",
-    "1984",
-    "Project Hail Mary",
-    "Neuromancer"
+  "books": [
+    {
+      "id": "dune",
+      "title": "Dune",
+      "authors": ["Frank Herbert"],
+      "publishedDate": "1965",
+      "thumbnail": "https://covers.openlibrary.org/b/id/11481354-M.jpg"
+    },
+    {
+      "id": "the-three-body-problem",
+      "title": "The Three-Body Problem",
+      "authors": ["Cixin Liu"],
+      "publishedDate": "2008",
+      "thumbnail": "https://covers.openlibrary.org/b/id/9157544-M.jpg"
+    },
+    {
+      "id": "the-martian",
+      "title": "The Martian",
+      "authors": ["Andy Weir"],
+      "publishedDate": "2011",
+      "thumbnail": "https://covers.openlibrary.org/b/id/11447888-M.jpg"
+    },
+    {
+      "id": "1984",
+      "title": "1984",
+      "authors": ["George Orwell"],
+      "publishedDate": "1949",
+      "thumbnail": "https://covers.openlibrary.org/b/id/9267242-M.jpg"
+    },
+    {
+      "id": "project-hail-mary",
+      "title": "Project Hail Mary",
+      "authors": ["Andy Weir"],
+      "publishedDate": "2021",
+      "thumbnail": "https://covers.openlibrary.org/b/id/11200092-M.jpg"
+    },
+    {
+      "id": "neuromancer",
+      "title": "Neuromancer",
+      "authors": ["William Gibson"],
+      "publishedDate": "1984",
+      "thumbnail": "https://covers.openlibrary.org/b/id/283860-M.jpg"
+    }
   ]
 }

@@ -1,4 +1,5 @@
 import type { SiteWorkExperience } from "../../types";
+import { BlockCell, BlockHeader, BlockLabel } from "../blocks/signal-board";
 
 interface WorkExperienceColumnProps {
   title: string;
@@ -10,11 +11,13 @@ export default function WorkExperienceColumn({
   items,
 }: WorkExperienceColumnProps) {
   return (
-    <aside className="border-b border-white/80 lg:border-r lg:border-b-0">
-      <div className="flex border-b border-white/80 px-5 py-7 sm:px-8 sm:py-8 lg:h-nav-row lg:items-center">
-        <h2 className="font-doto text-[2.35rem] font-black uppercase tracking-section sm:text-[3.4rem]">
-          {title}
-        </h2>
+    <BlockCell as="aside" tone="accent" className="lg:row-span-3">
+      <div className="border-b border-white/70 px-5 py-7 sm:px-8 sm:py-8 lg:min-h-nav-row">
+        <BlockHeader
+          eyebrow="timeline"
+          title={title}
+          titleClassName="text-[2.15rem] sm:text-[3rem] lg:text-[3.2rem]"
+        />
       </div>
 
       <div className="px-5 py-6 sm:px-8 sm:py-8">
@@ -22,11 +25,9 @@ export default function WorkExperienceColumn({
           {items.map((item) => (
             <article
               key={item.id}
-              className="border border-white/80 bg-accent px-5 py-5 font-mono text-[0.78rem] leading-5 text-white/88 sm:px-6 sm:py-6 sm:text-[0.82rem] sm:leading-6"
+              className="border border-white/55 bg-accent px-5 py-5 font-mono text-[0.76rem] leading-5 text-white/86 sm:px-6 sm:py-6 sm:text-[0.8rem] sm:leading-6"
             >
-              <p className="text-[0.72rem] uppercase tracking-[0.2em] text-white/70">
-                {item.periodLabel}
-              </p>
+              <BlockLabel className="text-[0.6rem] text-white/58">{item.periodLabel}</BlockLabel>
               <h3 className="mt-3 text-[0.92rem] font-semibold text-white">{item.role}</h3>
               <p className="mt-1 text-[0.8rem] text-white/90">{item.company}</p>
               {item.location ? (
@@ -46,6 +47,6 @@ export default function WorkExperienceColumn({
           ))}
         </div>
       </div>
-    </aside>
+    </BlockCell>
   );
 }

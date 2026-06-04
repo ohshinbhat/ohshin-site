@@ -42,9 +42,11 @@ export default function BlogPostPage() {
     <BlogPageLayout
       navigationItems={navigationItems}
       sidebarHref="/blogs"
-      withTopBorder
     >
-      <article ref={articleRef} className="border-t border-white/80 lg:border-t-0">
+      <article
+        ref={articleRef}
+        className="min-w-0 border-r border-b border-white/70 bg-cobalt lg:min-h-screen-nav"
+      >
         <BlogPostHeader articleRef={articleRef} post={resolvedPost} />
         <BlogPostBody post={resolvedPost} />
       </article>

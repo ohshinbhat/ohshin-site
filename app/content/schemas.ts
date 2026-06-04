@@ -17,6 +17,15 @@ export const SpotifyPlaylistSchema = z.object({
   embedUrl: z.string().url(),
 });
 
+export const BookInfoSchema = z.object({
+  id: z.string().min(1),
+  title: z.string().min(1),
+  authors: z.array(z.string().min(1)),
+  publishedDate: z.string().optional(),
+  description: z.string().optional(),
+  thumbnail: z.string().url().optional(),
+});
+
 export const HomeContentSchema = z.object({
   hero: z.object({
     title: z.string().min(1),
@@ -27,7 +36,7 @@ export const HomeContentSchema = z.object({
     paragraphs: z.array(z.string().min(1)),
   }),
   spotifyPlaylists: z.array(SpotifyPlaylistSchema),
-  bookTitles: z.array(z.string().min(1)),
+  books: z.array(BookInfoSchema),
 });
 
 export const WorkExperienceLinkSchema = z.object({

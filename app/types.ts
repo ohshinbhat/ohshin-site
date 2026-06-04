@@ -24,7 +24,7 @@ export interface SiteHomeContent {
     paragraphs: string[];
   };
   spotifyPlaylists: SpotifyPlaylist[];
-  bookTitles: string[];
+  books: BookInfo[];
 }
 
 export interface WorkExperienceLink {
