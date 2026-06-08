@@ -111,6 +111,57 @@ export function BlockHeader({
   );
 }
 
+interface BlockSectionTitleProps {
+  children: ReactNode;
+  className?: string;
+}
+
+export function BlockSectionTitle({
+  children,
+  className,
+}: BlockSectionTitleProps) {
+  return (
+    <h2
+      className={cx(
+        "font-doto text-[2.1rem] font-black uppercase leading-none tracking-section text-white sm:text-[3rem]",
+        className,
+      )}
+    >
+      {children}
+    </h2>
+  );
+}
+
+interface BlockSectionLayoutProps {
+  children: ReactNode;
+  className?: string;
+  contentClassName?: string;
+  padded?: boolean;
+  title: ReactNode;
+  titleClassName?: string;
+}
+
+export function BlockSectionLayout({
+  children,
+  className,
+  contentClassName,
+  padded = true,
+  title,
+  titleClassName,
+}: BlockSectionLayoutProps) {
+  return (
+    <div
+      className={cx(
+        padded && "px-5 py-7 sm:px-8 sm:py-8 lg:px-7 lg:py-6",
+        className,
+      )}
+    >
+      <BlockSectionTitle className={titleClassName}>{title}</BlockSectionTitle>
+      <div className={cx("mt-6", contentClassName)}>{children}</div>
+    </div>
+  );
+}
+
 interface HorizontalShelfProps {
   children: ReactNode;
   className?: string;

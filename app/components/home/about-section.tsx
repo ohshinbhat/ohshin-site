@@ -4,7 +4,6 @@ import AboutCopy from "../about/about-copy";
 import AboutFacts from "../about/about-facts";
 import AboutPortrait from "../about/about-portrait";
 import SpotifyShelf from "../about/spotify-shelf";
-import { BlockCell, BlockGrid, BlockHeader } from "../blocks/signal-board";
 
 interface AboutSectionProps {
   facts: AboutFact[];
@@ -20,40 +19,42 @@ export default function AboutSection({
   booksContent,
 }: AboutSectionProps) {
   return (
-    <section id="about" className="min-h-screen-nav bg-panel font-mono">
-      <BlockGrid className="min-h-screen-nav md:grid-cols-2 lg:grid-cols-[0.92fr_1.58fr_1.46fr] lg:grid-rows-[auto_minmax(0,1fr)_auto]">
-        <BlockCell className="px-5 py-7 sm:px-8 sm:py-8 lg:px-7 lg:py-7">
-          <BlockHeader
-            eyebrow="profile / signal"
-            title="about"
-            description="Small fragments of context. Read together, they make the shape."
-          />
-        </BlockCell>
+    <section id="about" className="min-h-screen-nav bg-ink font-mono text-white">
+      <div className="mx-auto min-h-screen-nav w-full max-w-[1320px] px-5 py-14 pb-32 sm:px-8 lg:px-10 lg:py-20">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_25rem] lg:gap-x-16">
+          <header className="border-b border-white/18 pb-8 lg:col-span-2">
+            <p className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-white/45">
+              profile / ohshin
+            </p>
+            <h2 className="mt-4 font-doto text-[4.6rem] font-black uppercase leading-none tracking-section text-white sm:text-[7rem] lg:text-[8.5rem]">
+              about
+            </h2>
+          </header>
 
-        <BlockCell className="px-5 py-7 sm:px-8 sm:py-8 lg:px-7 lg:py-6">
-          <AboutFacts facts={facts} />
-        </BlockCell>
+          <main className="order-3 space-y-10 lg:order-2">
+            <div className="max-w-[78ch] text-[0.9rem] leading-[1.7] text-white/90 sm:text-[0.98rem]">
+              <AboutCopy paragraphs={paragraphs} />
+            </div>
+          </main>
 
-        <BlockCell className="min-h-[24rem] md:min-h-[30rem] lg:row-span-2 lg:min-h-0">
-          <AboutPortrait />
-        </BlockCell>
+          <aside className="order-2 space-y-6 lg:order-3">
+            <div className="border-y border-white/18 py-5">
+              <AboutFacts facts={facts} />
+            </div>
+            <div className="h-[30rem] overflow-hidden rounded-3xl bg-steel sm:h-[34rem] lg:h-[38rem]">
+              <AboutPortrait />
+            </div>
+          </aside>
 
-        <BlockCell className="px-5 py-7 text-[0.9rem] leading-[1.55] sm:px-8 sm:py-8 sm:text-[0.95rem] md:min-h-[30rem] lg:col-span-2 lg:min-h-0 lg:px-7 lg:py-6 lg:text-[0.86rem] lg:leading-[1.34]">
-          <AboutCopy paragraphs={paragraphs} />
-        </BlockCell>
-
-        <BlockCell className="text-white md:col-span-2 lg:col-span-3">
-          <div className="grid md:grid-cols-2">
-            <div className="min-w-0 border-b border-white/70 px-5 py-7 sm:px-8 sm:py-8 md:border-r md:border-b-0 lg:px-7 lg:py-6">
+          <footer className="order-4 grid gap-12 border-t border-white/18 pt-10 lg:col-span-2 lg:grid-cols-2 lg:gap-16">
+            <div className="min-w-0">
               <SpotifyShelf playlists={playlists} />
             </div>
 
-            <div className="min-w-0 px-5 py-7 sm:px-8 sm:py-8 lg:px-7 lg:py-6">
-              {booksContent}
-            </div>
-          </div>
-        </BlockCell>
-      </BlockGrid>
+            <div className="min-w-0">{booksContent}</div>
+          </footer>
+        </div>
+      </div>
     </section>
   );
 }

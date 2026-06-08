@@ -4,22 +4,11 @@ This portfolio uses git-backed content files so routine updates do not require R
 
 ## Directory layout
 
-- `content/site/home.json`: hero copy, about facts, about paragraphs, Spotify playlists, and book titles
+- `content/site/home.json`: hero copy, about facts, about paragraphs, Spotify playlists, and books
 - `content/site/projects.json`: project section headings and project cards
 - `content/site/work-experience.json`: work experience section heading and entries
 - `content/site/navigation.json`: primary navigation items
 - `content/site/social-links.json`: reusable outbound profile links
-- `content/blogs/*.mdx`: blog posts with frontmatter and markdown body
-
-## Blog frontmatter
-
-Every blog post requires:
-
-- `title`
-- `slug`
-- `excerpt`
-- `publishedAt` in `YYYY-MM-DD`
-- `published` as a boolean
 
 ## Project fields
 
@@ -60,7 +49,6 @@ Every work experience entry requires:
 ## Publishing and sorting
 
 - Hidden items are kept in the repo by setting `published: false`
-- Blog posts are listed by `publishedAt` descending
 - Projects are ordered by `featured` first and then `sortOrder`
 - Work experience entries are ordered by `sortOrder` and then `startDate`
 - Navigation items render only when `visible: true`
@@ -80,13 +68,6 @@ Every work experience entry requires:
 2. Add a new object to `items`
 3. Set a unique `id`
 4. Use `sortOrder` to position it
-
-### Add a blog post
-
-1. Create `content/blogs/your-slug.mdx`
-2. Add the required frontmatter
-3. Write the body in markdown
-4. Set `published: true` when it should appear in `/blogs`
 
 ## Validation rules
 

@@ -93,7 +93,7 @@ export async function getContributionCalendar({
     payload.data?.user?.contributionsCollection?.contributionCalendar?.weeks ?? [];
 
   return {
-    weeks: weeks.slice(-28),
+    weeks: weeks.slice(-8),
     username,
     live: true,
     error: null,

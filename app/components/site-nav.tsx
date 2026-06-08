@@ -1,26 +1,63 @@
 import { useLocation, useNavigate } from "@remix-run/react";
-import { useEffect, type MouseEvent } from "react";
-import type { SiteNavigationItem } from "../types";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
+import type { ComponentType } from "react";
+import type { SiteNavigationItem, SiteSocialLink } from "../types";
 import DockNav from "./react-bits/dock-nav";
 import { useActiveHomeSection } from "../hooks/use-active-home-section";
 import { isHomeSectionId, scrollWindowToSection } from "../utils/nav";
+import GitHubIcon from "./ui/icons/github";
+import InstagramIcon from "./ui/icons/instagram";
+import LinkedInIcon from "./ui/icons/linkedin";
+import MailIcon from "./ui/icons/mail";
+import XIcon from "./ui/icons/x";
 
 interface SiteNavProps {
-  currentPage?: "home" | "work" | "blogs";
+  currentPage?: "home" | "work";
   items: SiteNavigationItem[];
+  socialLinks: SiteSocialLink[];
 }
 
-export default function SiteNav({ currentPage = "home", items }: SiteNavProps) {
+const SOCIAL_ICON_MAP: Record<
+  string,
+  ComponentType<{ className?: string }>
+> = {
+  github: GitHubIcon,
+  instagram: InstagramIcon,
+  linkedin: LinkedInIcon,
+  mail: MailIcon,
+  x: XIcon,
+};
+
+function isExternalHref(href: string) {
+  return href.startsWith("http://") || href.startsWith("https://");
+}
+
+export default function SiteNav({
+  currentPage = "home",
+  items,
+  socialLinks,
+}: SiteNavProps) {
   const location = useLocation();
   const navigate = useNavigate();
+  const hideTimeoutRef = useRef<number | null>(null);
+  const tickingRef = useRef(false);
+  const [isDockHidden, setIsDockHidden] = useState(false);
   const activeHomeSection = useActiveHomeSection(currentPage === "home");
   const isHomePage = location.pathname === "/";
+  const visibleItems = items.filter(
+    (item): item is SiteNavigationItem => item.key === "about" || item.key === "projects",
+  );
+  const visibleSocialLinks = socialLinks.filter((link) =>
+    Object.hasOwn(SOCIAL_ICON_MAP, link.label.toLowerCase()),
+  );
 
-  const activeKey = location.pathname.startsWith("/blogs")
-    ? "blogs"
-    : location.pathname.startsWith("/work")
+  const activeKey = location.pathname.startsWith("/work")
       ? "projects"
       : activeHomeSection;
+
+  useEffect(() => {
+    setIsDockHidden(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     const nav = document.querySelector("header[data-site-nav]");
@@ -46,7 +83,7 @@ export default function SiteNav({ currentPage = "home", items }: SiteNavProps) {
     event: MouseEvent<HTMLAnchorElement>,
     item: SiteNavigationItem,
   ) => {
-    if (item.key === "blogs" || item.key === "projects") {
+    if (item.key === "projects") {
       return;
     }
 
@@ -82,9 +119,50 @@ export default function SiteNav({ currentPage = "home", items }: SiteNavProps) {
     });
   }, [location.pathname, location.hash, location.state]);
 
+  useEffect(() => {
+    const updateDockVisibility = () => {
+      const currentScrollY = window.scrollY;
+
+      if (hideTimeoutRef.current) {
+        window.clearTimeout(hideTimeoutRef.current);
+      }
+
+      if (currentScrollY < 24) {
+        setIsDockHidden(false);
+      } else {
+        setIsDockHidden(true);
+        hideTimeoutRef.current = window.setTimeout(() => {
+          setIsDockHidden(false);
+        }, 560);
+      }
+
+      tickingRef.current = false;
+    };
+
+    const handleScroll = () => {
+      if (tickingRef.current) {
+        return;
+      }
+
+      tickingRef.current = true;
+      window.requestAnimationFrame(updateDockVisibility);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (hideTimeoutRef.current) {
+        window.clearTimeout(hideTimeoutRef.current);
+      }
+    };
+  }, []);
+
   return (
     <header
-      className="pointer-events-none fixed inset-x-0 bottom-4 z-30 flex w-full justify-center px-3 sm:bottom-6"
+      className={`pointer-events-none fixed inset-x-0 bottom-4 z-30 flex w-full justify-center px-3 transition-transform duration-300 ease-out sm:bottom-6 ${
+        isDockHidden ? "translate-y-[calc(100%+2rem)]" : "translate-y-0"
+      }`}
       data-site-nav
     >
       <div className="pointer-events-auto relative max-w-full rounded-full border border-white/14 bg-[rgba(10,12,17,0.42)] p-1.5 shadow-nav-glass backdrop-blur-2xl">
@@ -99,13 +177,39 @@ export default function SiteNav({ currentPage = "home", items }: SiteNavProps) {
 
         <nav
           aria-label="Primary"
-          className="relative flex max-w-full items-center justify-center"
+          className="relative flex max-w-full items-center justify-center gap-1.5"
         >
           <DockNav
-            items={items}
+            items={visibleItems}
             activeKey={activeKey}
             onItemClick={handleClick}
           />
+          {visibleSocialLinks.length > 0 ? (
+            <>
+              <span
+                aria-hidden="true"
+                className="h-7 w-px shrink-0 bg-white/10"
+              />
+              <div className="flex items-center gap-0.5 pr-1 sm:gap-1">
+                {visibleSocialLinks.map((link) => {
+                  const Icon = SOCIAL_ICON_MAP[link.label.toLowerCase()];
+
+                  return (
+                    <a
+                      key={link.label}
+                      aria-label={link.label}
+                      className="flex h-11 w-11 items-center justify-center rounded-full text-white/68 transition-colors duration-150 hover:text-white"
+                      href={link.url}
+                      rel={isExternalHref(link.url) ? "noreferrer" : undefined}
+                      target={isExternalHref(link.url) ? "_blank" : undefined}
+                    >
+                      <Icon className="h-7 w-7" />
+                    </a>
+                  );
+                })}
+              </div>
+            </>
+          ) : null}
         </nav>
       </div>
     </header>

@@ -2,6 +2,11 @@ import { motion } from "motion/react";
 import type { MouseEvent } from "react";
 import type { SiteNavigationItem } from "../../types";
 
+const ALEX_SKIN_URL =
+  "https://cdn.jsdelivr.net/npm/minecraft-assets@1.17.0/minecraft-assets/data/1.21.8/entity/player/slim/alex.png";
+const DIAMOND_PICKAXE_URL =
+  "https://cdn.jsdelivr.net/npm/minecraft-assets@1.17.0/minecraft-assets/data/1.21.8/items/diamond_pickaxe.png";
+
 interface DockNavItemProps {
   item: SiteNavigationItem;
   isActive: boolean;
@@ -15,6 +20,53 @@ interface DockNavProps {
     event: MouseEvent<HTMLAnchorElement>,
     item: SiteNavigationItem,
   ) => void;
+}
+
+function PixelAboutIcon() {
+  return (
+    <span aria-hidden="true" className="relative h-4 w-4 shrink-0">
+      <span
+        className="absolute inset-0 bg-no-repeat [image-rendering:pixelated]"
+        style={{
+          backgroundImage: `url(${ALEX_SKIN_URL})`,
+          backgroundSize: "128px 128px",
+          backgroundPosition: "-16px -16px",
+        }}
+      />
+      <span
+        className="absolute inset-0 bg-no-repeat [image-rendering:pixelated]"
+        style={{
+          backgroundImage: `url(${ALEX_SKIN_URL})`,
+          backgroundSize: "128px 128px",
+          backgroundPosition: "-80px -16px",
+        }}
+      />
+    </span>
+  );
+}
+
+function PixelWorkIcon() {
+  return (
+    <img
+      src={DIAMOND_PICKAXE_URL}
+      alt=""
+      aria-hidden="true"
+      className="h-4 w-4 shrink-0"
+      style={{ imageRendering: "pixelated" }}
+    />
+  );
+}
+
+function DockItemIcon({ itemKey }: { itemKey: SiteNavigationItem["key"] }) {
+  if (itemKey === "about") {
+    return <PixelAboutIcon />;
+  }
+
+  if (itemKey === "projects") {
+    return <PixelWorkIcon />;
+  }
+
+  return null;
 }
 
 function DockNavItem({ item, isActive, onClick }: DockNavItemProps) {
@@ -35,10 +87,11 @@ function DockNavItem({ item, isActive, onClick }: DockNavItemProps) {
         />
       ) : null}
       <motion.span
-        className="relative z-10 block"
+        className="relative z-10 flex items-center justify-center gap-2"
         animate={{ y: isActive ? -1 : 0, opacity: isActive ? 1 : 0.78 }}
         transition={{ duration: 0.18, ease: "easeOut" }}
       >
+        <DockItemIcon itemKey={item.key} />
         {item.label}
       </motion.span>
     </motion.a>

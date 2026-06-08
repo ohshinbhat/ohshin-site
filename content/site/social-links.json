@@ -1,14 +1,22 @@
 [
   {
-    "label": "GitHub",
-    "url": "https://github.com/ohshinbhat"
-  },
-  {
     "label": "X",
     "url": "https://x.com/ohshinbhat"
   },
   {
+    "label": "Instagram",
+    "url": "https://www.instagram.com/ohshinbhat/"
+  },
+  {
+    "label": "Mail",
+    "url": "mailto:ohshinb@gmail.com"
+  },
+  {
     "label": "LinkedIn",
     "url": "https://www.linkedin.com/in/ohshinbhat/"
+  },
+  {
+    "label": "GitHub",
+    "url": "https://github.com/ohshinbhat"
   }
 ]

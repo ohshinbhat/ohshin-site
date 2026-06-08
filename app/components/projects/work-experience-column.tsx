@@ -1,5 +1,4 @@
 import type { SiteWorkExperience } from "../../types";
-import { BlockCell, BlockHeader, BlockLabel } from "../blocks/signal-board";
 
 interface WorkExperienceColumnProps {
   title: string;
@@ -11,42 +10,42 @@ export default function WorkExperienceColumn({
   items,
 }: WorkExperienceColumnProps) {
   return (
-    <BlockCell as="aside" tone="accent" className="lg:row-span-3">
-      <div className="border-b border-white/70 px-5 py-7 sm:px-8 sm:py-8 lg:min-h-nav-row">
-        <BlockHeader
-          eyebrow="timeline"
-          title={title}
-          titleClassName="text-[2.15rem] sm:text-[3rem] lg:text-[3.2rem]"
-        />
+    <section className="min-w-0">
+      <div className="flex items-end justify-between gap-4">
+        <h2 className="font-doto text-[2.2rem] font-black uppercase leading-none tracking-section text-white sm:text-[3.2rem]">
+          {title}
+        </h2>
+        <p className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-accent">
+          timeline
+        </p>
       </div>
 
-      <div className="px-5 py-6 sm:px-8 sm:py-8">
-        <div className="space-y-4 sm:space-y-6">
-          {items.map((item) => (
-            <article
-              key={item.id}
-              className="border border-white/55 bg-accent px-5 py-5 font-mono text-[0.76rem] leading-5 text-white/86 sm:px-6 sm:py-6 sm:text-[0.8rem] sm:leading-6"
-            >
-              <BlockLabel className="text-[0.6rem] text-white/58">{item.periodLabel}</BlockLabel>
-              <h3 className="mt-3 text-[0.92rem] font-semibold text-white">{item.role}</h3>
-              <p className="mt-1 text-[0.8rem] text-white/90">{item.company}</p>
+      <div className="mt-6 border-t border-white/18">
+        {items.map((item) => (
+          <article
+            key={item.id}
+            className="grid gap-3 border-b border-white/12 py-5 font-mono text-[0.82rem] leading-5 text-white/62 sm:grid-cols-[7.25rem_minmax(0,1fr)] sm:text-[0.88rem]"
+          >
+            <div>
+              <p className="text-[0.64rem] uppercase tracking-[0.14em] text-white/46">
+                {item.periodLabel}
+              </p>
               {item.location ? (
-                <p className="mt-1 text-[0.72rem] uppercase tracking-[0.18em] text-white/58">
+                <p className="mt-2 text-[0.64rem] uppercase tracking-[0.14em] text-white/46">
                   {item.location}
                 </p>
               ) : null}
-              <p className="mt-4 text-[0.78rem] text-white/78 sm:text-[0.8rem]">{item.summary}</p>
-              {item.highlights.length > 0 ? (
-                <ul className="mt-4 space-y-1.5 text-white/72">
-                  {item.highlights.slice(0, 2).map((highlight) => (
-                    <li key={highlight}>{highlight}</li>
-                  ))}
-                </ul>
-              ) : null}
-            </article>
-          ))}
-        </div>
+            </div>
+
+            <div>
+              <h3 className="font-mono text-[0.96rem] font-semibold text-white sm:text-[1.02rem]">
+                {item.role}
+              </h3>
+              <p className="mt-1 text-white/86">{item.company}</p>
+            </div>
+          </article>
+        ))}
       </div>
-    </BlockCell>
+    </section>
   );
 }

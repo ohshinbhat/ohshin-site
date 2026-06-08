@@ -1,4 +1,3 @@
-import { getBlogPostBySlug, getBlogPostMetas } from "./blogs.server";
 import {
   getHomeContent,
   getNavigationItems,
@@ -23,39 +22,17 @@ export async function getHomePageContent() {
 }
 
 export async function getWorkPageContent() {
-  const [navigationItems, projects, workExperience] = await Promise.all([
+  const [navigationItems, projects, socialLinks, workExperience] = await Promise.all([
     getNavigationItems(),
     getProjectsSection(),
+    getSocialLinks(),
     getWorkExperienceSection(),
   ]);
 
   return {
     navigationItems,
     projects,
+    socialLinks,
     workExperience,
-  };
-}
-
-export async function getBlogsPageContent() {
-  const [navigationItems, posts] = await Promise.all([
-    getNavigationItems(),
-    getBlogPostMetas(),
-  ]);
-
-  return {
-    navigationItems,
-    posts,
-  };
-}
-
-export async function getBlogPostPageContent(slug: string) {
-  const [navigationItems, post] = await Promise.all([
-    getNavigationItems(),
-    getBlogPostBySlug(slug),
-  ]);
-
-  return {
-    navigationItems,
-    post,
   };
 }

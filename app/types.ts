@@ -1,5 +1,5 @@
 export type HomeSectionId = "about";
-export type NavigationKey = HomeSectionId | "projects" | "blogs";
+export type NavigationKey = HomeSectionId | "projects";
 
 export interface SiteHeroContent {
   title: string;
@@ -75,20 +75,6 @@ export interface SiteProjectsSection {
   items: SiteProject[];
 }
 
-export interface BlogPostMeta {
-  title: string;
-  slug: string;
-  excerpt: string;
-  publishedAt: string;
-  tags: string[];
-  published: boolean;
-  readingTimeMinutes: number;
-}
-
-export interface BlogPost extends BlogPostMeta {
-  body: string;
-}
-
 export interface SiteNavigationItem {
   key: NavigationKey;
   label: string;
@@ -99,6 +85,18 @@ export interface SiteNavigationItem {
 export interface SiteSocialLink {
   label: string;
   url: string;
+}
+
+export type ReachStatId = "instagram" | "x" | "visits";
+
+export interface ReachStat {
+  id: ReachStatId;
+  label: string;
+  metricLabel: string;
+  numericValue: number;
+  value: string;
+  href?: string;
+  live: boolean;
 }
 
 export interface BookInfo {

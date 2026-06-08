@@ -29,6 +29,7 @@ export default function Index() {
   const {
     home,
     navigationItems,
+    socialLinks,
   } = useLoaderData<typeof loader>();
 
   return (
@@ -37,7 +38,7 @@ export default function Index() {
         title={home.hero.title}
         subtitle={home.hero.subtitle}
       />
-      <SiteNav currentPage="home" items={navigationItems} />
+      <SiteNav currentPage="home" items={navigationItems} socialLinks={socialLinks} />
       <AboutSection
         facts={home.about.facts}
         paragraphs={home.about.paragraphs}

@@ -88,7 +88,7 @@ export const ProjectsSectionSchema = z.object({
 });
 
 export const NavigationItemSchema = z.object({
-  key: z.enum(["about", "projects", "blogs"]),
+  key: z.enum(["about", "projects"]),
   label: z.string().min(1),
   href: z.string().min(1),
   visible: z.boolean(),
@@ -97,13 +97,4 @@ export const NavigationItemSchema = z.object({
 export const SocialLinkSchema = z.object({
   label: z.string().min(1),
   url: z.string().url(),
-});
-
-export const BlogFrontmatterSchema = z.object({
-  title: z.string().min(1),
-  slug: z.string().min(1),
-  excerpt: z.string().min(1),
-  publishedAt: SortableDateSchema,
-  tags: z.array(z.string().min(1)).default([]),
-  published: z.boolean(),
 });

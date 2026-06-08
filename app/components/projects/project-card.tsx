@@ -1,63 +1,57 @@
 import type { SiteProject } from "../../types";
-import { BlockCell, BlockLabel } from "../blocks/signal-board";
+import ArrowUpRight from "../ui/icons/arrow-up-right";
+import GitHubIcon from "../ui/icons/github";
 
 interface ProjectCardProps {
   project: SiteProject;
+  serial?: string;
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+export default function ProjectCard({ project, serial }: ProjectCardProps) {
   return (
-    <BlockCell as="article" tone="accent" className="flex min-h-[18rem] flex-col justify-between sm:min-h-[21rem]">
-      <div className="flex-1 px-5 py-6 font-mono text-[0.86rem] leading-6 text-white/84 sm:px-8 sm:py-8 sm:text-sm sm:leading-7">
-        <div className="flex flex-wrap items-center justify-between gap-3 text-[0.68rem] uppercase tracking-[0.14em] text-white/56 sm:tracking-[0.18em]">
-          <span>{project.year}</span>
-          <span>{project.status}</span>
-        </div>
-
-        <div className="flex flex-wrap gap-2">
-          {project.tech.map((item) => (
-            <span
-              key={item}
-              className="border border-white/50 px-2 py-0.5 text-[0.64rem] uppercase tracking-[0.14em] text-white/70"
-            >
-              {item}
-            </span>
-          ))}
-        </div>
-
-        <BlockLabel className="mt-6 text-[0.58rem] text-white/44">project memo</BlockLabel>
-        <p className="mt-5 text-[0.86rem] leading-6 text-white/82 sm:text-sm sm:leading-7">{project.summary}</p>
-        <p className="mt-4 text-[0.82rem] leading-6 text-white/60">{project.role}</p>
-
-        <div className="mt-8 flex flex-wrap gap-3">
-          {project.githubUrl ? (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="border border-white/80 px-3 py-2 text-[0.72rem] uppercase tracking-[0.16em] text-white"
-            >
-              github
-            </a>
-          ) : null}
-          {project.liveUrl ? (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="border border-white/80 px-3 py-2 text-[0.72rem] uppercase tracking-[0.16em] text-white"
-            >
-              live site
-            </a>
-          ) : null}
-        </div>
+    <article className="grid gap-4 border-b border-white/12 py-6 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center">
+      <div className="hidden pr-5 font-doto text-[1.6rem] font-black leading-none text-accent/80 sm:block">
+        {serial}
       </div>
 
-      <div className="border-t border-white/70 px-5 py-4 sm:px-8">
-        <p className="block font-mono text-center text-[0.82rem] uppercase tracking-[0.1em] text-white sm:text-[0.9rem] sm:tracking-[0.12em]">
-          {project.title}
+      <div className="min-w-0">
+        <div className="flex items-center gap-3">
+          {serial ? (
+            <span className="font-doto text-[1.4rem] font-black leading-none text-accent/80 sm:hidden">
+              {serial}
+            </span>
+          ) : null}
+          <h3 className="font-doto text-[1.35rem] font-black uppercase leading-none tracking-section text-white sm:text-[1.82rem]">
+            {project.title}
+          </h3>
+        </div>
+        <p className="mt-3 max-w-[46ch] font-mono text-[0.74rem] leading-6 text-white/58 sm:text-[0.8rem]">
+          {project.summary}
         </p>
       </div>
-    </BlockCell>
+
+      <div className="flex h-full items-center gap-3 self-center text-[color:var(--ledger-accent)]">
+        {project.githubUrl ? (
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`${project.title} GitHub`}
+          >
+            <GitHubIcon className="h-5 w-5" />
+          </a>
+        ) : null}
+        {project.liveUrl ? (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`${project.title} live site`}
+          >
+            <ArrowUpRight className="h-5 w-5" />
+          </a>
+        ) : null}
+      </div>
+    </article>
   );
 }

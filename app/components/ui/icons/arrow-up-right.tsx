@@ -1,9 +1,15 @@
-export default function ArrowUpRight() {
+interface ArrowUpRightProps {
+  className?: string;
+}
+
+export default function ArrowUpRight({
+  className = "h-10 w-10 text-white",
+}: ArrowUpRightProps) {
   return (
     <svg
       aria-hidden="true"
       viewBox="0 0 64 64"
-      className="h-10 w-10 text-white"
+      className={className}
       fill="none"
       stroke="currentColor"
       strokeWidth="1.5"

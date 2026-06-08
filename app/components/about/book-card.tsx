@@ -6,9 +6,9 @@ interface BookCardProps {
 
 export default function BookCard({ book }: BookCardProps) {
   return (
-    <div className="group relative flex h-[6rem] flex-col justify-between overflow-hidden border border-white/20 bg-white/5 p-3">
+    <div className="relative flex w-64 flex-col justify-between overflow-hidden py-1">
       <div className="flex items-start gap-2.5">
-        <div className="relative h-16 w-12 flex-none overflow-hidden rounded-md border border-white/20 bg-white/5">
+        <div className="relative h-20 w-14 flex-none overflow-hidden rounded-lg bg-white/5 shadow-[0_14px_40px_rgba(0,0,0,.36)]">
           {book.thumbnail ? (
             <img
               src={book.thumbnail}
@@ -23,7 +23,7 @@ export default function BookCard({ book }: BookCardProps) {
           )}
         </div>
 
-        <div className="min-w-0 space-y-0.5">
+        <div className="min-w-0 space-y-1 border-t border-white/18 pt-2">
           <p className="text-[0.8rem] font-semibold leading-snug text-white line-clamp-2">
             {book.title}
           </p>

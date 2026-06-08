@@ -10,11 +10,5 @@
     "label": "work",
     "href": "/work",
     "visible": true
-  },
-  {
-    "key": "blogs",
-    "label": "blogs",
-    "href": "/blogs",
-    "visible": true
   }
 ]

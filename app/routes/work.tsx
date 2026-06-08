@@ -6,6 +6,7 @@ import ProjectsSection from "../components/projects/projects-section";
 import SiteNav from "../components/site-nav";
 import { getWorkPageContent } from "../content/loaders.server";
 import { getContributionCalendar } from "../lib/github.server";
+import { getReachStats } from "../lib/reach.server";
 import type { ContributionCalendar } from "../types";
 
 export const meta: MetaFunction = () => [
@@ -15,6 +16,9 @@ export const meta: MetaFunction = () => [
 export async function loader() {
   const username = process.env.GITHUB_USERNAME || "ohshinbhat";
   const workPageContent = await getWorkPageContent();
+  const reachStats = await getReachStats({
+    socialLinks: workPageContent.socialLinks,
+  });
   const contributionCalendarPromise = getContributionCalendar({
     username,
     token: process.env.GITHUB_TOKEN,
@@ -33,6 +37,7 @@ export async function loader() {
     {
       ...workPageContent,
       contributionCalendar: contributionCalendarPromise,
+      reachStats,
     },
     {
       headers: {
@@ -47,12 +52,14 @@ export default function WorkPage() {
     navigationItems,
     contributionCalendar,
     projects,
+    reachStats,
+    socialLinks,
     workExperience,
   } = useLoaderData<typeof loader>();
 
   return (
-    <main className="bg-accent pb-24 text-white">
-      <SiteNav currentPage="work" items={navigationItems} />
+    <main className="bg-ink text-white">
+      <SiteNav currentPage="work" items={navigationItems} socialLinks={socialLinks} />
       <ProjectsSection
         contributionGraphContent={
           <Suspense fallback={<ContributionGraph loading />}>
@@ -62,12 +69,14 @@ export default function WorkPage() {
                   weeks={
                     ((resolvedCalendar?.weeks ?? []) as ContributionCalendar["weeks"])
                   }
+                  error={resolvedCalendar?.error ?? null}
                 />
               )}
             </Await>
           </Suspense>
         }
         projects={projects}
+        reachStats={reachStats}
         workExperience={workExperience}
       />
     </main>
