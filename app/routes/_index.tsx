@@ -40,7 +40,6 @@ export default function Index() {
       />
       <SiteNav currentPage="home" items={navigationItems} socialLinks={socialLinks} />
       <AboutSection
-        facts={home.about.facts}
         paragraphs={home.about.paragraphs}
         playlists={home.spotifyPlaylists}
         booksContent={<BooksShelf books={home.books} />}

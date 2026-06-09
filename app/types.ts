@@ -6,12 +6,6 @@ export interface SiteHeroContent {
   subtitle: string;
 }
 
-export interface AboutFact {
-  label: string;
-  value: string;
-  href?: string;
-}
-
 export interface SpotifyPlaylist {
   title: string;
   embedUrl: string;
@@ -20,7 +14,6 @@ export interface SpotifyPlaylist {
 export interface SiteHomeContent {
   hero: SiteHeroContent;
   about: {
-    facts: AboutFact[];
     paragraphs: string[];
   };
   spotifyPlaylists: SpotifyPlaylist[];
@@ -75,6 +68,27 @@ export interface SiteProjectsSection {
   items: SiteProject[];
 }
 
+export interface ReachOutAction {
+  label: string;
+  href: string;
+}
+
+export interface ReachOutLane {
+  id: string;
+  label: string;
+  title: string;
+  description: string;
+  actions: ReachOutAction[];
+  options?: ReachOutAction[];
+}
+
+export interface SiteReachOutSection {
+  eyebrow: string;
+  title: string;
+  description: string;
+  lanes: ReachOutLane[];
+}
+
 export interface SiteNavigationItem {
   key: NavigationKey;
   label: string;
@@ -104,23 +118,5 @@ export interface BookInfo {
   title: string;
   authors: string[];
   publishedDate?: string;
-  description?: string;
   thumbnail?: string;
-}
-
-export interface ContributionDay {
-  color: string;
-  contributionCount: number;
-  date: string;
-}
-
-export interface ContributionWeek {
-  contributionDays: ContributionDay[];
-}
-
-export interface ContributionCalendar {
-  weeks: ContributionWeek[];
-  username: string;
-  live: boolean;
-  error: string | null;
 }

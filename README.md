@@ -3,16 +3,12 @@
 ## Local env setup
 
 1. Copy `.env.example` to `.env.local` if you need a fresh local file.
-2. Fill in:
-   - `GITHUB_USERNAME`
-   - `GITHUB_TOKEN`
+2. Fill in any optional values you want to use.
 3. Start the app with:
 
 ```bash
 npm run dev
 ```
-
-The app already reads these values from `process.env`, so once `.env.local` is filled in, the GitHub contribution graph will use them automatically.
 
 ## Reach stats
 

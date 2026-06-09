@@ -4,16 +4,6 @@
     "subtitle": "engineer. designer. shipper."
   },
   "about": {
-    "facts": [
-      { "label": "Age", "value": "23yo" },
-      { "label": "Location", "value": "Bombay <-> Bengaluru, India" },
-      {
-        "label": "Email",
-        "value": "ohshinb@gmail.com",
-        "href": "https://mail.google.com/mail/?view=cm&fs=1&to=ohshinb@gmail.com"
-      },
-      { "label": "Timezone", "value": "IST" }
-    ],
     "paragraphs": [
       "I grew up on the internet, but my story starts somewhere quieter.",
       "I come from a traditional South Indian family, where belief and ritual were part of everyday life. When I was a kid, my parents had my future read by a well-known astrologer. His prediction was heavy: I’d grow up to be exceptionally rare, almost lisan-al-gaib. To this day, that sits in my head.",

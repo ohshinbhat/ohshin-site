@@ -4,6 +4,7 @@ import type { ComponentType } from "react";
 import type { SiteNavigationItem, SiteSocialLink } from "../types";
 import DockNav from "./react-bits/dock-nav";
 import { useActiveHomeSection } from "../hooks/use-active-home-section";
+import { externalLinkProps } from "../utils/link";
 import { isHomeSectionId, scrollWindowToSection } from "../utils/nav";
 import GitHubIcon from "./ui/icons/github";
 import InstagramIcon from "./ui/icons/instagram";
@@ -28,9 +29,13 @@ const SOCIAL_ICON_MAP: Record<
   x: XIcon,
 };
 
-function isExternalHref(href: string) {
-  return href.startsWith("http://") || href.startsWith("https://");
-}
+const SOCIAL_ICON_CLASS_MAP: Record<string, string> = {
+  github: "h-6 w-6",
+  instagram: "h-7 w-7",
+  linkedin: "h-6 w-6",
+  mail: "h-6 w-6",
+  x: "h-5.5 w-5.5",
+};
 
 export default function SiteNav({
   currentPage = "home",
@@ -45,15 +50,16 @@ export default function SiteNav({
   const activeHomeSection = useActiveHomeSection(currentPage === "home");
   const isHomePage = location.pathname === "/";
   const visibleItems = items.filter(
-    (item): item is SiteNavigationItem => item.key === "about" || item.key === "projects",
+    (item): item is SiteNavigationItem =>
+      item.key === "about" || item.key === "projects",
   );
   const visibleSocialLinks = socialLinks.filter((link) =>
     Object.hasOwn(SOCIAL_ICON_MAP, link.label.toLowerCase()),
   );
 
   const activeKey = location.pathname.startsWith("/work")
-      ? "projects"
-      : activeHomeSection;
+    ? "projects"
+    : activeHomeSection;
 
   useEffect(() => {
     setIsDockHidden(false);
@@ -192,7 +198,10 @@ export default function SiteNav({
               />
               <div className="flex items-center gap-0.5 pr-1 sm:gap-1">
                 {visibleSocialLinks.map((link) => {
-                  const Icon = SOCIAL_ICON_MAP[link.label.toLowerCase()];
+                  const iconKey = link.label.toLowerCase();
+                  const Icon = SOCIAL_ICON_MAP[iconKey];
+                  const iconClassName =
+                    SOCIAL_ICON_CLASS_MAP[iconKey] ?? "h-6 w-6";
 
                   return (
                     <a
@@ -200,10 +209,9 @@ export default function SiteNav({
                       aria-label={link.label}
                       className="flex h-11 w-11 items-center justify-center rounded-full text-white/68 transition-colors duration-150 hover:text-white"
                       href={link.url}
-                      rel={isExternalHref(link.url) ? "noreferrer" : undefined}
-                      target={isExternalHref(link.url) ? "_blank" : undefined}
+                      {...externalLinkProps(link.url)}
                     >
-                      <Icon className="h-7 w-7" />
+                      <Icon className={iconClassName} />
                     </a>
                   );
                 })}

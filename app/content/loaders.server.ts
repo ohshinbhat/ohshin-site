@@ -2,6 +2,7 @@ import {
   getHomeContent,
   getNavigationItems,
   getProjectsSection,
+  getReachOutSection,
   getSocialLinks,
   getWorkExperienceSection,
 } from "./site-content.server";
@@ -22,9 +23,16 @@ export async function getHomePageContent() {
 }
 
 export async function getWorkPageContent() {
-  const [navigationItems, projects, socialLinks, workExperience] = await Promise.all([
+  const [
+    navigationItems,
+    projects,
+    reachOut,
+    socialLinks,
+    workExperience,
+  ] = await Promise.all([
     getNavigationItems(),
     getProjectsSection(),
+    getReachOutSection(),
     getSocialLinks(),
     getWorkExperienceSection(),
   ]);
@@ -32,6 +40,7 @@ export async function getWorkPageContent() {
   return {
     navigationItems,
     projects,
+    reachOut,
     socialLinks,
     workExperience,
   };

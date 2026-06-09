@@ -1,15 +1,24 @@
+import { staggerDelay } from "../../config/ui";
 import type { SiteProject } from "../../types";
 import ArrowUpRight from "../ui/icons/arrow-up-right";
 import GitHubIcon from "../ui/icons/github";
 
 interface ProjectCardProps {
   project: SiteProject;
+  revealIndex?: number;
   serial?: string;
 }
 
-export default function ProjectCard({ project, serial }: ProjectCardProps) {
+export default function ProjectCard({
+  project,
+  revealIndex = 0,
+  serial,
+}: ProjectCardProps) {
   return (
-    <article className="grid gap-4 border-b border-white/12 py-6 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center">
+    <article
+      className="grid gap-4 rounded-[1.35rem] bg-theme-black/24 px-4 py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] ring-1 ring-white/6 transition-transform duration-300 ease-out motion-safe:animate-work-reveal motion-safe:[animation-range:entry_0%_cover_34%] motion-safe:[animation-timeline:view()] motion-safe:hover:translate-x-2 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center sm:px-5"
+      style={{ animationDelay: staggerDelay(revealIndex, 160, 80) }}
+    >
       <div className="hidden pr-5 font-doto text-[1.6rem] font-black leading-none text-accent/80 sm:block">
         {serial}
       </div>
@@ -30,7 +39,7 @@ export default function ProjectCard({ project, serial }: ProjectCardProps) {
         </p>
       </div>
 
-      <div className="flex h-full items-center gap-3 self-center text-[color:var(--ledger-accent)]">
+      <div className="flex h-full items-center gap-3 self-center text-white drop-shadow-[0_0_14px_rgba(255,255,255,0.18)]">
         {project.githubUrl ? (
           <a
             href={project.githubUrl}
@@ -38,7 +47,7 @@ export default function ProjectCard({ project, serial }: ProjectCardProps) {
             rel="noreferrer"
             aria-label={`${project.title} GitHub`}
           >
-            <GitHubIcon className="h-5 w-5" />
+            <GitHubIcon className="h-7 w-7" />
           </a>
         ) : null}
         {project.liveUrl ? (
@@ -48,7 +57,7 @@ export default function ProjectCard({ project, serial }: ProjectCardProps) {
             rel="noreferrer"
             aria-label={`${project.title} live site`}
           >
-            <ArrowUpRight className="h-5 w-5" />
+            <ArrowUpRight className="h-7 w-7" />
           </a>
         ) : null}
       </div>

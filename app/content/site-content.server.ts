@@ -13,10 +13,12 @@ import {
   HomeContentSchema,
   NavigationItemSchema,
   ProjectsSectionSchema,
+  ReachOutSectionSchema,
   SocialLinkSchema,
   WorkExperienceSectionSchema,
 } from "./schemas";
 import type {
+  SiteReachOutSection,
   SiteHomeContent,
   SiteNavigationItem,
   SiteProjectsSection,
@@ -50,6 +52,10 @@ export async function getProjectsSection(): Promise<SiteProjectsSection> {
     ...content,
     items: sortProjects(filterPublishedProjects(items)),
   };
+}
+
+export async function getReachOutSection(): Promise<SiteReachOutSection> {
+  return loadJsonFile("reach-out.json", ReachOutSectionSchema);
 }
 
 export async function getWorkExperienceSection(): Promise<SiteWorkExperienceSection> {

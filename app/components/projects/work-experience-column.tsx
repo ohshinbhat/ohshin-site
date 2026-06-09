@@ -1,4 +1,8 @@
+import { staggerDelay, surfaces, textStyles } from "../../config/ui";
 import type { SiteWorkExperience } from "../../types";
+import { cn } from "../../utils/cn";
+import GlassSheen from "../ui/glass-sheen";
+import SectionHeadingRow from "../ui/section-heading-row";
 
 interface WorkExperienceColumnProps {
   title: string;
@@ -10,21 +14,23 @@ export default function WorkExperienceColumn({
   items,
 }: WorkExperienceColumnProps) {
   return (
-    <section className="min-w-0">
-      <div className="flex items-end justify-between gap-4">
-        <h2 className="font-doto text-[2.2rem] font-black uppercase leading-none tracking-section text-white sm:text-[3.2rem]">
-          {title}
-        </h2>
-        <p className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-accent">
-          timeline
-        </p>
-      </div>
+    <section
+      className={cn(surfaces.workPanel, "motion-safe:[animation-delay:-3.7s] motion-safe:[animation-duration:12.9s]")}
+    >
+      <GlassSheen className="left-[-45%] bg-white/[0.035] motion-safe:[animation-delay:-7.1s] motion-safe:[animation-duration:12.4s]" />
+      <SectionHeadingRow
+        label="timeline"
+        labelClassName={textStyles.accentLabel}
+        title={title}
+        titleClassName={textStyles.panelTitle}
+      />
 
-      <div className="mt-6 border-t border-white/18">
-        {items.map((item) => (
+      <div className="mt-6 grid gap-3">
+        {items.map((item, index) => (
           <article
             key={item.id}
-            className="grid gap-3 border-b border-white/12 py-5 font-mono text-[0.82rem] leading-5 text-white/62 sm:grid-cols-[7.25rem_minmax(0,1fr)] sm:text-[0.88rem]"
+            className="grid gap-3 rounded-[1.35rem] bg-theme-black/32 px-4 py-4 font-mono text-[0.82rem] leading-5 text-white/62 shadow-[0_12px_38px_rgba(0,0,0,0.16),inset_0_1px_0_rgba(255,255,255,0.08)] ring-1 ring-white/8 transition-transform duration-500 ease-out motion-safe:animate-work-reveal motion-safe:[animation-range:entry_0%_cover_32%] motion-safe:[animation-timeline:view()] sm:grid-cols-[7.25rem_minmax(0,1fr)] sm:text-[0.88rem] motion-safe:hover:translate-x-2 motion-safe:hover:scale-[1.015]"
+            style={{ animationDelay: staggerDelay(index, 120, 70) }}
           >
             <div>
               <p className="text-[0.64rem] uppercase tracking-[0.14em] text-white/46">

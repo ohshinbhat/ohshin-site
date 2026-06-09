@@ -1,0 +1,69 @@
+{
+  "eyebrow": "open channels",
+  "title": "reach out",
+  "description": "Different doors for different kinds of chaos. Pick the lane that matches what you want to build, hire for, or randomly spiral about.",
+  "lanes": [
+    {
+      "id": "team",
+      "label": "01 / team channel",
+      "title": "Want me on your team?",
+      "description": "For product engineering roles, frontend systems, design-engineering, and fast-moving teams that need someone who can ship clean interfaces with taste.",
+      "actions": [
+        {
+          "label": "email me",
+          "href": "https://mail.google.com/mail/?view=cm&fs=1&to=ohshinb@gmail.com&su=Hiring%20Ohshin&body=Hi%20Ohshin%2C%0A%0AI%27m%20reaching%20out%20about%20a%20role%20for%20..."
+        },
+        {
+          "label": "request resume",
+          "href": "https://mail.google.com/mail/?view=cm&fs=1&to=ohshinb@gmail.com&su=Resume%20request&body=Hi%20Ohshin%2C%0A%0ACan%20you%20send%20over%20your%20latest%20resume%3F"
+        }
+      ]
+    },
+    {
+      "id": "consulting",
+      "label": "02 / build channel",
+      "title": "Want to work or consult with me?",
+      "description": "For websites, product prototypes, UI systems, launch pages, frontend architecture, and creative technical direction where the brief needs taste and execution.",
+      "actions": [
+        {
+          "label": "book a call",
+          "href": "https://cal.com/ohshinbhat"
+        },
+        {
+          "label": "send brief",
+          "href": "https://mail.google.com/mail/?view=cm&fs=1&to=ohshinb@gmail.com&su=Project%20%2F%20consulting%20brief&body=Hi%20Ohshin%2C%0A%0AI%20want%20to%20work%20with%20you%20on%20..."
+        }
+      ]
+    },
+    {
+      "id": "fun",
+      "label": "03 / weird channel",
+      "title": "Want to send a fun DM?",
+      "description": "Low-stakes lane for internet artifacts, sci-fi arguments, strange product ideas, music swaps, or anything that feels like it belongs in a group chat at 2am.",
+      "actions": [
+        {
+          "label": "dm on x",
+          "href": "https://x.com/ohshinbhat"
+        },
+        {
+          "label": "instagram",
+          "href": "https://www.instagram.com/ohshinbhat/"
+        }
+      ],
+      "options": [
+        {
+          "label": "send me a cursed website",
+          "href": "https://x.com/ohshinbhat"
+        },
+        {
+          "label": "argue dune / three-body",
+          "href": "https://mail.google.com/mail/?view=cm&fs=1&to=ohshinb@gmail.com&su=Important%20sci-fi%20argument&body=Hi%20Ohshin%2C%0A%0AI%20need%20to%20argue%20about%20..."
+        },
+        {
+          "label": "show me what you built",
+          "href": "https://mail.google.com/mail/?view=cm&fs=1&to=ohshinb@gmail.com&su=Look%20what%20I%20built&body=Hi%20Ohshin%2C%0A%0AI%20made%20this%20thing%20..."
+        }
+      ]
+    }
+  ]
+}

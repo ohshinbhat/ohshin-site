@@ -4,8 +4,9 @@ This portfolio uses git-backed content files so routine updates do not require R
 
 ## Directory layout
 
-- `content/site/home.json`: hero copy, about facts, about paragraphs, Spotify playlists, and books
+- `content/site/home.json`: hero copy, about paragraphs, Spotify playlists, and books
 - `content/site/projects.json`: project section headings and project cards
+- `content/site/reach-out.json`: bottom work-page contact funnels and CTAs
 - `content/site/work-experience.json`: work experience section heading and entries
 - `content/site/navigation.json`: primary navigation items
 - `content/site/social-links.json`: reusable outbound profile links
@@ -28,6 +29,18 @@ Every project entry requires:
 - `status`
 
 `githubUrl`, `liveUrl`, and `image` are optional.
+
+## Reach out fields
+
+Every reach-out lane requires:
+
+- `id`
+- `label`
+- `title`
+- `description`
+- `actions`
+
+`options` is optional and works well for playful secondary prompts.
 
 ## Work experience fields
 

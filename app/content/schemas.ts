@@ -6,12 +6,6 @@ export const SortableDateSchema = z
   .string()
   .regex(sortableDatePattern, "Expected date in YYYY-MM-DD format");
 
-export const AboutFactSchema = z.object({
-  label: z.string().min(1),
-  value: z.string().min(1),
-  href: z.string().url().optional(),
-});
-
 export const SpotifyPlaylistSchema = z.object({
   title: z.string().min(1),
   embedUrl: z.string().url(),
@@ -22,7 +16,6 @@ export const BookInfoSchema = z.object({
   title: z.string().min(1),
   authors: z.array(z.string().min(1)),
   publishedDate: z.string().optional(),
-  description: z.string().optional(),
   thumbnail: z.string().url().optional(),
 });
 
@@ -32,7 +25,6 @@ export const HomeContentSchema = z.object({
     subtitle: z.string().min(1),
   }),
   about: z.object({
-    facts: z.array(AboutFactSchema),
     paragraphs: z.array(z.string().min(1)),
   }),
   spotifyPlaylists: z.array(SpotifyPlaylistSchema),
@@ -85,6 +77,27 @@ export const ProjectSchema = z.object({
 export const ProjectsSectionSchema = z.object({
   sectionTitle: z.string().min(1),
   items: z.array(ProjectSchema),
+});
+
+export const ReachOutActionSchema = z.object({
+  label: z.string().min(1),
+  href: z.string().url(),
+});
+
+export const ReachOutLaneSchema = z.object({
+  id: z.string().min(1),
+  label: z.string().min(1),
+  title: z.string().min(1),
+  description: z.string().min(1),
+  actions: z.array(ReachOutActionSchema).min(1),
+  options: z.array(ReachOutActionSchema).optional(),
+});
+
+export const ReachOutSectionSchema = z.object({
+  eyebrow: z.string().min(1),
+  title: z.string().min(1),
+  description: z.string().min(1),
+  lanes: z.array(ReachOutLaneSchema).min(1),
 });
 
 export const NavigationItemSchema = z.object({
