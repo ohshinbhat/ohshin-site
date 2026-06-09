@@ -47,18 +47,15 @@ const config: Config = {
         "work-reveal": {
           "0%": {
             opacity: "0",
-            filter: "blur(10px)",
-            transform: "translateY(44px) scale(0.965)",
+            transform: "translate3d(0,28px,0)",
           },
-          "62%": {
+          "68%": {
             opacity: "1",
-            filter: "blur(0)",
-            transform: "translateY(-4px) scale(1.006)",
+            transform: "translate3d(0,-2px,0)",
           },
           "100%": {
             opacity: "1",
-            filter: "blur(0)",
-            transform: "translateY(0) scale(1)",
+            transform: "translate3d(0,0,0)",
           },
         },
         "reach-pulse": {
@@ -109,9 +106,13 @@ const config: Config = {
           "42%": { transform: "translate3d(1px,2px,0) skewX(-1deg)" },
           "70%": { transform: "translate3d(-1px,-2px,0) skewX(1deg)" },
         },
+        "stack-marquee": {
+          "0%": { transform: "translate3d(0,0,0)" },
+          "100%": { transform: "translate3d(-50%,0,0)" },
+        },
       },
       animation: {
-        "work-reveal": "work-reveal 1200ms cubic-bezier(0.16, 1, 0.3, 1) both",
+        "work-reveal": "work-reveal 900ms cubic-bezier(0.16, 1, 0.3, 1) both",
         "reach-pulse": "reach-pulse 7.2s ease-in-out infinite",
         "reach-sweep": "reach-sweep 3.8s cubic-bezier(0.16, 1, 0.3, 1) infinite",
         "glass-breathe": "glass-breathe 11s cubic-bezier(0.45, 0, 0.2, 1) infinite",
@@ -119,6 +120,7 @@ const config: Config = {
         "hero-static": "hero-static 180ms steps(2, end) infinite",
         "scan-roll": "scan-roll 5.8s linear infinite",
         "chroma-shake": "chroma-shake 950ms steps(2, end) infinite",
+        "stack-marquee": "stack-marquee 18s linear infinite",
       },
     },
   },

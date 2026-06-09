@@ -24,7 +24,7 @@ interface DockNavProps {
 
 function PixelAboutIcon() {
   return (
-    <span aria-hidden="true" className="relative h-4 w-4 shrink-0">
+    <span aria-hidden="true" className="relative h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4">
       <span
         className="absolute inset-0 bg-no-repeat [image-rendering:pixelated]"
         style={{
@@ -51,7 +51,7 @@ function PixelWorkIcon() {
       src={DIAMOND_PICKAXE_URL}
       alt=""
       aria-hidden="true"
-      className="h-4 w-4 shrink-0"
+      className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4"
       style={{ imageRendering: "pixelated" }}
     />
   );
@@ -75,7 +75,7 @@ function DockNavItem({ item, isActive, onClick }: DockNavItemProps) {
       href={item.href}
       onClick={onClick}
       whileTap={{ scale: 0.97 }}
-      className={`relative z-10 min-w-[5.8rem] rounded-full px-4 py-3 text-center font-doto text-[12px] font-black tracking-[0.08em] outline-none focus-visible:ring-1 focus-visible:ring-white/30 sm:min-w-[7rem] sm:px-6 sm:text-[14px] sm:tracking-[0.12em] ${
+      className={`relative z-10 min-w-[4.65rem] shrink-0 rounded-full px-2.5 py-2.5 text-center font-doto text-[10px] font-black tracking-[0.06em] outline-none focus-visible:ring-1 focus-visible:ring-white/30 sm:min-w-[7rem] sm:px-6 sm:py-3 sm:text-[14px] sm:tracking-[0.12em] ${
         isActive ? "text-white" : "text-white/70"
       }`}
     >
@@ -87,7 +87,7 @@ function DockNavItem({ item, isActive, onClick }: DockNavItemProps) {
         />
       ) : null}
       <motion.span
-        className="relative z-10 flex items-center justify-center gap-2"
+        className="relative z-10 flex items-center justify-center gap-1.5 sm:gap-2"
         animate={{ y: isActive ? -1 : 0, opacity: isActive ? 1 : 0.78 }}
         transition={{ duration: 0.18, ease: "easeOut" }}
       >
@@ -100,7 +100,7 @@ function DockNavItem({ item, isActive, onClick }: DockNavItemProps) {
 
 export default function DockNav({ items, activeKey, onItemClick }: DockNavProps) {
   return (
-    <div className="relative flex max-w-[calc(100vw-2.5rem)] items-center justify-center gap-1 overflow-x-auto">
+    <div className="relative flex shrink-0 items-center justify-center gap-0.5 sm:gap-1">
       {items.map((item) => (
         <DockNavItem
           key={item.key}

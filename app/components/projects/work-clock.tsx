@@ -12,11 +12,9 @@ function getIstClockLabel() {
 }
 
 export default function WorkClock() {
-  const [clockLabel, setClockLabel] = useState<string | null>(null);
+  const [clockLabel, setClockLabel] = useState(getIstClockLabel);
 
   useEffect(() => {
-    setClockLabel(getIstClockLabel());
-
     const intervalId = window.setInterval(() => {
       setClockLabel(getIstClockLabel());
     }, 30_000);
@@ -24,5 +22,5 @@ export default function WorkClock() {
     return () => window.clearInterval(intervalId);
   }, []);
 
-  return <>{clockLabel ?? "-- : --"}</>;
+  return <span suppressHydrationWarning>{clockLabel}</span>;
 }

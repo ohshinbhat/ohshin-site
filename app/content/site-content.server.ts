@@ -15,6 +15,7 @@ import {
   ProjectsSectionSchema,
   ReachOutSectionSchema,
   SocialLinkSchema,
+  TechStackSectionSchema,
   WorkExperienceSectionSchema,
 } from "./schemas";
 import type {
@@ -23,6 +24,7 @@ import type {
   SiteNavigationItem,
   SiteProjectsSection,
   SiteSocialLink,
+  SiteTechStackSection,
   SiteWorkExperienceSection,
 } from "../types";
 
@@ -56,6 +58,16 @@ export async function getProjectsSection(): Promise<SiteProjectsSection> {
 
 export async function getReachOutSection(): Promise<SiteReachOutSection> {
   return loadJsonFile("reach-out.json", ReachOutSectionSchema);
+}
+
+export async function getTechStackSection(): Promise<SiteTechStackSection> {
+  const content = await loadJsonFile("tech-stack.json", TechStackSectionSchema);
+  const items = ensureUniqueBy(content.items, (item) => item.id, "tech stack id");
+
+  return {
+    ...content,
+    items: [...items].sort((left, right) => left.sortOrder - right.sortOrder),
+  };
 }
 
 export async function getWorkExperienceSection(): Promise<SiteWorkExperienceSection> {

@@ -6,14 +6,12 @@ import { getWorkPageContent } from "../content/loaders.server";
 import { getReachStats } from "../lib/reach.server";
 
 export const meta: MetaFunction = () => [
-  { title: "Work | Ohshin" },
+  { title: "Ohshin Bhat" },
 ];
 
 export async function loader() {
   const workPageContent = await getWorkPageContent();
-  const reachStats = await getReachStats({
-    socialLinks: workPageContent.socialLinks,
-  });
+  const reachStats = getReachStats();
 
   return json(
     {
@@ -35,6 +33,7 @@ export default function WorkPage() {
     reachOut,
     reachStats,
     socialLinks,
+    techStack,
     workExperience,
   } = useLoaderData<typeof loader>();
 
@@ -45,6 +44,7 @@ export default function WorkPage() {
         projects={projects}
         reachOut={reachOut}
         reachStats={reachStats}
+        techStack={techStack}
         workExperience={workExperience}
       />
     </main>

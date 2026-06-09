@@ -29,7 +29,7 @@ export default function WorkExperienceColumn({
         {items.map((item, index) => (
           <article
             key={item.id}
-            className="grid gap-3 rounded-[1.35rem] bg-theme-black/32 px-4 py-4 font-mono text-[0.82rem] leading-5 text-white/62 shadow-[0_12px_38px_rgba(0,0,0,0.16),inset_0_1px_0_rgba(255,255,255,0.08)] ring-1 ring-white/8 transition-transform duration-500 ease-out motion-safe:animate-work-reveal motion-safe:[animation-range:entry_0%_cover_32%] motion-safe:[animation-timeline:view()] sm:grid-cols-[7.25rem_minmax(0,1fr)] sm:text-[0.88rem] motion-safe:hover:translate-x-2 motion-safe:hover:scale-[1.015]"
+            className="grid gap-3 rounded-[1.35rem] bg-theme-black/32 px-4 py-4 font-mono text-[0.82rem] leading-5 text-white/62 shadow-[0_12px_38px_rgba(0,0,0,0.16),inset_0_1px_0_rgba(255,255,255,0.08)] ring-1 ring-white/8 motion-safe:animate-work-reveal sm:grid-cols-[7.25rem_minmax(0,1fr)] sm:text-[0.88rem]"
             style={{ animationDelay: staggerDelay(index, 120, 70) }}
           >
             <div>

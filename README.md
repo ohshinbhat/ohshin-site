@@ -10,6 +10,16 @@
 npm run dev
 ```
 
+## Quality checks
+
+Run the full product-readiness check before shipping:
+
+```bash
+npm run check
+```
+
+This runs TypeScript, ESLint, and a production Remix build.
+
 ## Reach stats
 
 The Work page `reach` strip reads optional server-side values:

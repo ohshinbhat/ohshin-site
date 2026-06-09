@@ -1,8 +1,9 @@
-import { useEffect, useState, type ComponentType } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { IconType } from "react-icons";
+import { FaEye, FaInstagram, FaXTwitter } from "react-icons/fa6";
+import { useCountUp } from "react-countup";
 import { staggerDelay, surfaces, textStyles } from "../../config/ui";
 import type { ReachStat } from "../../types";
-import InstagramIcon from "../ui/icons/instagram";
-import XIcon from "../ui/icons/x";
 import GlassSheen from "../ui/glass-sheen";
 import SectionHeadingRow from "../ui/section-heading-row";
 
@@ -11,63 +12,81 @@ interface ReachStripProps {
 }
 
 const STAT_ICON_MAP: Partial<
-  Record<ReachStat["id"], ComponentType<{ className?: string }>>
+  Record<ReachStat["id"], IconType>
 > = {
-  instagram: InstagramIcon,
-  x: XIcon,
+  instagram: FaInstagram,
+  visits: FaEye,
+  x: FaXTwitter,
 };
-
-function PageVisitsIcon({ className = "h-6 w-6" }: { className?: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      className={className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      viewBox="0 0 24 24"
-    >
-      <path d="M3.5 12s3.2-5.5 8.5-5.5S20.5 12 20.5 12 17.3 17.5 12 17.5 3.5 12 3.5 12Z" />
-      <circle cx="12" cy="12" r="2.7" />
-    </svg>
-  );
-}
 
 function formatCount(value: number) {
   return new Intl.NumberFormat("en-US").format(Math.round(value));
 }
 
-function AnimatedCount({ value }: { value: number }) {
-  const [displayValue, setDisplayValue] = useState(0);
+function getCountStorageKey(value: number) {
+  return `portfolio-reach-count-started:${value}`;
+}
+
+function hasStartedCount(storageKey: string) {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  return window.sessionStorage.getItem(storageKey) === "1";
+}
+
+function persistStartedCount(storageKey: string) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  window.sessionStorage.setItem(storageKey, "1");
+}
+
+function CountUpNumber({
+  storageKey,
+  value,
+}: {
+  storageKey: string;
+  value: number;
+}) {
+  const countRef = useRef<HTMLSpanElement>(null);
+  const { start } = useCountUp({
+    ref: countRef,
+    end: value,
+    duration: 5.8,
+    formattingFn: (currentValue) => `${formatCount(currentValue)}+`,
+    onEnd: () => persistStartedCount(storageKey),
+    onStart: () => persistStartedCount(storageKey),
+    start: 0,
+    startOnMount: false,
+  });
 
   useEffect(() => {
-    const duration = 8_400;
-    const start = performance.now();
-    let frameId = 0;
+    const animationFrame = window.requestAnimationFrame(start);
 
-    const tick = (time: number) => {
-      const progress = Math.min((time - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplayValue(value * eased);
+    return () => window.cancelAnimationFrame(animationFrame);
+  }, [start]);
 
-      if (progress < 1) {
-        frameId = window.requestAnimationFrame(tick);
-      }
-    };
+  return <span ref={countRef}>{formatCount(value)}+</span>;
+}
 
-    frameId = window.requestAnimationFrame(tick);
+function AnimatedCount({ value }: { value: number }) {
+  const storageKey = getCountStorageKey(value);
+  const [hasStarted] = useState(() => hasStartedCount(storageKey));
 
-    return () => window.cancelAnimationFrame(frameId);
-  }, [value]);
+  if (hasStarted) {
+    return <span>{formatCount(value)}+</span>;
+  }
 
-  return <>{formatCount(displayValue)}+</>;
+  return <CountUpNumber storageKey={storageKey} value={value} />;
 }
 
 function ReachStatItem({ index, stat }: { index: number; stat: ReachStat }) {
-  const Icon = STAT_ICON_MAP[stat.id] ?? PageVisitsIcon;
+  const Icon = STAT_ICON_MAP[stat.id] ?? FaEye;
   const content = (
     <div
-      className="group relative isolate grid min-h-[13rem] min-w-0 overflow-hidden rounded-[1.75rem] bg-theme-black/38 px-5 py-5 shadow-[0_22px_80px_rgba(0,0,0,0.28),0_0_44px_rgba(211,23,10,0.12),inset_0_1px_0_rgba(255,255,255,0.11)] ring-1 ring-white/10 transition-transform duration-700 ease-out motion-safe:animate-work-reveal motion-safe:[animation-range:entry_0%_cover_34%] motion-safe:[animation-timeline:view()] motion-safe:hover:-translate-y-2 motion-safe:hover:scale-[1.018] sm:px-6"
+      className="relative isolate grid min-h-[11rem] min-w-0 overflow-hidden rounded-[1.5rem] bg-theme-black/38 px-4 py-4 shadow-[0_22px_80px_rgba(0,0,0,0.28),0_0_44px_rgba(211,23,10,0.12),inset_0_1px_0_rgba(255,255,255,0.11)] ring-1 ring-white/10 motion-safe:animate-work-reveal sm:min-h-[13rem] sm:rounded-[1.75rem] sm:px-6 sm:py-5"
       style={{ animationDelay: staggerDelay(index, 220, 80) }}
     >
       <div
@@ -138,13 +157,13 @@ export default function ReachStrip({ stats }: ReachStripProps) {
         className="absolute -right-20 top-10 -z-10 h-64 w-64 rounded-full bg-white/10 blur-3xl motion-safe:animate-reach-pulse motion-safe:[animation-delay:-5.6s]"
       />
       <SectionHeadingRow
-        label="live-ish / counting slow"
+        label="live-ish"
         labelClassName={textStyles.accentLabel}
         title="reach"
-        titleClassName="font-doto text-[2.6rem] font-black uppercase leading-none tracking-section text-white sm:text-[4.5rem]"
+        titleClassName="font-doto text-[2.25rem] font-black uppercase leading-none tracking-section text-white sm:text-[4.5rem]"
       />
 
-      <div className="mt-7 grid min-w-0 gap-4 lg:grid-cols-3">
+      <div className="mt-6 grid min-w-0 gap-3 sm:mt-7 sm:gap-4 lg:grid-cols-3">
         {stats.map((stat, index) => (
           <ReachStatItem key={stat.id} index={index} stat={stat} />
         ))}

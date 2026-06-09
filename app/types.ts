@@ -68,9 +68,30 @@ export interface SiteProjectsSection {
   items: SiteProject[];
 }
 
+export interface SiteTechStackItem {
+  id: string;
+  label: string;
+  group: string;
+  accent?: boolean;
+  sortOrder: number;
+}
+
+export interface SiteTechStackSection {
+  eyebrow: string;
+  title: string;
+  description: string;
+  items: SiteTechStackItem[];
+}
+
 export interface ReachOutAction {
   label: string;
   href: string;
+}
+
+export interface ReachOutSegment {
+  title: string;
+  description: string;
+  actions: ReachOutAction[];
 }
 
 export interface ReachOutLane {
@@ -79,6 +100,7 @@ export interface ReachOutLane {
   title: string;
   description: string;
   actions: ReachOutAction[];
+  segments?: ReachOutSegment[];
   options?: ReachOutAction[];
 }
 

@@ -16,12 +16,12 @@ export default function SpotifyShelf({ playlists }: SpotifyShelfProps) {
         titleClassName={textStyles.shelfTitle}
       />
 
-      <div className="mt-5 overflow-x-auto pb-3">
-        <div className="flex w-max gap-5">
+      <div className="mt-5 max-w-full overflow-x-auto pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="flex w-max max-w-none gap-4 sm:gap-5">
           {playlists.map((playlist) => (
             <div
               key={playlist.embedUrl}
-              className="w-[min(19rem,calc(100vw-3rem))] flex-none space-y-2 sm:w-72"
+              className="w-[min(17.5rem,calc(100vw-4rem))] flex-none space-y-2 sm:w-72"
             >
               <p className="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-white/58">
                 {playlist.title}

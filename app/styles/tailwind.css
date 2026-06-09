@@ -2,6 +2,10 @@
 @import "tailwindcss";
 
 @layer base {
+  :root {
+    --site-nav-height: 61px;
+  }
+
   html {
     scroll-behavior: smooth;
   }

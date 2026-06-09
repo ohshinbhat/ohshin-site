@@ -7,7 +7,7 @@ import HeroSection from "../components/home/hero-section";
 import SiteNav from "../components/site-nav";
 
 export const meta: MetaFunction = () => [
-  { title: "Ohshin | Engineer, Designer, Shipper" },
+  { title: "Ohshin Bhat" },
 ];
 
 export async function loader() {

@@ -79,9 +79,30 @@ export const ProjectsSectionSchema = z.object({
   items: z.array(ProjectSchema),
 });
 
+export const TechStackItemSchema = z.object({
+  id: z.string().min(1),
+  label: z.string().min(1),
+  group: z.string().min(1),
+  accent: z.boolean().optional(),
+  sortOrder: z.number().int().nonnegative(),
+});
+
+export const TechStackSectionSchema = z.object({
+  eyebrow: z.string().min(1),
+  title: z.string().min(1),
+  description: z.string().min(1),
+  items: z.array(TechStackItemSchema).min(1),
+});
+
 export const ReachOutActionSchema = z.object({
   label: z.string().min(1),
   href: z.string().url(),
+});
+
+export const ReachOutSegmentSchema = z.object({
+  title: z.string().min(1),
+  description: z.string().min(1),
+  actions: z.array(ReachOutActionSchema).min(1),
 });
 
 export const ReachOutLaneSchema = z.object({
@@ -90,6 +111,7 @@ export const ReachOutLaneSchema = z.object({
   title: z.string().min(1),
   description: z.string().min(1),
   actions: z.array(ReachOutActionSchema).min(1),
+  segments: z.array(ReachOutSegmentSchema).optional(),
   options: z.array(ReachOutActionSchema).optional(),
 });
 

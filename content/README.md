@@ -7,6 +7,7 @@ This portfolio uses git-backed content files so routine updates do not require R
 - `content/site/home.json`: hero copy, about paragraphs, Spotify playlists, and books
 - `content/site/projects.json`: project section headings and project cards
 - `content/site/reach-out.json`: bottom work-page contact funnels and CTAs
+- `content/site/tech-stack.json`: tech stack section copy and ordered tool list
 - `content/site/work-experience.json`: work experience section heading and entries
 - `content/site/navigation.json`: primary navigation items
 - `content/site/social-links.json`: reusable outbound profile links
@@ -41,6 +42,17 @@ Every reach-out lane requires:
 - `actions`
 
 `options` is optional and works well for playful secondary prompts.
+
+## Tech stack fields
+
+Every tech stack item requires:
+
+- `id`
+- `label`
+- `group`
+- `sortOrder`
+
+`accent` is optional and gives important tools a stronger visual treatment.
 
 ## Work experience fields
 

@@ -1,6 +1,6 @@
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import type { ReactNode } from "react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   aboutProfileTags,
   layout,
@@ -26,7 +26,9 @@ export default function AboutSection({
   booksContent,
 }: AboutSectionProps) {
   const aboutRef = useRef<HTMLElement | null>(null);
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
   const reducedMotion = useReducedMotion();
+  const shouldDisableParallax = reducedMotion || isMobileViewport;
   const { scrollYProgress } = useScroll({
     target: aboutRef,
     offset: ["start end", "end start"],
@@ -37,6 +39,16 @@ export default function AboutSection({
   const portraitY = useTransform(scrollYProgress, [0, 0.5, 1], [-70, 0, 112]);
   const portraitScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.94, 1.04, 1.12]);
   const portraitRotate = useTransform(scrollYProgress, [0, 0.5, 1], [-2.5, 0, 2.5]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const updateViewport = () => setIsMobileViewport(mediaQuery.matches);
+
+    updateViewport();
+    mediaQuery.addEventListener("change", updateViewport);
+
+    return () => mediaQuery.removeEventListener("change", updateViewport);
+  }, []);
 
   return (
     <section
@@ -55,16 +67,16 @@ export default function AboutSection({
       <div className={`${layout.homeContainer} relative z-10`}>
         <motion.div
           className="will-change-transform"
-          style={styleUnlessReduced(reducedMotion, { x: headerX, y: headerY })}
+          style={styleUnlessReduced(shouldDisableParallax, { x: headerX, y: headerY })}
         >
           <header className={surfaces.aboutHeader}>
             <GlassSheen className="left-[-35%] bg-white/[0.045] motion-safe:[animation-delay:-5.5s] motion-safe:[animation-duration:10.8s]" />
             <div className={textStyles.headerMeta}>
               <p className="text-white/78">profile / ohshin</p>
-              <p className="sm:text-right">bengaluru / india</p>
+              <p className="sm:text-right">mumbai / bengaluru, india</p>
             </div>
 
-            <div className="pt-16 lg:pt-20">
+            <div className="pt-12 sm:pt-16 lg:pt-20">
               <h2 className={textStyles.displayTitleStandalone}>
                 about
               </h2>
@@ -73,7 +85,7 @@ export default function AboutSection({
         </motion.div>
 
         <div className="grid gap-8 py-10 lg:py-12">
-          <main className="relative isolate left-1/2 min-w-0 w-[calc(100vw-2.5rem)] max-w-[1840px] -translate-x-1/2 overflow-hidden rounded-[2rem] bg-white/[0.07] shadow-[0_24px_100px_rgba(0,0,0,0.42),0_0_64px_rgba(211,23,10,0.12),inset_0_1px_0_rgba(255,255,255,0.12)] ring-1 ring-white/12 backdrop-blur-2xl motion-safe:animate-glass-breathe motion-safe:[animation-delay:-2.8s] motion-safe:[animation-duration:12.2s] sm:w-[calc(100vw-4rem)] lg:w-[calc(100vw-5rem)] lg:rounded-[2.35rem]">
+          <main className="relative isolate left-1/2 min-w-0 w-[calc(100vw-1.5rem)] max-w-[1840px] -translate-x-1/2 overflow-hidden rounded-[1.5rem] bg-white/[0.07] shadow-[0_24px_100px_rgba(0,0,0,0.42),0_0_64px_rgba(211,23,10,0.12),inset_0_1px_0_rgba(255,255,255,0.12)] ring-1 ring-white/12 backdrop-blur-2xl motion-safe:animate-glass-breathe motion-safe:[animation-delay:-2.8s] motion-safe:[animation-duration:12.2s] sm:w-[calc(100vw-4rem)] sm:rounded-[2rem] lg:w-[calc(100vw-5rem)] lg:rounded-[2.35rem]">
             <GlassSheen className="left-[-42%] bg-white/[0.035] motion-safe:[animation-delay:-3.9s] motion-safe:[animation-duration:12.4s]" />
             <div
               aria-hidden="true"
@@ -81,8 +93,8 @@ export default function AboutSection({
             />
             <div className="grid gap-6 lg:min-h-[44rem] lg:grid-cols-[minmax(0,1fr)_minmax(26rem,0.82fr)] lg:gap-8 xl:grid-cols-[minmax(0,0.92fr)_minmax(34rem,0.88fr)] xl:gap-10">
               <motion.div
-                className="flex min-w-0 flex-col justify-center p-5 sm:p-7 lg:p-9 xl:p-12"
-                style={styleUnlessReduced(reducedMotion, { y: copyY })}
+                className="flex min-w-0 flex-col justify-center p-4 sm:p-7 lg:p-9 xl:p-12"
+                style={styleUnlessReduced(shouldDisableParallax, { y: copyY })}
               >
                 <div className="max-w-[54rem]">
                   <div className="mb-8 flex flex-wrap gap-2 font-mono text-[0.56rem] uppercase tracking-[0.22em] text-white/46">
@@ -102,14 +114,14 @@ export default function AboutSection({
               </motion.div>
 
               <motion.aside
-                className="order-first min-h-[30rem] sm:min-h-[36rem] lg:order-none lg:min-h-full"
-                style={styleUnlessReduced(reducedMotion, {
+                className="order-first min-h-[22rem] sm:min-h-[34rem] lg:order-none lg:min-h-full"
+                style={styleUnlessReduced(shouldDisableParallax, {
                   rotate: portraitRotate,
                   scale: portraitScale,
                   y: portraitY,
                 })}
               >
-                <div className="relative h-full min-h-[30rem] overflow-hidden rounded-[1.65rem] bg-black/35 shadow-[0_30px_90px_rgba(0,0,0,0.38)] sm:min-h-[36rem] lg:min-h-full">
+                <div className="relative h-full min-h-[22rem] overflow-hidden rounded-[1.25rem] bg-black/35 shadow-[0_30px_90px_rgba(0,0,0,0.38)] sm:min-h-[34rem] sm:rounded-[1.65rem] lg:min-h-full">
                   <AboutPortrait />
                   <div
                     aria-hidden
