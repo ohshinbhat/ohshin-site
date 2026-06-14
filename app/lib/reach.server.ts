@@ -1,4 +1,5 @@
 import type { ReachStat } from "../types";
+import { PAGE_VIEW_BASELINE, getPageViewTotal } from "./page-views.server";
 
 const STATIC_REACH_STATS: ReachStat[] = [
   {
@@ -23,12 +24,34 @@ const STATIC_REACH_STATS: ReachStat[] = [
     id: "visits",
     label: "page visits",
     metricLabel: "Page visits",
-    numericValue: 120_000,
-    value: "120K+",
+    tooltip: "My previous portfolio already had 150,000 visits, so I carried that history over here.",
+    numericValue: PAGE_VIEW_BASELINE,
+    value: "150K+",
     live: false,
   },
 ];
 
-export function getReachStats() {
-  return STATIC_REACH_STATS;
+function formatCompactCount(value: number) {
+  return `${new Intl.NumberFormat("en-US", {
+    maximumFractionDigits: 1,
+    notation: "compact",
+  }).format(value)}+`;
+}
+
+export async function getReachStats() {
+  const pageViews = await getPageViewTotal();
+
+  return STATIC_REACH_STATS.map((stat) => {
+    if (stat.id !== "visits") {
+      return stat;
+    }
+
+    return {
+      ...stat,
+      live: pageViews.live,
+      tooltip: "My previous portfolio already had 150,000 visits, so I carried that history over here.",
+      numericValue: pageViews.total,
+      value: formatCompactCount(pageViews.total),
+    };
+  });
 }

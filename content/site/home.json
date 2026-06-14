@@ -27,7 +27,7 @@
       "title": "Dune",
       "authors": ["Frank Herbert"],
       "publishedDate": "1965",
-      "thumbnail": "https://covers.openlibrary.org/b/id/11481354-M.jpg"
+      "thumbnail": "https://covers.openlibrary.org/b/isbn/9780441172719-M.jpg"
     },
     {
       "id": "the-three-body-problem",
@@ -48,7 +48,7 @@
       "title": "1984",
       "authors": ["George Orwell"],
       "publishedDate": "1949",
-      "thumbnail": "https://covers.openlibrary.org/b/id/9267242-M.jpg"
+      "thumbnail": "https://covers.openlibrary.org/b/isbn/9781328869333-M.jpg"
     },
     {
       "id": "project-hail-mary",
@@ -62,7 +62,7 @@
       "title": "Neuromancer",
       "authors": ["William Gibson"],
       "publishedDate": "1984",
-      "thumbnail": "https://covers.openlibrary.org/b/id/283860-M.jpg"
+      "thumbnail": "https://covers.openlibrary.org/b/isbn/9780143111603-M.jpg"
     }
   ]
 }

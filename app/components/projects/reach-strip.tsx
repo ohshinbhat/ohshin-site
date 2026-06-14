@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { IconType } from "react-icons";
-import { FaEye, FaInstagram, FaXTwitter } from "react-icons/fa6";
-import { useCountUp } from "react-countup";
+import { FaCircleInfo, FaEye, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { staggerDelay, surfaces, textStyles } from "../../config/ui";
 import type { ReachStat } from "../../types";
 import GlassSheen from "../ui/glass-sheen";
@@ -50,25 +49,36 @@ function CountUpNumber({
   storageKey: string;
   value: number;
 }) {
-  const countRef = useRef<HTMLSpanElement>(null);
-  const { start } = useCountUp({
-    ref: countRef,
-    end: value,
-    duration: 5.8,
-    formattingFn: (currentValue) => `${formatCount(currentValue)}+`,
-    onEnd: () => persistStartedCount(storageKey),
-    onStart: () => persistStartedCount(storageKey),
-    start: 0,
-    startOnMount: false,
-  });
+  const frameRef = useRef<number | null>(null);
+  const [displayValue, setDisplayValue] = useState(0);
 
   useEffect(() => {
-    const animationFrame = window.requestAnimationFrame(start);
+    const duration = 5_800;
+    const startedAt = window.performance.now();
 
-    return () => window.cancelAnimationFrame(animationFrame);
-  }, [start]);
+    persistStartedCount(storageKey);
 
-  return <span ref={countRef}>{formatCount(value)}+</span>;
+    const tick = (time: number) => {
+      const progress = Math.min((time - startedAt) / duration, 1);
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+      setDisplayValue(value * easedProgress);
+
+      if (progress < 1) {
+        frameRef.current = window.requestAnimationFrame(tick);
+      }
+    };
+
+    frameRef.current = window.requestAnimationFrame(tick);
+
+    return () => {
+      if (frameRef.current !== null) {
+        window.cancelAnimationFrame(frameRef.current);
+      }
+    };
+  }, [storageKey, value]);
+
+  return <span>{formatCount(displayValue)}+</span>;
 }
 
 function AnimatedCount({ value }: { value: number }) {
@@ -80,6 +90,26 @@ function AnimatedCount({ value }: { value: number }) {
   }
 
   return <CountUpNumber storageKey={storageKey} value={value} />;
+}
+
+function StatTooltip({ text }: { text: string }) {
+  return (
+    <span className="group/tooltip relative inline-flex">
+      <button
+        type="button"
+        aria-label={text}
+        className="inline-flex h-5 w-5 items-center justify-center rounded-full text-white/45 transition-colors duration-200 hover:text-white focus-visible:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/35"
+      >
+        <FaCircleInfo className="h-3.5 w-3.5" />
+      </button>
+      <span
+        role="tooltip"
+        className="pointer-events-none absolute bottom-[calc(100%+0.55rem)] left-1/2 z-20 w-52 -translate-x-1/2 rounded-xl border border-white/12 bg-theme-black/90 px-3 py-2 font-mono text-[0.58rem] normal-case leading-4 tracking-normal text-white/72 opacity-0 shadow-[0_18px_60px_rgba(0,0,0,0.38)] backdrop-blur-xl transition duration-200 group-hover/tooltip:opacity-100 group-focus-within/tooltip:opacity-100"
+      >
+        {text}
+      </span>
+    </span>
+  );
 }
 
 function ReachStatItem({ index, stat }: { index: number; stat: ReachStat }) {
@@ -124,9 +154,10 @@ function ReachStatItem({ index, stat }: { index: number; stat: ReachStat }) {
         >
           <AnimatedCount value={stat.numericValue} />
         </p>
-        <p className="mt-3 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-white/70">
-          {stat.metricLabel}
-        </p>
+        <div className="mt-3 flex items-center gap-2 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-white/70">
+          <span>{stat.metricLabel}</span>
+          {stat.tooltip ? <StatTooltip text={stat.tooltip} /> : null}
+        </div>
       </div>
     </div>
   );

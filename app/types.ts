@@ -129,6 +129,7 @@ export interface ReachStat {
   id: ReachStatId;
   label: string;
   metricLabel: string;
+  tooltip?: string;
   numericValue: number;
   value: string;
   href?: string;

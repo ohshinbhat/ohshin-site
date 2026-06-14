@@ -7,6 +7,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import type { PropsWithChildren } from "react";
+import PageViewTracker from "./components/page-view-tracker";
 import appStylesHref from "./styles/tailwind.css?url";
 
 export const links: LinksFunction = () => [
@@ -53,5 +54,10 @@ export function Layout({ children }: PropsWithChildren) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <>
+      <PageViewTracker />
+      <Outlet />
+    </>
+  );
 }
