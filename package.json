@@ -9,7 +9,7 @@
     "start": "dotenv -e .env.local -- remix-serve ./build/server/index.js",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --cache --cache-location .cache/eslint",
-    "check": "npm run typecheck && npm run lint && npm run build"
+    "verify": "yarn typecheck && yarn lint && yarn build"
   },
   "dependencies": {
     "@remix-run/dev": "^2.17.4",
@@ -17,6 +17,7 @@
     "@remix-run/react": "^2.17.4",
     "@remix-run/serve": "^2.17.4",
     "@tailwindcss/vite": "^4.1.13",
+    "@upstash/redis": "^1.38.0",
     "clsx": "^2.1.1",
     "motion": "^12.36.0",
     "react": "^18.3.1",
@@ -29,12 +30,12 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
+    "@eslint/js": "^9.39.4",
     "@types/node": "^25.5.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "dotenv-cli": "^11.0.0",
-    "eslint": "^10.4.1",
+    "eslint": "^9.39.4",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.6.0",
