@@ -11,11 +11,11 @@
       "actions": [
         {
           "label": "email me",
-          "href": "mailto:ohshinb@gmail.com?subject=Hiring%20Ohshin"
+          "href": "https://mail.google.com/mail/?view=cm&fs=1&to=ohshinb%40gmail.com&su=Hiring%20Ohshin"
         },
         {
           "label": "get resume",
-          "href": "https://ohshin.dev/resume"
+          "href": "/resume.pdf"
         }
       ],
       "segments": [
@@ -25,11 +25,11 @@
           "actions": [
             {
               "label": "email me",
-              "href": "mailto:ohshinb@gmail.com?subject=Hiring%20Ohshin"
+              "href": "https://mail.google.com/mail/?view=cm&fs=1&to=ohshinb%40gmail.com&su=Hiring%20Ohshin"
             },
             {
               "label": "get resume",
-              "href": "https://ohshin.dev/resume"
+              "href": "/resume.pdf"
             }
           ]
         },

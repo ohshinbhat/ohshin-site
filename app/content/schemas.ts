@@ -1,6 +1,12 @@
 import { z } from "zod";
 
 const sortableDatePattern = /^\d{4}-\d{2}-\d{2}$/;
+const rootRelativePathPattern = /^\/(?!\/).+/;
+
+const HrefSchema = z.union([
+  z.string().url(),
+  z.string().regex(rootRelativePathPattern, "Expected URL or root-relative path"),
+]);
 
 export const SortableDateSchema = z
   .string()
@@ -96,7 +102,7 @@ export const TechStackSectionSchema = z.object({
 
 export const ReachOutActionSchema = z.object({
   label: z.string().min(1),
-  href: z.string().url(),
+  href: HrefSchema,
 });
 
 export const ReachOutSegmentSchema = z.object({

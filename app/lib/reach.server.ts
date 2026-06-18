@@ -12,7 +12,7 @@ const STATIC_REACH_STATS: ReachStat[] = [
     live: false,
   },
   {
-    href: "https://www.instagram.com/ohshinbhat/",
+    href: "https://www.instagram.com/ohshiin/",
     id: "instagram",
     label: "instagram",
     metricLabel: "Views",
