@@ -9,7 +9,7 @@
       "description": "A compact UI library and playground focused on reusable primitives, tokenized styling, and fast theme iteration.",
       "tech": ["TypeScript", "Tailwind", "React"],
       "githubUrl": "https://github.com/ohshinbhat/zeno-ui",
-      "liveUrl": null,
+      "liveUrl": "https://zenoui.in",
       "image": null,
       "featured": true,
       "published": true,
