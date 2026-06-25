@@ -36,21 +36,21 @@
       "status": "Prototype"
     },
     {
-      "id": "article-fm",
-      "slug": "article-fm",
-      "title": "Article FM",
-      "summary": "A Manifest V3 Chrome extension that adds a listen flow to X pages by extracting article-like content and playing generated audio in a floating mini-player.",
-      "description": "Built with React, TypeScript, Vite, Tailwind, and Zustand. The extension injects a listen action on `twitter.com` and `x.com`, handles SPA navigation changes, passes extracted content through the background worker, and renders a compact top-right player.",
-      "tech": ["TypeScript", "React", "Chrome Extension", "Vite", "Tailwind"],
-      "githubUrl": "https://github.com/ohshinbhat/article-fm",
+      "id": "prompt-now",
+      "slug": "prompt-now",
+      "title": "Prompt Now",
+      "summary": "A native macOS menu bar app that brings your last Codex or Claude window back after a timer so review loops do not disappear.",
+      "description": "Built with Swift and SwiftPM as a lightweight menu bar utility, with app bundle, DMG, Homebrew cask, and Mac App Store packaging paths.",
+      "tech": ["Swift", "SwiftPM", "macOS", "Homebrew"],
+      "githubUrl": "https://github.com/ohshinbhat/prompt-now",
       "liveUrl": null,
       "image": null,
       "featured": false,
       "published": true,
       "sortOrder": 3,
       "year": 2026,
-      "role": "Frontend Engineer",
-      "status": "Prototype"
+      "role": "macOS Engineer",
+      "status": "Shipped"
     }
   ]
 }
