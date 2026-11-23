@@ -1,11 +1,9 @@
 import { useLocation, useNavigate } from "@remix-run/react";
-import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ComponentType } from "react";
-import type { HomeSectionId, SiteNavigationItem, SiteSocialLink } from "../types";
+import type { SiteNavigationItem, SiteSocialLink } from "../types";
 import DockNav from "./react-bits/dock-nav";
-import { useActiveHomeSection } from "../hooks/use-active-home-section";
 import { externalLinkProps } from "../utils/link";
-import { isHomeSectionId, scrollWindowToSection } from "../utils/nav";
 import {
   FaGithub,
   FaInstagram,
@@ -39,20 +37,6 @@ const SOCIAL_ICON_CLASS_MAP: Record<string, string> = {
   x: "h-5 w-5 sm:h-5.5 sm:w-5.5",
 };
 
-function getTargetSectionFromState(state: unknown): HomeSectionId | null {
-  if (typeof state !== "object" || state === null || !("targetSection" in state)) {
-    return null;
-  }
-
-  const targetSection = (state as { targetSection?: unknown }).targetSection;
-
-  if (typeof targetSection !== "string" || !isHomeSectionId(targetSection)) {
-    return null;
-  }
-
-  return targetSection;
-}
-
 export default function SiteNav({
   currentPage = "home",
   items,
@@ -61,21 +45,17 @@ export default function SiteNav({
   const location = useLocation();
   const navigate = useNavigate();
   const hideTimeoutRef = useRef<number | null>(null);
-  const tickingRef = useRef(false);
+  const scrollFrameRef = useRef<number | null>(null);
   const [isDockHidden, setIsDockHidden] = useState(false);
-  const activeHomeSection = useActiveHomeSection(currentPage === "home");
-  const isHomePage = location.pathname === "/";
   const visibleItems = items.filter(
     (item): item is SiteNavigationItem =>
-      item.key === "about" || item.key === "projects",
+      item.visible && (item.key === "about" || item.key === "projects"),
   );
   const visibleSocialLinks = socialLinks.filter((link) =>
     Object.hasOwn(SOCIAL_ICON_MAP, link.label.toLowerCase()),
   );
 
-  const activeKey = location.pathname.startsWith("/work")
-    ? "projects"
-    : activeHomeSection;
+  const activeKey = currentPage === "work" ? "projects" : "about";
 
   useEffect(() => {
     const frameId = window.requestAnimationFrame(() => {
@@ -105,47 +85,13 @@ export default function SiteNav({
     };
   }, []);
 
-  const handleClick = (
-    event: MouseEvent<HTMLAnchorElement>,
-    item: SiteNavigationItem,
-  ) => {
-    if (item.key === "projects") {
-      return;
-    }
-
-    if (!isHomePage) {
-      event.preventDefault();
-      navigate(`/#${item.key}`);
-      return;
-    }
-
-    event.preventDefault();
-    window.history.replaceState(null, "", `/#${item.key}`);
-    scrollWindowToSection(item.key);
-  };
-
   useEffect(() => {
     if (location.pathname === "/work" || location.pathname.startsWith("/work/")) {
-      const sectionId = location.hash.slice(1);
-
-      if (isHomeSectionId(sectionId)) {
-        navigate(`/#${sectionId}`, { replace: true });
+      if (location.hash === "#about") {
+        navigate("/#about", { replace: true });
       }
     }
   }, [location.hash, location.pathname, navigate]);
-
-  useEffect(() => {
-    if (location.pathname !== "/") return;
-    const stateSection = getTargetSectionFromState(location.state);
-    const sectionId = stateSection ?? location.hash.slice(1);
-    if (!isHomeSectionId(sectionId)) return;
-
-    // Delay to ensure layout is ready before measuring positions
-    window.requestAnimationFrame(() => {
-      window.history.replaceState(null, "", `/#${sectionId}`);
-      scrollWindowToSection(sectionId);
-    });
-  }, [location.pathname, location.hash, location.state]);
 
   useEffect(() => {
     const updateDockVisibility = () => {
@@ -164,22 +110,24 @@ export default function SiteNav({
         }, 560);
       }
 
-      tickingRef.current = false;
+      scrollFrameRef.current = null;
     };
 
     const handleScroll = () => {
-      if (tickingRef.current) {
+      if (scrollFrameRef.current !== null) {
         return;
       }
 
-      tickingRef.current = true;
-      window.requestAnimationFrame(updateDockVisibility);
+      scrollFrameRef.current = window.requestAnimationFrame(updateDockVisibility);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      if (scrollFrameRef.current !== null) {
+        window.cancelAnimationFrame(scrollFrameRef.current);
+      }
       if (hideTimeoutRef.current) {
         window.clearTimeout(hideTimeoutRef.current);
       }
@@ -210,7 +158,6 @@ export default function SiteNav({
           <DockNav
             items={visibleItems}
             activeKey={activeKey}
-            onItemClick={handleClick}
           />
           {visibleSocialLinks.length > 0 ? (
             <>

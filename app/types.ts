@@ -108,13 +108,18 @@ export interface SiteSocialLink {
 
 export type ReachStatId = "instagram" | "x" | "visits";
 
+export interface PageViewTotal {
+  live: boolean;
+  total: number;
+  status: "live" | "unconfigured" | "unavailable";
+}
+
 export interface ReachStat {
   id: ReachStatId;
   label: string;
   metricLabel: string;
   tooltip?: string;
   numericValue: number;
-  value: string;
   href?: string;
   live: boolean;
 }

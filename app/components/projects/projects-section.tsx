@@ -65,7 +65,7 @@ export default function ProjectsSection({
             />
           </aside>
 
-          <main className="motion-safe:animate-work-reveal min-w-0 [animation-delay:280ms]">
+          <div className="motion-safe:animate-work-reveal min-w-0 [animation-delay:280ms]">
             <div className={cn(surfaces.workPanel, "motion-safe:[animation-delay:-6.2s] motion-safe:[animation-duration:13.4s]")}>
               <GlassSheen className="left-[-45%] bg-white/[0.035] motion-safe:[animation-delay:-4.8s] motion-safe:[animation-duration:11.6s]" />
               <SectionHeadingRow
@@ -84,7 +84,7 @@ export default function ProjectsSection({
                 ))}
               </div>
             </div>
-          </main>
+          </div>
         </div>
 
         <div className="motion-safe:animate-work-reveal py-8 [animation-delay:340ms] lg:py-10">

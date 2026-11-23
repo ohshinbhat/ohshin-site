@@ -73,7 +73,7 @@ export default function AboutSection({
           </header>
         </div>
 
-        <motion.main
+        <motion.div
           className="relative isolate min-w-0 w-full overflow-hidden rounded-[1.5rem] bg-white/[0.07] shadow-[0_24px_100px_rgba(0,0,0,0.42),0_0_64px_rgba(211,23,10,0.12),inset_0_1px_0_rgba(255,255,255,0.12)] ring-1 ring-white/12 backdrop-blur-2xl motion-safe:animate-glass-breathe motion-safe:[animation-delay:-2.8s] motion-safe:[animation-duration:12.2s] sm:rounded-[2rem] lg:rounded-[2.35rem]"
           initial={reducedMotion ? false : { opacity: 0.76, y: 36 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
@@ -113,7 +113,7 @@ export default function AboutSection({
               </div>
             </aside>
           </div>
-        </motion.main>
+        </motion.div>
 
         <motion.footer
           className="grid w-full gap-8 lg:grid-cols-2"

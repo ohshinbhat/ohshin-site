@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "provider": "upstash",
+  "backupName": "portfolio-before-deletion backup-2026-10-15",
+  "recoveredAt": "2026-11-23",
+  "legacyBaseline": 150000,
+  "recordedVisits": 12273,
+  "total": 162273,
+  "sources": {
+    "organic": 12271,
+    "twitter": 1,
+    "instagram": 1,
+    "linkedin": 0
+  }
+}

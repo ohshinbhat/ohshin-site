@@ -42,6 +42,7 @@ export default async function handleRequest(
       },
     );
 
-    setTimeout(abort, 5000);
+    const abortTimeout = setTimeout(abort, 5000);
+    body.once("close", () => clearTimeout(abortTimeout));
   });
 }

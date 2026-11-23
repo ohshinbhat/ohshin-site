@@ -19,7 +19,7 @@ export const links: LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Doto:wght@400..900&family=IBM+Plex+Mono:wght@400;500;600&family=Lora:wght@500;600;700&family=Tektur:wght@500;600;700;800&display=swap",
+    href: "https://fonts.googleapis.com/css2?family=Doto:wght@400..900&family=IBM+Plex+Mono:wght@400;500;600&family=Tektur:wght@500;600;700;800&display=swap",
   },
   { rel: "icon", type: "image/png", sizes: "64x64", href: "/favicon.png" },
   { rel: "shortcut icon", href: "/favicon.ico" },
@@ -55,9 +55,8 @@ export function Layout({ children }: PropsWithChildren) {
 
 export default function App() {
   return (
-    <>
-      <PageViewTracker />
+    <PageViewTracker>
       <Outlet />
-    </>
+    </PageViewTracker>
   );
 }

@@ -24,17 +24,12 @@ const config: Config = {
         doto: ['"Doto"', "monospace"],
         metric: ['"Tektur"', "monospace"],
         mono: ['"IBM Plex Mono"', "monospace"],
-        serif: ['"Lora"', "Georgia", "serif"],
       },
       maxWidth: {
         site: "1400px",
       },
       minHeight: {
         "screen-nav": "calc(100dvh - var(--site-nav-height, 61px))",
-        "nav-row": "10.5rem",
-      },
-      height: {
-        "nav-row": "10.5rem",
       },
       boxShadow: {
         "nav-glass":

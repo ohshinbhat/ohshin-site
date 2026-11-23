@@ -11,7 +11,7 @@ export const meta: MetaFunction = () => [
 
 export async function loader() {
   const workPageContent = await getWorkPageContent();
-  const reachStats = await getReachStats();
+  const reachStats = getReachStats();
 
   return json(
     {
