@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { IconType } from "react-icons";
 import { FaCircleInfo, FaEye, FaInstagram, FaXTwitter } from "react-icons/fa6";
-import { staggerDelay, surfaces, textStyles } from "../../config/ui";
+import { staggerDelay, surfaces } from "../../config/ui";
 import type { ReachStat } from "../../types";
 import GlassSheen from "../ui/glass-sheen";
 import SectionHeadingRow from "../ui/section-heading-row";
@@ -188,8 +188,6 @@ export default function ReachStrip({ stats }: ReachStripProps) {
         className="absolute -right-20 top-10 -z-10 h-64 w-64 rounded-full bg-white/10 blur-3xl motion-safe:animate-reach-pulse motion-safe:[animation-delay:-5.6s]"
       />
       <SectionHeadingRow
-        label="live-ish"
-        labelClassName={textStyles.accentLabel}
         title="reach"
         titleClassName="font-doto text-[2.25rem] font-black uppercase leading-none tracking-section text-white sm:text-[4.5rem]"
       />

@@ -1,5 +1,5 @@
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
-import { staggerDelay, surfaces, textStyles } from "../../config/ui";
+import { staggerDelay, surfaces } from "../../config/ui";
 import type { SiteReachOutSection } from "../../types";
 import { externalLinkProps } from "../../utils/link";
 import GlassSheen from "../ui/glass-sheen";
@@ -19,10 +19,7 @@ export default function ReachOutSection({ content }: ReachOutSectionProps) {
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1fr)] lg:items-end">
         <div>
-          <p className={textStyles.accentLabel}>
-            {content.eyebrow}
-          </p>
-          <h2 className="mt-4 font-doto text-[clamp(2.75rem,14vw,8rem)] font-black uppercase leading-[0.82] tracking-section text-white">
+          <h2 className="font-doto text-[clamp(2.75rem,14vw,8rem)] font-black uppercase leading-[0.82] tracking-section text-white">
             {content.title}
           </h2>
         </div>
@@ -51,11 +48,7 @@ export default function ReachOutSection({ content }: ReachOutSectionProps) {
                 aria-hidden="true"
                 className="absolute inset-x-0 top-0 h-px bg-white/48"
               />
-              <p className="font-mono text-[0.58rem] uppercase tracking-[0.24em] text-accent">
-                {lane.label}
-              </p>
-
-              <div className="mt-5 grid gap-7">
+              <div className="grid gap-7">
                 {segments.map((segment) => (
                   <div key={segment.title}>
                     <h3 className="font-doto text-[2.25rem] font-black uppercase leading-[0.9] tracking-section text-white sm:text-[2.7rem]">

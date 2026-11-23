@@ -10,8 +10,6 @@ export default function SpotifyShelf({ playlists }: SpotifyShelfProps) {
   return (
     <section>
       <SectionHeadingRow
-        label="records shelf"
-        labelClassName={textStyles.shelfLabel}
         title="playlists"
         titleClassName={textStyles.shelfTitle}
       />

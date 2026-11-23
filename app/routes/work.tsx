@@ -33,7 +33,6 @@ export default function WorkPage() {
     reachOut,
     reachStats,
     socialLinks,
-    techStack,
     workExperience,
   } = useLoaderData<typeof loader>();
 
@@ -44,7 +43,6 @@ export default function WorkPage() {
         projects={projects}
         reachOut={reachOut}
         reachStats={reachStats}
-        techStack={techStack}
         workExperience={workExperience}
       />
     </main>

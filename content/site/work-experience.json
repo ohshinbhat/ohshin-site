@@ -2,6 +2,19 @@
   "sectionTitle": "Experience",
   "items": [
     {
+      "id": "software-engineer-upsurge-labs",
+      "role": "Software Engineer",
+      "company": "Upsurge Labs",
+      "periodLabel": "Aug 2026 - Present",
+      "startDate": "2026-08-01",
+      "endDate": null,
+      "summary": "Software Engineer at Upsurge Labs.",
+      "highlights": [],
+      "links": [],
+      "published": true,
+      "sortOrder": 0
+    },
+    {
       "id": "software-development-engineer-dream11",
       "role": "Software Development Engineer",
       "company": "Dream11",

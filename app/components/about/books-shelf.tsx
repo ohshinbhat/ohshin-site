@@ -31,8 +31,6 @@ export default function BooksShelf({
   return (
     <section>
       <SectionHeadingRow
-        label="reading stack"
-        labelClassName={textStyles.shelfLabel}
         title="books"
         titleClassName={textStyles.shelfTitle}
       />
