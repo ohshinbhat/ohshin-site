@@ -68,21 +68,6 @@ export interface SiteProjectsSection {
   items: SiteProject[];
 }
 
-export interface SiteTechStackItem {
-  id: string;
-  label: string;
-  group: string;
-  accent?: boolean;
-  sortOrder: number;
-}
-
-export interface SiteTechStackSection {
-  eyebrow: string;
-  title: string;
-  description: string;
-  items: SiteTechStackItem[];
-}
-
 export interface ReachOutAction {
   label: string;
   href: string;
@@ -96,7 +81,6 @@ export interface ReachOutSegment {
 
 export interface ReachOutLane {
   id: string;
-  label: string;
   title: string;
   description: string;
   actions: ReachOutAction[];
@@ -105,7 +89,6 @@ export interface ReachOutLane {
 }
 
 export interface SiteReachOutSection {
-  eyebrow: string;
   title: string;
   description: string;
   lanes: ReachOutLane[];
@@ -125,13 +108,18 @@ export interface SiteSocialLink {
 
 export type ReachStatId = "instagram" | "x" | "visits";
 
+export interface PageViewTotal {
+  live: boolean;
+  total: number;
+  status: "live" | "unconfigured" | "unavailable";
+}
+
 export interface ReachStat {
   id: ReachStatId;
   label: string;
   metricLabel: string;
   tooltip?: string;
   numericValue: number;
-  value: string;
   href?: string;
   live: boolean;
 }

@@ -19,8 +19,6 @@ export default function WorkExperienceColumn({
     >
       <GlassSheen className="left-[-45%] bg-white/[0.035] motion-safe:[animation-delay:-7.1s] motion-safe:[animation-duration:12.4s]" />
       <SectionHeadingRow
-        label="timeline"
-        labelClassName={textStyles.accentLabel}
         title={title}
         titleClassName={textStyles.panelTitle}
       />

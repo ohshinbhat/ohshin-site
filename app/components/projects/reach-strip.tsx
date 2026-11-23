@@ -1,10 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion, useSpring, useTransform } from "motion/react";
+import { useEffect } from "react";
 import type { IconType } from "react-icons";
 import { FaCircleInfo, FaEye, FaInstagram, FaXTwitter } from "react-icons/fa6";
-import { staggerDelay, surfaces, textStyles } from "../../config/ui";
+import { staggerDelay, surfaces } from "../../config/ui";
 import type { ReachStat } from "../../types";
 import GlassSheen from "../ui/glass-sheen";
 import SectionHeadingRow from "../ui/section-heading-row";
+import { usePageViews } from "../page-view-tracker";
 
 interface ReachStripProps {
   stats: ReachStat[];
@@ -22,74 +24,17 @@ function formatCount(value: number) {
   return new Intl.NumberFormat("en-US").format(Math.round(value));
 }
 
-function getCountStorageKey(value: number) {
-  return `portfolio-reach-count-started:${value}`;
-}
-
-function hasStartedCount(storageKey: string) {
-  if (typeof window === "undefined") {
-    return false;
-  }
-
-  return window.sessionStorage.getItem(storageKey) === "1";
-}
-
-function persistStartedCount(storageKey: string) {
-  if (typeof window === "undefined") {
-    return;
-  }
-
-  window.sessionStorage.setItem(storageKey, "1");
-}
-
-function CountUpNumber({
-  storageKey,
-  value,
-}: {
-  storageKey: string;
-  value: number;
-}) {
-  const frameRef = useRef<number | null>(null);
-  const [displayValue, setDisplayValue] = useState(0);
+function AnimatedCount({ value }: { value: number }) {
+  const reducedMotion = useReducedMotion();
+  const count = useSpring(value, { stiffness: 180, damping: 30 });
+  const label = useTransform(count, current => `${formatCount(current)}+`);
 
   useEffect(() => {
-    const duration = 5_800;
-    const startedAt = window.performance.now();
+    if (reducedMotion) count.jump(value);
+    else count.set(value);
+  }, [count, reducedMotion, value]);
 
-    persistStartedCount(storageKey);
-
-    const tick = (time: number) => {
-      const progress = Math.min((time - startedAt) / duration, 1);
-      const easedProgress = 1 - Math.pow(1 - progress, 3);
-
-      setDisplayValue(value * easedProgress);
-
-      if (progress < 1) {
-        frameRef.current = window.requestAnimationFrame(tick);
-      }
-    };
-
-    frameRef.current = window.requestAnimationFrame(tick);
-
-    return () => {
-      if (frameRef.current !== null) {
-        window.cancelAnimationFrame(frameRef.current);
-      }
-    };
-  }, [storageKey, value]);
-
-  return <span>{formatCount(displayValue)}+</span>;
-}
-
-function AnimatedCount({ value }: { value: number }) {
-  const storageKey = getCountStorageKey(value);
-  const [hasStarted] = useState(() => hasStartedCount(storageKey));
-
-  if (hasStarted) {
-    return <span>{formatCount(value)}+</span>;
-  }
-
-  return <CountUpNumber storageKey={storageKey} value={value} />;
+  return <motion.span>{label}</motion.span>;
 }
 
 function StatTooltip({ text }: { text: string }) {
@@ -174,6 +119,18 @@ function ReachStatItem({ index, stat }: { index: number; stat: ReachStat }) {
 }
 
 export default function ReachStrip({ stats }: ReachStripProps) {
+  const pageViews = usePageViews();
+  const displayedStats = stats.map(stat => {
+    if (stat.id !== "visits" || !pageViews) return stat;
+    return {
+      ...stat,
+      numericValue: pageViews.total,
+      live: pageViews.live,
+      tooltip: pageViews.live
+        ? stat.tooltip
+        : `${stat.tooltip} Live counting is currently unavailable. Showing the last known total.`,
+    };
+  });
   return (
     <section
       className={`${surfaces.reachPanel} motion-safe:[animation-delay:-8.4s] motion-safe:[animation-duration:14.2s]`}
@@ -188,14 +145,12 @@ export default function ReachStrip({ stats }: ReachStripProps) {
         className="absolute -right-20 top-10 -z-10 h-64 w-64 rounded-full bg-white/10 blur-3xl motion-safe:animate-reach-pulse motion-safe:[animation-delay:-5.6s]"
       />
       <SectionHeadingRow
-        label="live-ish"
-        labelClassName={textStyles.accentLabel}
         title="reach"
         titleClassName="font-doto text-[2.25rem] font-black uppercase leading-none tracking-section text-white sm:text-[4.5rem]"
       />
 
       <div className="mt-6 grid min-w-0 gap-3 sm:mt-7 sm:gap-4 lg:grid-cols-3">
-        {stats.map((stat, index) => (
+        {displayedStats.map((stat, index) => (
           <ReachStatItem key={stat.id} index={index} stat={stat} />
         ))}
       </div>

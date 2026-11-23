@@ -7,16 +7,13 @@ import type {
   SiteReachOutSection,
   ReachStat,
   SiteProjectsSection,
-  SiteTechStackSection,
   SiteWorkExperienceSection,
 } from "../../types";
 import { cn } from "../../utils/cn";
 import ProjectCard from "./project-card";
 import ReachOutSection from "./reach-out-section";
 import ReachStrip from "./reach-strip";
-import TechStackSection from "./tech-stack-section";
 import WorkExperienceColumn from "./work-experience-column";
-import WorkClock from "./work-clock";
 import GlassSheen from "../ui/glass-sheen";
 import SectionHeadingRow from "../ui/section-heading-row";
 
@@ -24,7 +21,6 @@ interface ProjectsSectionProps {
   projects: SiteProjectsSection;
   reachOut: SiteReachOutSection;
   reachStats: ReachStat[];
-  techStack: SiteTechStackSection;
   workExperience: SiteWorkExperienceSection;
 }
 
@@ -32,7 +28,6 @@ export default function ProjectsSection({
   projects,
   reachOut,
   reachStats,
-  techStack,
   workExperience,
 }: ProjectsSectionProps) {
   return (
@@ -52,33 +47,14 @@ export default function ProjectsSection({
         <div className="motion-safe:animate-work-reveal">
           <header className={surfaces.workHeader}>
             <GlassSheen className="left-[-35%] bg-white/[0.045] motion-safe:[animation-delay:-2.4s] motion-safe:[animation-duration:10.2s]" />
-            <div className={textStyles.headerMeta}>
-              <p className="text-white">
-                work / output
-              </p>
-              <p className="hidden text-center sm:block">scroll / inspect</p>
-              <p className="sm:text-right">
-                <WorkClock /> IST
-              </p>
-            </div>
-
-            <div className="pt-12 sm:pt-16 lg:pt-20">
-              <p className={textStyles.sectionKicker}>
-                teams, roles and projects
-              </p>
-              <h1 className={textStyles.displayTitle}>
-                work
-              </h1>
-            </div>
+            <h1 className={textStyles.displayTitleStandalone}>
+              work
+            </h1>
           </header>
         </div>
 
         <div className="motion-safe:animate-work-reveal py-10 [animation-delay:160ms] lg:py-12">
           <ReachStrip stats={reachStats} />
-        </div>
-
-        <div className="py-4 lg:py-6">
-          <TechStackSection content={techStack} />
         </div>
 
         <div className="grid gap-8 py-4 lg:grid-cols-[minmax(18rem,0.56fr)_minmax(0,1fr)] lg:gap-8 lg:py-6">
@@ -89,12 +65,10 @@ export default function ProjectsSection({
             />
           </aside>
 
-          <main className="motion-safe:animate-work-reveal min-w-0 [animation-delay:280ms]">
+          <div className="motion-safe:animate-work-reveal min-w-0 [animation-delay:280ms]">
             <div className={cn(surfaces.workPanel, "motion-safe:[animation-delay:-6.2s] motion-safe:[animation-duration:13.4s]")}>
               <GlassSheen className="left-[-45%] bg-white/[0.035] motion-safe:[animation-delay:-4.8s] motion-safe:[animation-duration:11.6s]" />
               <SectionHeadingRow
-                label="build log"
-                labelClassName={textStyles.accentLabel}
                 title={projects.sectionTitle}
                 titleClassName={textStyles.panelTitle}
               />
@@ -110,7 +84,7 @@ export default function ProjectsSection({
                 ))}
               </div>
             </div>
-          </main>
+          </div>
         </div>
 
         <div className="motion-safe:animate-work-reveal py-8 [animation-delay:340ms] lg:py-10">

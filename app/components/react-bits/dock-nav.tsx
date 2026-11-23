@@ -1,5 +1,5 @@
+import { Link } from "@remix-run/react";
 import { motion } from "motion/react";
-import type { MouseEvent } from "react";
 import type { SiteNavigationItem } from "../../types";
 
 const ALEX_SKIN_URL =
@@ -10,16 +10,11 @@ const DIAMOND_PICKAXE_URL =
 interface DockNavItemProps {
   item: SiteNavigationItem;
   isActive: boolean;
-  onClick: (event: MouseEvent<HTMLAnchorElement>) => void;
 }
 
 interface DockNavProps {
   items: SiteNavigationItem[];
   activeKey: SiteNavigationItem["key"];
-  onItemClick: (
-    event: MouseEvent<HTMLAnchorElement>,
-    item: SiteNavigationItem,
-  ) => void;
 }
 
 function PixelAboutIcon() {
@@ -69,13 +64,13 @@ function DockItemIcon({ itemKey }: { itemKey: SiteNavigationItem["key"] }) {
   return null;
 }
 
-function DockNavItem({ item, isActive, onClick }: DockNavItemProps) {
+function DockNavItem({ item, isActive }: DockNavItemProps) {
   return (
-    <motion.a
-      href={item.href}
-      onClick={onClick}
-      whileTap={{ scale: 0.97 }}
-      className={`relative z-10 min-w-[4.65rem] shrink-0 rounded-full px-2.5 py-2.5 text-center font-doto text-[10px] font-black tracking-[0.06em] outline-none focus-visible:ring-1 focus-visible:ring-white/30 sm:min-w-[7rem] sm:px-6 sm:py-3 sm:text-[14px] sm:tracking-[0.12em] ${
+    <Link
+      to={item.href}
+      prefetch="intent"
+      aria-current={isActive ? "page" : undefined}
+      className={`relative z-10 min-w-[4.65rem] shrink-0 rounded-full px-2.5 py-2.5 text-center font-doto text-[10px] font-black tracking-[0.06em] outline-none active:scale-[0.97] focus-visible:ring-1 focus-visible:ring-white/30 sm:min-w-[7rem] sm:px-6 sm:py-3 sm:text-[14px] sm:tracking-[0.12em] ${
         isActive ? "text-white" : "text-white/70"
       }`}
     >
@@ -94,11 +89,11 @@ function DockNavItem({ item, isActive, onClick }: DockNavItemProps) {
         <DockItemIcon itemKey={item.key} />
         {item.label}
       </motion.span>
-    </motion.a>
+    </Link>
   );
 }
 
-export default function DockNav({ items, activeKey, onItemClick }: DockNavProps) {
+export default function DockNav({ items, activeKey }: DockNavProps) {
   return (
     <div className="relative flex shrink-0 items-center justify-center gap-0.5 sm:gap-1">
       {items.map((item) => (
@@ -106,7 +101,6 @@ export default function DockNav({ items, activeKey, onItemClick }: DockNavProps)
           key={item.key}
           item={item}
           isActive={item.key === activeKey}
-          onClick={(event) => onItemClick(event, item)}
         />
       ))}
     </div>

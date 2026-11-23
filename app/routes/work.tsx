@@ -11,7 +11,7 @@ export const meta: MetaFunction = () => [
 
 export async function loader() {
   const workPageContent = await getWorkPageContent();
-  const reachStats = await getReachStats();
+  const reachStats = getReachStats();
 
   return json(
     {
@@ -33,7 +33,6 @@ export default function WorkPage() {
     reachOut,
     reachStats,
     socialLinks,
-    techStack,
     workExperience,
   } = useLoaderData<typeof loader>();
 
@@ -44,7 +43,6 @@ export default function WorkPage() {
         projects={projects}
         reachOut={reachOut}
         reachStats={reachStats}
-        techStack={techStack}
         workExperience={workExperience}
       />
     </main>

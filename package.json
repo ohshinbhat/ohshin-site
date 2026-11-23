@@ -9,6 +9,7 @@
     "start": "dotenv -e .env.local -- remix-serve ./build/server/index.js",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --cache --cache-location .cache/eslint",
+    "counter:backup": "dotenv -e .env.local -- node --experimental-strip-types scripts/backup-page-views.mjs",
     "check": "npm run typecheck && npm run lint && npm run build"
   },
   "dependencies": {
@@ -17,7 +18,6 @@
     "@remix-run/react": "^2.17.4",
     "@remix-run/serve": "^2.17.4",
     "@tailwindcss/vite": "^4.1.13",
-    "@upstash/redis": "^1.38.0",
     "clsx": "^2.1.1",
     "motion": "^12.36.0",
     "react": "^18.3.1",

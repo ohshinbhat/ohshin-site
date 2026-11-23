@@ -24,17 +24,12 @@ const config: Config = {
         doto: ['"Doto"', "monospace"],
         metric: ['"Tektur"', "monospace"],
         mono: ['"IBM Plex Mono"', "monospace"],
-        serif: ['"Lora"', "Georgia", "serif"],
       },
       maxWidth: {
         site: "1400px",
       },
       minHeight: {
         "screen-nav": "calc(100dvh - var(--site-nav-height, 61px))",
-        "nav-row": "10.5rem",
-      },
-      height: {
-        "nav-row": "10.5rem",
       },
       boxShadow: {
         "nav-glass":
@@ -87,29 +82,6 @@ const config: Config = {
           "74%": { opacity: "0.22" },
           "100%": { opacity: "0", transform: "translateX(170%) skewX(-18deg)" },
         },
-        "hero-static": {
-          "0%": { transform: "translate3d(0,0,0)" },
-          "20%": { transform: "translate3d(-1px,1px,0)" },
-          "40%": { transform: "translate3d(1px,-1px,0)" },
-          "60%": { transform: "translate3d(-1px,0,0)" },
-          "80%": { transform: "translate3d(1px,1px,0)" },
-          "100%": { transform: "translate3d(0,0,0)" },
-        },
-        "scan-roll": {
-          "0%": { transform: "translateY(-100%)" },
-          "100%": { transform: "translateY(100%)" },
-        },
-        "chroma-shake": {
-          "0%, 100%": { transform: "translate3d(0,0,0) skewX(0deg)" },
-          "14%": { transform: "translate3d(2px,-1px,0) skewX(-2deg)" },
-          "28%": { transform: "translate3d(-3px,1px,0) skewX(2deg)" },
-          "42%": { transform: "translate3d(1px,2px,0) skewX(-1deg)" },
-          "70%": { transform: "translate3d(-1px,-2px,0) skewX(1deg)" },
-        },
-        "stack-marquee": {
-          "0%": { transform: "translate3d(0,0,0)" },
-          "100%": { transform: "translate3d(-50%,0,0)" },
-        },
       },
       animation: {
         "work-reveal": "work-reveal 900ms cubic-bezier(0.16, 1, 0.3, 1) both",
@@ -117,10 +89,6 @@ const config: Config = {
         "reach-sweep": "reach-sweep 3.8s cubic-bezier(0.16, 1, 0.3, 1) infinite",
         "glass-breathe": "glass-breathe 11s cubic-bezier(0.45, 0, 0.2, 1) infinite",
         "glass-sheen": "glass-sheen 7.8s cubic-bezier(0.45, 0, 0.2, 1) infinite",
-        "hero-static": "hero-static 180ms steps(2, end) infinite",
-        "scan-roll": "scan-roll 5.8s linear infinite",
-        "chroma-shake": "chroma-shake 950ms steps(2, end) infinite",
-        "stack-marquee": "stack-marquee 18s linear infinite",
       },
     },
   },

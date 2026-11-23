@@ -4,7 +4,6 @@ import {
   getProjectsSection,
   getReachOutSection,
   getSocialLinks,
-  getTechStackSection,
   getWorkExperienceSection,
 } from "./site-content.server";
 
@@ -29,14 +28,12 @@ export async function getWorkPageContent() {
     projects,
     reachOut,
     socialLinks,
-    techStack,
     workExperience,
   ] = await Promise.all([
     getNavigationItems(),
     getProjectsSection(),
     getReachOutSection(),
     getSocialLinks(),
-    getTechStackSection(),
     getWorkExperienceSection(),
   ]);
 
@@ -45,7 +42,6 @@ export async function getWorkPageContent() {
     projects,
     reachOut,
     socialLinks,
-    techStack,
     workExperience,
   };
 }

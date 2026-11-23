@@ -7,7 +7,6 @@ import {
 import type { ReactNode } from "react";
 import { useRef } from "react";
 import {
-  aboutProfileTags,
   layout,
   styleUnlessReduced,
   surfaces,
@@ -68,20 +67,13 @@ export default function AboutSection({
         <div>
           <header className={surfaces.aboutHeader}>
             <GlassSheen className="left-[-35%] bg-white/[0.045] motion-safe:[animation-delay:-5.5s] motion-safe:[animation-duration:10.8s]" />
-            <div className={textStyles.headerMeta}>
-              <p className="text-white/78">profile / ohshin</p>
-              <p className="sm:text-right">mumbai / bengaluru, india</p>
-            </div>
-
-            <div className="pt-12 sm:pt-16 lg:pt-20">
-              <h2 className={textStyles.displayTitleStandalone}>
-                about
-              </h2>
-            </div>
+            <h2 className={textStyles.displayTitleStandalone}>
+              about
+            </h2>
           </header>
         </div>
 
-        <motion.main
+        <motion.div
           className="relative isolate min-w-0 w-full overflow-hidden rounded-[1.5rem] bg-white/[0.07] shadow-[0_24px_100px_rgba(0,0,0,0.42),0_0_64px_rgba(211,23,10,0.12),inset_0_1px_0_rgba(255,255,255,0.12)] ring-1 ring-white/12 backdrop-blur-2xl motion-safe:animate-glass-breathe motion-safe:[animation-delay:-2.8s] motion-safe:[animation-duration:12.2s] sm:rounded-[2rem] lg:rounded-[2.35rem]"
           initial={reducedMotion ? false : { opacity: 0.76, y: 36 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
@@ -96,16 +88,6 @@ export default function AboutSection({
           <div className="grid gap-6 lg:min-h-[44rem] lg:grid-cols-[minmax(0,1fr)_minmax(24rem,0.76fr)] lg:gap-8 xl:grid-cols-[minmax(0,0.96fr)_minmax(30rem,0.78fr)] xl:gap-10">
             <div className="flex min-w-0 flex-col justify-center p-4 sm:p-7 lg:p-9 xl:p-12">
               <div className="max-w-[54rem]">
-                <div className="mb-8 flex flex-wrap gap-2 font-mono text-[0.56rem] uppercase tracking-[0.22em] text-white/46">
-                  {aboutProfileTags.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full bg-white/[0.055] px-3 py-1 ring-1 ring-white/10"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
                 <div className="max-w-[72ch] text-[0.92rem] leading-[1.85] text-white/90 sm:text-[1rem]">
                   <AboutCopy paragraphs={paragraphs} />
                 </div>
@@ -131,7 +113,7 @@ export default function AboutSection({
               </div>
             </aside>
           </div>
-        </motion.main>
+        </motion.div>
 
         <motion.footer
           className="grid w-full gap-8 lg:grid-cols-2"
