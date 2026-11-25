@@ -3,6 +3,9 @@ import { useRef } from "react";
 import { styleUnlessReduced, textStyles } from "../../config/ui";
 import DecryptedText from "../react-bits/decrypted-text";
 
+// React 18 forwards this browser hint as a lowercase HTML attribute.
+const heroImagePriority = { fetchpriority: "high" } as const;
+
 interface HeroSectionProps {
   title: string;
   subtitle: string;
@@ -29,16 +32,22 @@ export default function HeroSection({
       id="hero"
       className="relative isolate min-h-[100svh] overflow-hidden"
     >
-      <motion.img
-        src="/background-v2.png"
-        alt=""
-        loading="eager"
-        className="absolute inset-0 h-full w-full object-cover object-[42%_center] motion-safe:will-change-transform sm:object-center"
-        style={styleUnlessReduced(reducedMotion, {
-          scale: imageScale,
-          y: imageY,
-        })}
-      />
+      <picture>
+        <source srcSet="/background-v2.avif" type="image/avif" />
+        <motion.img
+          {...heroImagePriority}
+          src="/background-v2.jpg"
+          alt=""
+          width={1672}
+          height={941}
+          loading="eager"
+          className="absolute inset-0 h-full w-full object-cover object-[42%_center] motion-safe:will-change-transform sm:object-center"
+          style={styleUnlessReduced(reducedMotion, {
+            scale: imageScale,
+            y: imageY,
+          })}
+        />
+      </picture>
       <div className="relative z-10 flex min-h-[100svh] items-center justify-center px-4 py-20 text-center sm:px-6">
         <div className="w-full max-w-5xl -translate-y-10 sm:-translate-y-20 lg:-translate-y-24">
           <motion.div
