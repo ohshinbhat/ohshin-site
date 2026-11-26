@@ -1,5 +1,5 @@
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { styleUnlessReduced, textStyles } from "../../config/ui";
 import DecryptedText from "../react-bits/decrypted-text";
 
@@ -16,6 +16,8 @@ export default function HeroSection({
   subtitle,
 }: HeroSectionProps) {
   const heroRef = useRef<HTMLElement | null>(null);
+  const imageRef = useRef<HTMLImageElement | null>(null);
+  const [useJpeg, setUseJpeg] = useState(false);
   const reducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -26,6 +28,15 @@ export default function HeroSection({
   const textY = useTransform(scrollYProgress, [0, 0.82], [0, -96]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.68], [1, 0]);
 
+  useEffect(() => {
+    const image = imageRef.current;
+
+    // An eager image can fail before React hydrates and attaches onError.
+    if (image?.complete && image.naturalWidth === 0) {
+      setUseJpeg(true);
+    }
+  }, []);
+
   return (
     <section
       ref={heroRef}
@@ -33,14 +44,16 @@ export default function HeroSection({
       className="relative isolate min-h-[100svh] overflow-hidden"
     >
       <picture>
-        <source srcSet="/background-v2.avif" type="image/avif" />
+        {!useJpeg && <source srcSet="/background-v2.webp" type="image/webp" />}
         <motion.img
           {...heroImagePriority}
+          ref={imageRef}
           src="/background-v2.jpg"
           alt=""
           width={1672}
           height={941}
           loading="eager"
+          onError={useJpeg ? undefined : () => setUseJpeg(true)}
           className="absolute inset-0 h-full w-full object-cover object-[42%_center] motion-safe:will-change-transform sm:object-center"
           style={styleUnlessReduced(reducedMotion, {
             scale: imageScale,
